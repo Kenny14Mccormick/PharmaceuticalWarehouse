@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад"
         mc:Ignorable="d"
-        Title="Авторизация" Height="450" Width="800">
+        Title="Авторизация" Height="450" Width="800" Background="Red">
     <Grid>
         <DockPanel>
             <StackPanel>
