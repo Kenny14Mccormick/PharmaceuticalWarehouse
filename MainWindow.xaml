@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад"
         mc:Ignorable="d"
-        Title="Авторизация" Height="450" Width="800" Background="Red" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
-
+        Title="Авторизация" Height="450" Width="800" Background="AliceBlue" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <TextBlock FontSize="40" Text="Добро пожаловать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 </Window>
