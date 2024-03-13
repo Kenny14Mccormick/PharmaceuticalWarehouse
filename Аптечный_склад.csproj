@@ -104,5 +104,20 @@
   <ItemGroup>
     <Folder Include="Medicine\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cross-cancel-sign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wrap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Question-Mark-PNG-Pic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\checkmark.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
