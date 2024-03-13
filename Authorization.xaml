@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад"
         mc:Ignorable="d"
-        Title="Authorization" Height="450" Width="800">
+  Title="Авторизация" Height="600" Width="600" Background="#2D5B73"
+        WindowStyle="None" ResizeMode="NoResize">
+
     <Grid>
-        
+
+        <Grid VerticalAlignment="Top" Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Свернуть" Click="MinimizeButton_Click" Grid.Column="13"/>
+            <Button Content="Развернуть" Click="MaximizeButton_Click" Grid.Column="14"/>
+            <Button Content="Закрыть" Click="CloseButton_Click" Grid.Column="15"/>
+        </Grid>
+
     </Grid>
 </Window>
