@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад"
         mc:Ignorable="d"
-  Title="Авторизация" Height="600" Width="600" Background="#2D5B73"
-        WindowStyle="None" ResizeMode="NoResize">
+  Title="Авторизация" Height="700" Width="600" Background="#2D5B73"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid>
-
-        <Grid VerticalAlignment="Top" Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -29,10 +32,47 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Свернуть" Click="MinimizeButton_Click" Grid.Column="13"/>
-            <Button Content="Развернуть" Click="MaximizeButton_Click" Grid.Column="14"/>
-            <Button Content="Закрыть" Click="CloseButton_Click" Grid.Column="15"/>
+            <Button Click="MinimizeButton_Click" Grid.Column="13" Style="{StaticResource panel}">
+                <Image Source="/Images/wrap.png"/>
+            </Button>
+
+            <Button  Click="MaximizeButton_Click" Grid.Column="14" Style="{StaticResource panel}">
+            <Image Source="/Images/maximize.png" />
+
+            </Button>
+            <Button  Click="CloseButton_Click" Grid.Column="15" Style="{StaticResource panel}">
+                <Image Source="/Images/cross-cancel-sign.png" />
+            </Button>
         </Grid>
 
+        <Grid Grid.Row="1" Margin="60 0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Логотип" FontSize="45" Foreground="White" TextAlignment ="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="Авторизация" FontSize="45" Foreground="White" TextAlignment ="Center" VerticalAlignment="Center" Grid.Row="1"/>
+            <Grid Grid.Row="2" Margin="0 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Логин" Foreground="White" FontSize="30" Margin="10 0"/>
+                <TextBox Grid.Row="1" x:Name="tbLogin"/>
+            </Grid>
+            <Grid Grid.Row="3" Margin="0 10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Пароль" Foreground="White" FontSize="30" Margin="10 0"/>
+                <PasswordBox Grid.Row="1" x:Name="tbPassword"/>
+            </Grid>
+            <Button Content="Войти" FontSize="30" Grid.Row="5" Margin="0 0 0 60"/>
+        </Grid>
     </Grid>
 </Window>

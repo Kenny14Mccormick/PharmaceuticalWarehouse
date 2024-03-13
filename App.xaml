@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:Аптечный_склад"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#4F8A9E"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style x:Key="panel" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
     </Application.Resources>
 </Application>
