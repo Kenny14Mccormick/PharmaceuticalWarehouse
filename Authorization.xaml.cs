@@ -36,7 +36,7 @@ namespace Аптечный_склад
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            System.Windows.Application.Current.Shutdown();
         }
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -50,10 +50,10 @@ namespace Аптечный_склад
 
             var user = MainWindow.Pharmaceutical_Warehouse.User.FirstOrDefault(u => u.Login == login && u.Password == password);
 
-            if(user != null)
+            if (user != null)
             {
                 Close();
-                Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist();
+                Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist(user);
                 windowPharmacist.Show();
             }
             else

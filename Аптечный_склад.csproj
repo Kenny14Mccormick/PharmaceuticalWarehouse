@@ -102,6 +102,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pharmacist\Pages\UserSettings.xaml.cs">
+      <DependentUpon>UserSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pharmacist\WindowPharmacist.xaml.cs">
       <DependentUpon>WindowPharmacist.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pharmacist\Pages\UserSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pharmacist\WindowPharmacist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Medicine\" />
-    <Folder Include="Pharmacist\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\cross-cancel-sign.png" />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад"
         mc:Ignorable="d"
-  Title="Авторизация" Height="700" Width="600" Background="#2D5B73"
+  Title="Авторизация" Height="700" Width="600" Background="#243944"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -62,7 +62,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Логин" Foreground="White" FontSize="30" Margin="10 0"/>
-                <TextBox Grid.Row="1" x:Name="tbLogin"/>
+                <TextBox Grid.Row="1" x:Name="tbLogin" FontSize="30"/>
             </Grid>
             <Grid Grid.Row="3" Margin="0 10">
                 <Grid.RowDefinitions>
@@ -70,7 +70,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Пароль" Foreground="White" FontSize="30" Margin="10 0"/>
-                <PasswordBox Grid.Row="1" x:Name="tbPassword"/>
+                <PasswordBox Grid.Row="1" x:Name="tbPassword" FontSize="30"/>
             </Grid>
             <Button Content="Войти" FontSize="30" Grid.Row="5" Margin="0 0 0 60" Click="btnAutorization_Click"/>
         </Grid>
