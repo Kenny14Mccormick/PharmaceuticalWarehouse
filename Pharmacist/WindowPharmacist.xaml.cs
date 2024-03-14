@@ -73,6 +73,10 @@ namespace Аптечный_склад.Pharmacist
 
         private void UserSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
+            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
             // Создаем объект страницы настроек
             Pharmacist.Pages.UserSettings userSettingsPage = new Pharmacist.Pages.UserSettings(CurrentUser);
 
@@ -83,17 +87,52 @@ namespace Аптечный_склад.Pharmacist
 
         private void AddApplicationBtn_Click(object sender, RoutedEventArgs e)
         {
+           // var currentUser = MainWindow.Pharmaceutical_Warehouse.User.FirstOrDefault(u => u.Login == username && u.Password == password);
 
+            // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
+
+            // Получаем заявки и поставки только для текущей аптеки
         }
 
         private void SeeApplicationBtn_Click(object sender, RoutedEventArgs e)
         {
+            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            
+            // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
+            var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
 
+            // Получаем заявки только для текущей аптеки
+            var pharmacyApplications = MainWindow.Pharmaceutical_Warehouse.Application
+                .Where(app => app.PharmacyCode == pharmacy.PharmacyCode)
+                .ToList();
+
+            // Пронумеруем заявки с единицы
+            int applicationNumber = 1;
+            foreach (var application in pharmacyApplications)
+            {
+                application.ApplicationCode = applicationNumber;
+                applicationNumber++;
+            }
+
+            // Создаем объект страницы просмотра заявок
+            Pharmacist.Pages.ViewApplications viewApplicationsPage = new Pharmacist.Pages.ViewApplications(pharmacyApplications);
+
+            // Открываем страницу просмотра заявок во фрейме
+            MyFrame.NavigationService.Navigate(viewApplicationsPage);
         }
+
+
+
 
         private void SeeSuppliesBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
         }
     }
 }

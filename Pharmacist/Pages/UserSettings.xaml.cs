@@ -68,12 +68,20 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Обновляем ник пользователя из TextBox
             CurrentUser.Title = tbTitle.Text;
 
+            // Сохраняем изменения в базе данных
+            try
+            {
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибок сохранения
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             // Показываем кнопку "Изменить", скрываем кнопку "Сохранить"
             ChangeTitleButton.Visibility = Visibility.Visible;
             SaveTitleButton.Visibility = Visibility.Collapsed;
-
-            // Сохраняем изменения, если необходимо
-            // Pharmaceutical_Warehouse.SaveChanges();
         }
 
         // Обработчики событий для кнопок изменения и сохранения логина
@@ -97,12 +105,21 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Обновляем логин пользователя из TextBox
             CurrentUser.Login = tbLogin.Text;
 
+            // Сохраняем изменения в базе данных
+            try
+            {
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибок сохранения
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             // Показываем кнопку "Изменить", скрываем кнопку "Сохранить"
             ChangeLoginButton.Visibility = Visibility.Visible;
             SaveLoginButton.Visibility = Visibility.Collapsed;
 
-            // Сохраняем изменения, если необходимо
-            // Pharmaceutical_Warehouse.SaveChanges();
         }
 
         // Обработчики событий для кнопок изменения и сохранения пароля
@@ -126,12 +143,21 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Обновляем пароль пользователя из TextBox
             CurrentUser.Password = tbPassword.Text;
 
+            // Сохраняем изменения в базе данных
+            try
+            {
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибок сохранения
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             // Показываем кнопку "Изменить", скрываем кнопку "Сохранить"
             ChangePasswordButton.Visibility = Visibility.Visible;
             SavePasswordButton.Visibility = Visibility.Collapsed;
 
-            // Сохраняем изменения, если необходимо
-            // Pharmaceutical_Warehouse.SaveChanges();
         }
 
     }

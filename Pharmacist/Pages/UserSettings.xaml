@@ -23,8 +23,8 @@
             <TextBlock Text="Текущее имя: "/>
             <TextBlock Grid.Column="1" x:Name="tblTitle" Text="{Binding CurrentUser.Title}"/>
             <TextBox Grid.Column="1" x:Name="tbTitle" Visibility="Collapsed" Text="{Binding CurrentUser.Title}"/>
-             <Button Grid.Column="2" x:Name="ChangeTitleButton" Content="Изменить" Click="ChangeTitleButton_Click"/>
-        <Button Grid.Column="2" x:Name="SaveTitleButton" Visibility="Collapsed" Content="Сохранить" Click="SaveTitleButton_Click"/>
+                <Button Grid.Column="2" x:Name="ChangeTitleButton" Content="Изменить" Margin="20 0" Click="ChangeTitleButton_Click"/>
+        <Button Grid.Column="2" x:Name="SaveTitleButton" Visibility="Collapsed" Margin="20 0" Content="Сохранить" Click="SaveTitleButton_Click"/>
         </Grid>
         </Border>
 
@@ -38,8 +38,8 @@
             <TextBlock Grid.Row="1" Text="Текущий логин: "/>
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tblLogin" Text="{Binding CurrentUser.Login}"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbLogin" Visibility="Collapsed" Text="{Binding CurrentUser.Login}"/>
-        <Button Grid.Row="1" Grid.Column="2" x:Name="ChangeLoginButton" Content="Изменить" Click="ChangeLoginButton_Click"/>
-        <Button Grid.Row="1" Grid.Column="2" Visibility="Collapsed" x:Name="SaveLoginButton" Content="Сохранить" Click="SaveLoginButton_Click"/>
+                <Button Grid.Row="1" Grid.Column="2" x:Name="ChangeLoginButton" Content="Изменить" Margin="20 0" Click="ChangeLoginButton_Click"/>
+                <Button Grid.Row="1" Grid.Column="2" Visibility="Collapsed" x:Name="SaveLoginButton" Content="Сохранить" Margin="20 0" Click="SaveLoginButton_Click"/>
         </Grid>
         </Border>
         <Border Grid.Row="2" BorderBrush="#5F9EA0" BorderThickness="1">
@@ -53,8 +53,8 @@
                 <TextBlock Grid.Row="2" Text="Текущий пароль: "/>
         <TextBlock Grid.Column="1" Grid.Row="2" x:Name="tblPassword" Text="{Binding CurrentUser.Password}"/>
         <TextBox Grid.Column="1" Grid.Row="2" x:Name="tbPassword" Visibility="Collapsed" Text="{Binding CurrentUser.Password}"/>
-            <Button Grid.Row="2" Grid.Column="2" Content="Изменить" x:Name="ChangePasswordButton" Click="ChangePasswordButton_Click"/>
-            <Button Grid.Row="2" Grid.Column="2" Visibility="Collapsed" Content="Сохранить" x:Name="SavePasswordButton" Click="SavePasswordButton_Click"/>
+                <Button Grid.Row="2" Grid.Column="2" Content="Изменить" x:Name="ChangePasswordButton" Margin="20 0" Click="ChangePasswordButton_Click"/>
+                <Button Grid.Row="2" Grid.Column="2" Visibility="Collapsed" Content="Сохранить" x:Name="SavePasswordButton" Margin="20 0" Click="SavePasswordButton_Click"/>
     </Grid>
         </Border>
     </Grid>
