@@ -112,6 +112,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pharmacist\Pages\AddApplication.xaml.cs">
+      <DependentUpon>AddApplication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pharmacist\Pages\DetailedApplication.xaml.cs">
       <DependentUpon>DetailedApplication.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pharmacist\Pages\AddApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pharmacist\Pages\DetailedApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

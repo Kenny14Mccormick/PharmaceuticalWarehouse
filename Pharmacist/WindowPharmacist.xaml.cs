@@ -87,11 +87,9 @@ namespace Аптечный_склад.Pharmacist
 
         private void AddApplicationBtn_Click(object sender, RoutedEventArgs e)
         {
-           // var currentUser = MainWindow.Pharmaceutical_Warehouse.User.FirstOrDefault(u => u.Login == username && u.Password == password);
-
             // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
+            var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
 
-            // Получаем заявки и поставки только для текущей аптеки
         }
 
         private void SeeApplicationBtn_Click(object sender, RoutedEventArgs e)

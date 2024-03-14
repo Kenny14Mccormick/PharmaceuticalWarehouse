@@ -1,0 +1,47 @@
+﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.AddApplication"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddApplication">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="30 0">
+            <TextBlock Foreground="White" FontSize="25" Margin="20 5" Text="Аптека"/>
+            <TextBox x:Name="tbPharmacy" Height="40"/>
+        </StackPanel>
+        <StackPanel Margin="30 0" Grid.Row="1">
+        <TextBlock Foreground="White" FontSize="25" Margin="20 5" Text="Адрес"/>
+        <TextBox x:Name="tbAddress" Height="40"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        <StackPanel  Margin="30 0">
+            <TextBlock Foreground="White" FontSize="25" Margin="20 5" Text="Лекарство"/>
+            <ComboBox x:Name="cbMedicine" Height="40"/>
+        </StackPanel>
+            <Button Click="btnAddMedicineToList_Click" Grid.Column="1" Height="40" Margin="20 5" VerticalAlignment="Bottom" Content="Добавить" FontSize="20"/>
+        </Grid>
+        <Button Click="btnCreateApplication" Grid.Row="3" Height="40" Margin="20 5" VerticalAlignment="Bottom" Content="Создать" FontSize="20"/>
+        <Button Click="btnRemoveMedicineFromList_Click" Grid.Column="1" Grid.Row="3" Height="40" Margin="60 5 20 5" VerticalAlignment="Bottom" Content="Убрать" FontSize="20"/>
+        <TextBlock Grid.Column="1" Text="Добавленные в заявку лекарства" FontSize="20" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <ListView Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="20 5"/>
+    </Grid>
+</Page>
