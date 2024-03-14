@@ -1,0 +1,24 @@
+﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.DetailedSupply"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DetailedSupply">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid FontSize="25" x:Name="dgDetailedSupply" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Лекарство" Binding="{Binding Medicine.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество" Binding="{Binding MedicineQuantity}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1" Margin="20 30" Content="Назад" FontSize="30" Click="btnBack_Click"/>
+    </Grid>
+</Page>

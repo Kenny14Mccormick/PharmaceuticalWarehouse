@@ -26,6 +26,7 @@ namespace Аптечный_склад
         public int PharmacyManagerCode { get; set; }
     
         public virtual Pharmacy Pharmacy { get; set; }
+        public int DisplaySupplyCode { get; set; }
         public virtual PharmacyManager PharmacyManager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PharmacySupplyContent> PharmacySupplyContent { get; set; }

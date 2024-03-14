@@ -105,11 +105,17 @@
     <Compile Include="Pharmacist\Pages\DetailedApplication.xaml.cs">
       <DependentUpon>DetailedApplication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pharmacist\Pages\DetailedSupply.xaml.cs">
+      <DependentUpon>DetailedSupply.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pharmacist\Pages\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pharmacist\Pages\ViewApplications.xaml.cs">
       <DependentUpon>ViewApplications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacist\Pages\ViewSupplies.xaml.cs">
+      <DependentUpon>ViewSupplies.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pharmacist\WindowPharmacist.xaml.cs">
       <DependentUpon>WindowPharmacist.xaml</DependentUpon>
@@ -169,11 +175,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pharmacist\Pages\DetailedSupply.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pharmacist\Pages\UserSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pharmacist\Pages\ViewApplications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pharmacist\Pages\ViewSupplies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

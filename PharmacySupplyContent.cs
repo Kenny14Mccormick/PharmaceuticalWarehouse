@@ -17,7 +17,8 @@ namespace Аптечный_склад
         public int SupplyCode { get; set; }
         public int MedicineCode { get; set; }
         public int MedicineQuantity { get; set; }
-    
+        public virtual Medicine Medicine { get; set; }
+
         public virtual PharmacySupply PharmacySupply { get; set; }
     }
 }
