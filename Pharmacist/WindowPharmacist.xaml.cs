@@ -154,5 +154,14 @@ namespace Аптечный_склад.Pharmacist
             MyFrame.NavigationService.Navigate(viewSuppliesPage);
         }
 
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Content = null;
+            // Изменение внешнего вида кнопок навигации
+            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+        }
     }
 }

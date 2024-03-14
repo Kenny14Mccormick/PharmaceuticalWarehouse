@@ -41,7 +41,9 @@
             <Button Click="MinimizeButton_Click" Grid.Column="19" Style="{StaticResource panel}">
                 <Image Source="/Images/wrap.png"/>
             </Button>
-
+            <Button Click="HomeButton_Click" Grid.Column="1" Style="{StaticResource panel}">
+                <Image Source="/Images/home.png"/>
+            </Button>
             <Button  Click="MaximizeButton_Click" Grid.Column="20" Style="{StaticResource panel}">
                 <Image Source="/Images/maximize.png" />
 
