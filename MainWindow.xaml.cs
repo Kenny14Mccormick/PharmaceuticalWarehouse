@@ -20,10 +20,12 @@ namespace Аптечный_склад
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Pharmaceutical_WarehouseEntities Pharmaceutical_Warehouse;
         public MainWindow()
         {
             InitializeComponent();
             ShowSplashScreen();
+            Pharmaceutical_Warehouse = new Pharmaceutical_WarehouseEntities();
         }
 
         private async void ShowSplashScreen()

@@ -1,0 +1,1524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActiveSubstance">
+          <Key>
+            <PropertyRef Name="SubstanceCode" />
+          </Key>
+          <Property Name="SubstanceCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationCode" />
+          </Key>
+          <Property Name="ApplicationCode" Type="int" Nullable="false" />
+          <Property Name="PharmacyCode" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.ApplicationContent" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ApplicationContent">
+          <Key>
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="ApplicationCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="MedicineCode" Type="int" Nullable="false" />
+          <Property Name="ApplicationCode" Type="int" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="StatusCode" />
+          </Key>
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="StatusDescription" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="HistoryOperations">
+          <Key>
+            <PropertyRef Name="OperationCode" />
+          </Key>
+          <Property Name="OperationCode" Type="int" Nullable="false" />
+          <Property Name="UserCode" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ManufacturerCode" />
+          </Key>
+          <Property Name="ManufacturerCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="MedicineCode" />
+          </Key>
+          <Property Name="MedicineCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Registration_number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CategoryCode" Type="int" Nullable="false" />
+          <Property Name="SubstanceCode" Type="int" Nullable="false" />
+          <Property Name="FormCode" Type="int" Nullable="false" />
+          <Property Name="PhotoCode" Type="int" Nullable="false" />
+          <Property Name="ManufacturerCode" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
+          <Property Name="StorageConditionals" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicineCategory">
+          <Key>
+            <PropertyRef Name="CategoryCode" />
+          </Key>
+          <Property Name="CategoryCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicinePhoto">
+          <Key>
+            <PropertyRef Name="PhotoCode" />
+          </Key>
+          <Property Name="PhotoCode" Type="int" Nullable="false" />
+          <Property Name="ImageSource" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicineSupply">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+          </Key>
+          <Property Name="SupplyCode" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="SupplierCode" Type="int" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="PharmacyCode" />
+          </Key>
+          <Property Name="PharmacyCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PharmacistName" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="PharmacistPhone" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PharmacyManager">
+          <Key>
+            <PropertyRef Name="PharmacyManagerCode" />
+          </Key>
+          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="22" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PharmacySupply">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+          </Key>
+          <Property Name="SupplyCode" Type="int" Nullable="false" />
+          <Property Name="PharmacyCode" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.PharmacySupplyContent" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PharmacySupplyContent">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="SupplyCode" Type="int" Nullable="false" />
+          <Property Name="MedicineCode" Type="int" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReleaseForm">
+          <Key>
+            <PropertyRef Name="FormCode" />
+          </Key>
+          <Property Name="FormCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleCode" />
+          </Key>
+          <Property Name="RoleCode" Type="int" Nullable="false" />
+          <Property Name="RoleDescription" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="SupplierCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactData" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.SupplyContent" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SupplyContent">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="SupplyCode" Type="int" Nullable="false" />
+          <Property Name="MedicineCode" Type="int" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RoleCode" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PharmacyCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WareHouse">
+          <Key>
+            <PropertyRef Name="WareHouseCode" />
+          </Key>
+          <Property Name="WareHouseCode" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.WareHouseMedicine" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="WareHouseMedicine">
+          <Key>
+            <PropertyRef Name="WareHouseCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="WareHouseCode" Type="int" Nullable="false" />
+          <Property Name="MedicineCode" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Application_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="StatusCode" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="StatusCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyCode" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="PharmacyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationContent_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationCode" />
+            </Principal>
+            <Dependent Role="ApplicationContent">
+              <PropertyRef Name="ApplicationCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationContent_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="ApplicationContent">
+              <PropertyRef Name="MedicineCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryOperations_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HistoryOperations" Type="Self.HistoryOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="HistoryOperations">
+              <PropertyRef Name="UserCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_ActiveSubstance">
+          <End Role="ActiveSubstance" Type="Self.ActiveSubstance" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActiveSubstance">
+              <PropertyRef Name="SubstanceCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="SubstanceCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_Manufacturer">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ManufacturerCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="ManufacturerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_MedicineCategory">
+          <End Role="MedicineCategory" Type="Self.MedicineCategory" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineCategory">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="CategoryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_MedicinePhoto">
+          <End Role="MedicinePhoto" Type="Self.MedicinePhoto" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicinePhoto">
+              <PropertyRef Name="PhotoCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="PhotoCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_ReleaseForm">
+          <End Role="ReleaseForm" Type="Self.ReleaseForm" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReleaseForm">
+              <PropertyRef Name="FormCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="FormCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineSupply_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="MedicineSupply" Type="Self.MedicineSupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="MedicineSupply">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineSupply_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="MedicineSupply" Type="Self.MedicineSupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="MedicineSupply">
+              <PropertyRef Name="SupplierCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacySupply_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyCode" />
+            </Principal>
+            <Dependent Role="PharmacySupply">
+              <PropertyRef Name="PharmacyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacySupply_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="PharmacySupply">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacySupplyContent_PharmacySupply">
+          <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="1" />
+          <End Role="PharmacySupplyContent" Type="Self.PharmacySupplyContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacySupply">
+              <PropertyRef Name="SupplyCode" />
+            </Principal>
+            <Dependent Role="PharmacySupplyContent">
+              <PropertyRef Name="SupplyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyContent_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="SupplyContent" Type="Self.SupplyContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="SupplyContent">
+              <PropertyRef Name="MedicineCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyContent_MedicineSupply">
+          <End Role="MedicineSupply" Type="Self.MedicineSupply" Multiplicity="1" />
+          <End Role="SupplyContent" Type="Self.SupplyContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineSupply">
+              <PropertyRef Name="SupplyCode" />
+            </Principal>
+            <Dependent Role="SupplyContent">
+              <PropertyRef Name="SupplyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyCode" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PharmacyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleCode" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WareHouse_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="WareHouse">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WareHouseMedicine_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="WareHouseMedicine" Type="Self.WareHouseMedicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="WareHouseMedicine">
+              <PropertyRef Name="MedicineCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WareHouseMedicine_WareHouse">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="WareHouseMedicine" Type="Self.WareHouseMedicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WareHouseCode" />
+            </Principal>
+            <Dependent Role="WareHouseMedicine">
+              <PropertyRef Name="WareHouseCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Pharmaceutical_WarehouseModelContainer">
+          <EntitySet Name="ActiveSubstance" EntityType="Self.ActiveSubstance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryOperations" EntityType="Self.HistoryOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicineCategory" EntityType="Self.MedicineCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicinePhoto" EntityType="Self.MedicinePhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicineSupply" EntityType="Self.MedicineSupply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pharmacy" EntityType="Self.Pharmacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PharmacyManager" EntityType="Self.PharmacyManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PharmacySupply" EntityType="Self.PharmacySupply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReleaseForm" EntityType="Self.ReleaseForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WareHouse" EntityType="Self.WareHouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationContent" EntityType="Self.ApplicationContent" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ApplicationContent].[MedicineCode] AS [MedicineCode], 
+    [ApplicationContent].[ApplicationCode] AS [ApplicationCode], 
+    [ApplicationContent].[MedicineQuantity] AS [MedicineQuantity]
+    FROM [dbo].[ApplicationContent] AS [ApplicationContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PharmacySupplyContent" EntityType="Self.PharmacySupplyContent" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PharmacySupplyContent].[SupplyCode] AS [SupplyCode], 
+    [PharmacySupplyContent].[MedicineCode] AS [MedicineCode], 
+    [PharmacySupplyContent].[MedicineQuantity] AS [MedicineQuantity]
+    FROM [dbo].[PharmacySupplyContent] AS [PharmacySupplyContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SupplyContent" EntityType="Self.SupplyContent" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SupplyContent].[SupplyCode] AS [SupplyCode], 
+    [SupplyContent].[MedicineCode] AS [MedicineCode], 
+    [SupplyContent].[MedicineQuantity] AS [MedicineQuantity]
+    FROM [dbo].[SupplyContent] AS [SupplyContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WareHouseMedicine" EntityType="Self.WareHouseMedicine" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WareHouseMedicine].[WareHouseCode] AS [WareHouseCode], 
+    [WareHouseMedicine].[MedicineCode] AS [MedicineCode], 
+    [WareHouseMedicine].[Quantity] AS [Quantity]
+    FROM [dbo].[WareHouseMedicine] AS [WareHouseMedicine]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Pharmacy" Association="Self.FK_Application_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_PharmacyManager" Association="Self.FK_Application_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationContent_Application" Association="Self.FK_ApplicationContent_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationContent_Medicine" Association="Self.FK_ApplicationContent_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryOperations_User" Association="Self.FK_HistoryOperations_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HistoryOperations" EntitySet="HistoryOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_ActiveSubstance" Association="Self.FK_Medicine_ActiveSubstance">
+            <End Role="ActiveSubstance" EntitySet="ActiveSubstance" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_Manufacturer" Association="Self.FK_Medicine_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_MedicineCategory" Association="Self.FK_Medicine_MedicineCategory">
+            <End Role="MedicineCategory" EntitySet="MedicineCategory" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_MedicinePhoto" Association="Self.FK_Medicine_MedicinePhoto">
+            <End Role="MedicinePhoto" EntitySet="MedicinePhoto" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_ReleaseForm" Association="Self.FK_Medicine_ReleaseForm">
+            <End Role="ReleaseForm" EntitySet="ReleaseForm" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineSupply_PharmacyManager" Association="Self.FK_MedicineSupply_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="MedicineSupply" EntitySet="MedicineSupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineSupply_Supplier" Association="Self.FK_MedicineSupply_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="MedicineSupply" EntitySet="MedicineSupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacySupply_Pharmacy" Association="Self.FK_PharmacySupply_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="PharmacySupply" EntitySet="PharmacySupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacySupply_PharmacyManager" Association="Self.FK_PharmacySupply_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="PharmacySupply" EntitySet="PharmacySupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacySupplyContent_PharmacySupply" Association="Self.FK_PharmacySupplyContent_PharmacySupply">
+            <End Role="PharmacySupply" EntitySet="PharmacySupply" />
+            <End Role="PharmacySupplyContent" EntitySet="PharmacySupplyContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyContent_Medicine" Association="Self.FK_SupplyContent_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="SupplyContent" EntitySet="SupplyContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyContent_MedicineSupply" Association="Self.FK_SupplyContent_MedicineSupply">
+            <End Role="MedicineSupply" EntitySet="MedicineSupply" />
+            <End Role="SupplyContent" EntitySet="SupplyContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Pharmacy" Association="Self.FK_User_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouse_PharmacyManager" Association="Self.FK_WareHouse_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="WareHouse" EntitySet="WareHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouseMedicine_Medicine" Association="Self.FK_WareHouseMedicine_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="WareHouseMedicine" EntitySet="WareHouseMedicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouseMedicine_WareHouse" Association="Self.FK_WareHouseMedicine_WareHouse">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="WareHouseMedicine" EntitySet="WareHouseMedicine" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pharmaceutical_WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActiveSubstance">
+          <Key>
+            <PropertyRef Name="SubstanceCode" />
+          </Key>
+          <Property Name="SubstanceCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_Medicine_ActiveSubstance" FromRole="ActiveSubstance" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationCode" />
+          </Key>
+          <Property Name="ApplicationCode" Type="Int32" Nullable="false" />
+          <Property Name="PharmacyCode" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApplicationStatus" Relationship="Self.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatus" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.FK_Application_Pharmacy" FromRole="Application" ToRole="Pharmacy" />
+          <NavigationProperty Name="PharmacyManager" Relationship="Self.FK_Application_PharmacyManager" FromRole="Application" ToRole="PharmacyManager" />
+          <NavigationProperty Name="ApplicationContent" Relationship="Self.FK_ApplicationContent_Application" FromRole="Application" ToRole="ApplicationContent" />
+        </EntityType>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="StatusCode" />
+          </Key>
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="StatusDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_Application_ApplicationStatus" FromRole="ApplicationStatus" ToRole="Application" />
+        </EntityType>
+        <EntityType Name="HistoryOperations">
+          <Key>
+            <PropertyRef Name="OperationCode" />
+          </Key>
+          <Property Name="OperationCode" Type="Int32" Nullable="false" />
+          <Property Name="UserCode" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HistoryOperations_User" FromRole="HistoryOperations" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ManufacturerCode" />
+          </Key>
+          <Property Name="ManufacturerCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_Medicine_Manufacturer" FromRole="Manufacturer" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="MedicineCode" />
+          </Key>
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Registration_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryCode" Type="Int32" Nullable="false" />
+          <Property Name="SubstanceCode" Type="Int32" Nullable="false" />
+          <Property Name="FormCode" Type="Int32" Nullable="false" />
+          <Property Name="PhotoCode" Type="Int32" Nullable="false" />
+          <Property Name="ManufacturerCode" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StorageConditionals" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ActiveSubstance" Relationship="Self.FK_Medicine_ActiveSubstance" FromRole="Medicine" ToRole="ActiveSubstance" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Medicine_Manufacturer" FromRole="Medicine" ToRole="Manufacturer" />
+          <NavigationProperty Name="ApplicationContent" Relationship="Self.FK_ApplicationContent_Medicine" FromRole="Medicine" ToRole="ApplicationContent" />
+          <NavigationProperty Name="MedicineCategory" Relationship="Self.FK_Medicine_MedicineCategory" FromRole="Medicine" ToRole="MedicineCategory" />
+          <NavigationProperty Name="MedicinePhoto" Relationship="Self.FK_Medicine_MedicinePhoto" FromRole="Medicine" ToRole="MedicinePhoto" />
+          <NavigationProperty Name="ReleaseForm" Relationship="Self.FK_Medicine_ReleaseForm" FromRole="Medicine" ToRole="ReleaseForm" />
+          <NavigationProperty Name="SupplyContent" Relationship="Self.FK_SupplyContent_Medicine" FromRole="Medicine" ToRole="SupplyContent" />
+          <NavigationProperty Name="WareHouseMedicine" Relationship="Self.FK_WareHouseMedicine_Medicine" FromRole="Medicine" ToRole="WareHouseMedicine" />
+        </EntityType>
+        <EntityType Name="MedicineCategory">
+          <Key>
+            <PropertyRef Name="CategoryCode" />
+          </Key>
+          <Property Name="CategoryCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_Medicine_MedicineCategory" FromRole="MedicineCategory" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="MedicinePhoto">
+          <Key>
+            <PropertyRef Name="PhotoCode" />
+          </Key>
+          <Property Name="PhotoCode" Type="Int32" Nullable="false" />
+          <Property Name="ImageSource" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_Medicine_MedicinePhoto" FromRole="MedicinePhoto" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="MedicineSupply">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+          </Key>
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SupplierCode" Type="Int32" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PharmacyManager" Relationship="Self.FK_MedicineSupply_PharmacyManager" FromRole="MedicineSupply" ToRole="PharmacyManager" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_MedicineSupply_Supplier" FromRole="MedicineSupply" ToRole="Supplier" />
+          <NavigationProperty Name="SupplyContent" Relationship="Self.FK_SupplyContent_MedicineSupply" FromRole="MedicineSupply" ToRole="SupplyContent" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="PharmacyCode" />
+          </Key>
+          <Property Name="PharmacyCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PharmacistName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PharmacistPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_Application_Pharmacy" FromRole="Pharmacy" ToRole="Application" />
+          <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupply_Pharmacy" FromRole="Pharmacy" ToRole="PharmacySupply" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Pharmacy" FromRole="Pharmacy" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PharmacyManager">
+          <Key>
+            <PropertyRef Name="PharmacyManagerCode" />
+          </Key>
+          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="22" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_Application_PharmacyManager" FromRole="PharmacyManager" ToRole="Application" />
+          <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_MedicineSupply_PharmacyManager" FromRole="PharmacyManager" ToRole="MedicineSupply" />
+          <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupply_PharmacyManager" FromRole="PharmacyManager" ToRole="PharmacySupply" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_WareHouse_PharmacyManager" FromRole="PharmacyManager" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="PharmacySupply">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+          </Key>
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
+          <Property Name="PharmacyCode" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.FK_PharmacySupply_Pharmacy" FromRole="PharmacySupply" ToRole="Pharmacy" />
+          <NavigationProperty Name="PharmacyManager" Relationship="Self.FK_PharmacySupply_PharmacyManager" FromRole="PharmacySupply" ToRole="PharmacyManager" />
+          <NavigationProperty Name="PharmacySupplyContent" Relationship="Self.FK_PharmacySupplyContent_PharmacySupply" FromRole="PharmacySupply" ToRole="PharmacySupplyContent" />
+        </EntityType>
+        <EntityType Name="ReleaseForm">
+          <Key>
+            <PropertyRef Name="FormCode" />
+          </Key>
+          <Property Name="FormCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_Medicine_ReleaseForm" FromRole="ReleaseForm" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleCode" />
+          </Key>
+          <Property Name="RoleCode" Type="Int32" Nullable="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="SupplierCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactData" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_MedicineSupply_Supplier" FromRole="Supplier" ToRole="MedicineSupply" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserCode" />
+          </Key>
+          <Property Name="UserCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleCode" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PharmacyCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HistoryOperations" Relationship="Self.FK_HistoryOperations_User" FromRole="User" ToRole="HistoryOperations" />
+          <NavigationProperty Name="Pharmacy" Relationship="Self.FK_User_Pharmacy" FromRole="User" ToRole="Pharmacy" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="WareHouse">
+          <Key>
+            <PropertyRef Name="WareHouseCode" />
+          </Key>
+          <Property Name="WareHouseCode" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PharmacyManager" Relationship="Self.FK_WareHouse_PharmacyManager" FromRole="WareHouse" ToRole="PharmacyManager" />
+          <NavigationProperty Name="WareHouseMedicine" Relationship="Self.FK_WareHouseMedicine_WareHouse" FromRole="WareHouse" ToRole="WareHouseMedicine" />
+        </EntityType>
+        <EntityType Name="ApplicationContent">
+          <Key>
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="ApplicationCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_ApplicationContent_Application" FromRole="ApplicationContent" ToRole="Application" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_ApplicationContent_Medicine" FromRole="ApplicationContent" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="PharmacySupplyContent">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupplyContent_PharmacySupply" FromRole="PharmacySupplyContent" ToRole="PharmacySupply" />
+        </EntityType>
+        <EntityType Name="SupplyContent">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_SupplyContent_Medicine" FromRole="SupplyContent" ToRole="Medicine" />
+          <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_SupplyContent_MedicineSupply" FromRole="SupplyContent" ToRole="MedicineSupply" />
+        </EntityType>
+        <EntityType Name="WareHouseMedicine">
+          <Key>
+            <PropertyRef Name="WareHouseCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="WareHouseCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_WareHouseMedicine_Medicine" FromRole="WareHouseMedicine" ToRole="Medicine" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_WareHouseMedicine_WareHouse" FromRole="WareHouseMedicine" ToRole="WareHouse" />
+        </EntityType>
+        <Association Name="FK_Medicine_ActiveSubstance">
+          <End Role="ActiveSubstance" Type="Self.ActiveSubstance" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActiveSubstance">
+              <PropertyRef Name="SubstanceCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="SubstanceCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="StatusCode" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="StatusCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyCode" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="PharmacyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationContent_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationCode" />
+            </Principal>
+            <Dependent Role="ApplicationContent">
+              <PropertyRef Name="ApplicationCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryOperations_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HistoryOperations" Type="Self.HistoryOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserCode" />
+            </Principal>
+            <Dependent Role="HistoryOperations">
+              <PropertyRef Name="UserCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_Manufacturer">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ManufacturerCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="ManufacturerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationContent_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="ApplicationContent">
+              <PropertyRef Name="MedicineCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_MedicineCategory">
+          <End Role="MedicineCategory" Type="Self.MedicineCategory" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineCategory">
+              <PropertyRef Name="CategoryCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="CategoryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_MedicinePhoto">
+          <End Role="MedicinePhoto" Type="Self.MedicinePhoto" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicinePhoto">
+              <PropertyRef Name="PhotoCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="PhotoCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_ReleaseForm">
+          <End Role="ReleaseForm" Type="Self.ReleaseForm" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReleaseForm">
+              <PropertyRef Name="FormCode" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="FormCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyContent_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="SupplyContent" Type="Self.SupplyContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="SupplyContent">
+              <PropertyRef Name="MedicineCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WareHouseMedicine_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="WareHouseMedicine" Type="Self.WareHouseMedicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="WareHouseMedicine">
+              <PropertyRef Name="MedicineCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineSupply_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="MedicineSupply" Type="Self.MedicineSupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="MedicineSupply">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineSupply_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="MedicineSupply" Type="Self.MedicineSupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="MedicineSupply">
+              <PropertyRef Name="SupplierCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyContent_MedicineSupply">
+          <End Role="MedicineSupply" Type="Self.MedicineSupply" Multiplicity="1" />
+          <End Role="SupplyContent" Type="Self.SupplyContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineSupply">
+              <PropertyRef Name="SupplyCode" />
+            </Principal>
+            <Dependent Role="SupplyContent">
+              <PropertyRef Name="SupplyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacySupply_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyCode" />
+            </Principal>
+            <Dependent Role="PharmacySupply">
+              <PropertyRef Name="PharmacyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Pharmacy">
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacy">
+              <PropertyRef Name="PharmacyCode" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PharmacyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacySupply_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="PharmacySupply">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WareHouse_PharmacyManager">
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacyManager">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Principal>
+            <Dependent Role="WareHouse">
+              <PropertyRef Name="PharmacyManagerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PharmacySupplyContent_PharmacySupply">
+          <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="1" />
+          <End Role="PharmacySupplyContent" Type="Self.PharmacySupplyContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PharmacySupply">
+              <PropertyRef Name="SupplyCode" />
+            </Principal>
+            <Dependent Role="PharmacySupplyContent">
+              <PropertyRef Name="SupplyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleCode" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WareHouseMedicine_WareHouse">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="WareHouseMedicine" Type="Self.WareHouseMedicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WareHouseCode" />
+            </Principal>
+            <Dependent Role="WareHouseMedicine">
+              <PropertyRef Name="WareHouseCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Pharmaceutical_WarehouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActiveSubstance" EntityType="Self.ActiveSubstance" />
+          <EntitySet Name="Application" EntityType="Self.Application" />
+          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" />
+          <EntitySet Name="HistoryOperations" EntityType="Self.HistoryOperations" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" />
+          <EntitySet Name="MedicineCategory" EntityType="Self.MedicineCategory" />
+          <EntitySet Name="MedicinePhoto" EntityType="Self.MedicinePhoto" />
+          <EntitySet Name="MedicineSupply" EntityType="Self.MedicineSupply" />
+          <EntitySet Name="Pharmacy" EntityType="Self.Pharmacy" />
+          <EntitySet Name="PharmacyManager" EntityType="Self.PharmacyManager" />
+          <EntitySet Name="PharmacySupply" EntityType="Self.PharmacySupply" />
+          <EntitySet Name="ReleaseForm" EntityType="Self.ReleaseForm" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="WareHouse" EntityType="Self.WareHouse" />
+          <EntitySet Name="ApplicationContent" EntityType="Self.ApplicationContent" />
+          <EntitySet Name="PharmacySupplyContent" EntityType="Self.PharmacySupplyContent" />
+          <EntitySet Name="SupplyContent" EntityType="Self.SupplyContent" />
+          <EntitySet Name="WareHouseMedicine" EntityType="Self.WareHouseMedicine" />
+          <AssociationSet Name="FK_Medicine_ActiveSubstance" Association="Self.FK_Medicine_ActiveSubstance">
+            <End Role="ActiveSubstance" EntitySet="ActiveSubstance" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Pharmacy" Association="Self.FK_Application_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_PharmacyManager" Association="Self.FK_Application_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationContent_Application" Association="Self.FK_ApplicationContent_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryOperations_User" Association="Self.FK_HistoryOperations_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HistoryOperations" EntitySet="HistoryOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_Manufacturer" Association="Self.FK_Medicine_Manufacturer">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationContent_Medicine" Association="Self.FK_ApplicationContent_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_MedicineCategory" Association="Self.FK_Medicine_MedicineCategory">
+            <End Role="MedicineCategory" EntitySet="MedicineCategory" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_MedicinePhoto" Association="Self.FK_Medicine_MedicinePhoto">
+            <End Role="MedicinePhoto" EntitySet="MedicinePhoto" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_ReleaseForm" Association="Self.FK_Medicine_ReleaseForm">
+            <End Role="ReleaseForm" EntitySet="ReleaseForm" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyContent_Medicine" Association="Self.FK_SupplyContent_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="SupplyContent" EntitySet="SupplyContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouseMedicine_Medicine" Association="Self.FK_WareHouseMedicine_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="WareHouseMedicine" EntitySet="WareHouseMedicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineSupply_PharmacyManager" Association="Self.FK_MedicineSupply_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="MedicineSupply" EntitySet="MedicineSupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineSupply_Supplier" Association="Self.FK_MedicineSupply_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="MedicineSupply" EntitySet="MedicineSupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyContent_MedicineSupply" Association="Self.FK_SupplyContent_MedicineSupply">
+            <End Role="MedicineSupply" EntitySet="MedicineSupply" />
+            <End Role="SupplyContent" EntitySet="SupplyContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacySupply_Pharmacy" Association="Self.FK_PharmacySupply_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="PharmacySupply" EntitySet="PharmacySupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Pharmacy" Association="Self.FK_User_Pharmacy">
+            <End Role="Pharmacy" EntitySet="Pharmacy" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacySupply_PharmacyManager" Association="Self.FK_PharmacySupply_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="PharmacySupply" EntitySet="PharmacySupply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouse_PharmacyManager" Association="Self.FK_WareHouse_PharmacyManager">
+            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
+            <End Role="WareHouse" EntitySet="WareHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PharmacySupplyContent_PharmacySupply" Association="Self.FK_PharmacySupplyContent_PharmacySupply">
+            <End Role="PharmacySupply" EntitySet="PharmacySupply" />
+            <End Role="PharmacySupplyContent" EntitySet="PharmacySupplyContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WareHouseMedicine_WareHouse" Association="Self.FK_WareHouseMedicine_WareHouse">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="WareHouseMedicine" EntitySet="WareHouseMedicine" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Pharmaceutical_WarehouseModelContainer" CdmEntityContainer="Pharmaceutical_WarehouseEntities">
+          <EntitySetMapping Name="ActiveSubstance">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.ActiveSubstance">
+              <MappingFragment StoreEntitySet="ActiveSubstance">
+                <ScalarProperty Name="SubstanceCode" ColumnName="SubstanceCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationStatus">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.ApplicationStatus">
+              <MappingFragment StoreEntitySet="ApplicationStatus">
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="StatusDescription" ColumnName="StatusDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryOperations">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.HistoryOperations">
+              <MappingFragment StoreEntitySet="HistoryOperations">
+                <ScalarProperty Name="OperationCode" ColumnName="OperationCode" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturer">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturer">
+                <ScalarProperty Name="ManufacturerCode" ColumnName="ManufacturerCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicine">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Registration_number" ColumnName="Registration_number" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="SubstanceCode" ColumnName="SubstanceCode" />
+                <ScalarProperty Name="FormCode" ColumnName="FormCode" />
+                <ScalarProperty Name="PhotoCode" ColumnName="PhotoCode" />
+                <ScalarProperty Name="ManufacturerCode" ColumnName="ManufacturerCode" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="StorageConditionals" ColumnName="StorageConditionals" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicineCategory">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.MedicineCategory">
+              <MappingFragment StoreEntitySet="MedicineCategory">
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicinePhoto">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.MedicinePhoto">
+              <MappingFragment StoreEntitySet="MedicinePhoto">
+                <ScalarProperty Name="PhotoCode" ColumnName="PhotoCode" />
+                <ScalarProperty Name="ImageSource" ColumnName="ImageSource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicineSupply">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.MedicineSupply">
+              <MappingFragment StoreEntitySet="MedicineSupply">
+                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pharmacy">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Pharmacy">
+              <MappingFragment StoreEntitySet="Pharmacy">
+                <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PharmacistName" ColumnName="PharmacistName" />
+                <ScalarProperty Name="PharmacistPhone" ColumnName="PharmacistPhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PharmacyManager">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacyManager">
+              <MappingFragment StoreEntitySet="PharmacyManager">
+                <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PharmacySupply">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacySupply">
+              <MappingFragment StoreEntitySet="PharmacySupply">
+                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
+                <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReleaseForm">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.ReleaseForm">
+              <MappingFragment StoreEntitySet="ReleaseForm">
+                <ScalarProperty Name="FormCode" ColumnName="FormCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactData" ColumnName="ContactData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WareHouse">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.WareHouse">
+              <MappingFragment StoreEntitySet="WareHouse">
+                <ScalarProperty Name="WareHouseCode" ColumnName="WareHouseCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationContent">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.ApplicationContent">
+              <MappingFragment StoreEntitySet="ApplicationContent">
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PharmacySupplyContent">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacySupplyContent">
+              <MappingFragment StoreEntitySet="PharmacySupplyContent">
+                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyContent">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.SupplyContent">
+              <MappingFragment StoreEntitySet="SupplyContent">
+                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WareHouseMedicine">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.WareHouseMedicine">
+              <MappingFragment StoreEntitySet="WareHouseMedicine">
+                <ScalarProperty Name="WareHouseCode" ColumnName="WareHouseCode" />
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

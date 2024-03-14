@@ -1,0 +1,57 @@
+﻿<Window x:Class="Аптечный_склад.Pharmacist.WindowPharmacist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Аптечный_склад.Pharmacist"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="700" Width="1600" Background="#2D5B73"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="MinimizeButton_Click" Grid.Column="19" Style="{StaticResource panel}">
+                <Image Source="/Images/wrap.png"/>
+            </Button>
+
+            <Button  Click="MaximizeButton_Click" Grid.Column="20" Style="{StaticResource panel}">
+                <Image Source="/Images/maximize.png" />
+
+            </Button>
+            <Button  Click="CloseButton_Click" Grid.Column="21" Style="{StaticResource panel}">
+                <Image Source="/Images/cross-cancel-sign.png" />
+            </Button>
+            <Button  Click="QuitButton_Click" Grid.Column="0" Style="{StaticResource panel}">
+                <Image Source="/Images/logOut.png" />
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

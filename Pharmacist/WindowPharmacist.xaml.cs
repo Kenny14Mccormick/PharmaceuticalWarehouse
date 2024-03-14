@@ -12,18 +12,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Аптечный_склад
+namespace Аптечный_склад.Pharmacist
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для WindowPharmacist.xaml
     /// </summary>
-    public partial class Authorization : Window
+    public partial class WindowPharmacist : Window
     {
-        public Authorization()
+        public WindowPharmacist()
         {
             InitializeComponent();
         }
 
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            Authorization authorization = new Authorization();
+            authorization.Show();
+        }
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -41,25 +47,6 @@ namespace Аптечный_склад
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-        }
-
-        private void btnAutorization_Click(object sender, RoutedEventArgs e)
-        {
-            string login = tbLogin.Text;
-            string password = tbPassword.Password;
-
-            var user = MainWindow.Pharmaceutical_Warehouse.User.FirstOrDefault(u => u.Login == login && u.Password == password);
-
-            if(user != null)
-            {
-                Close();
-                Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist();
-                windowPharmacist.Show();
-            }
-            else
-            {
-                MessageBox.Show("Неккоректный логин или пароль!");
-            }
         }
     }
 }

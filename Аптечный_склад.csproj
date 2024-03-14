@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +64,83 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActiveSubstance.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Application.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationContent.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationStatus.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryOperations.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manufacturer.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Medicine.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicineCategory.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicinePhoto.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicineSupply.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacist\WindowPharmacist.xaml.cs">
+      <DependentUpon>WindowPharmacist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacy.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PharmacyManager.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PharmacySupply.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PharmacySupplyContent.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReleaseForm.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplyContent.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WareHouse.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WareHouseMedicine.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Page Include="Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -63,10 +149,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
@@ -74,8 +156,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pharmacist\WindowPharmacist.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +189,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="MyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MyModel.edmx.diagram">
+      <DependentUpon>MyModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Medicine\" />
+    <Folder Include="Pharmacist\Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\cross-cancel-sign.png" />
@@ -121,6 +226,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyModel.Context.cs</LastGenOutput>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="MyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+      <LastGenOutput>MyModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
