@@ -40,7 +40,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Сортировка по дате" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <TextBlock Text="Выберите период" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
+            <Grid Grid.Column="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Выберите период" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
+                <Button Grid.Column="2" Content="Сброс" Margin="5" Click="ResetDatesBtn_Click" FontSize="17"/>
+            </Grid>
             <ComboBox x:Name="comboboxDate" Grid.Row="1" Grid.Column="0" Margin="15 0" >
                 <ComboBoxItem Content="По умолчанию"/>
                 <ComboBoxItem Content="По возрастанию"/>

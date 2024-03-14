@@ -104,5 +104,11 @@ namespace Аптечный_склад.Pharmacist.Pages
         {
             LoadApplications();
         }
+
+        private void ResetDatesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            dpStart.SelectedDate = null;
+            dpEnd.SelectedDate = null;
+        }
     }
 }

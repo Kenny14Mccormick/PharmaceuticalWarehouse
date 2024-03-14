@@ -18,6 +18,7 @@ namespace Аптечный_склад
         public Medicine()
         {
             this.ApplicationContent = new HashSet<ApplicationContent>();
+            this.PharmacySupplyContent = new HashSet<PharmacySupplyContent>();
             this.SupplyContent = new HashSet<SupplyContent>();
             this.WareHouseMedicine = new HashSet<WareHouseMedicine>();
         }
@@ -41,6 +42,8 @@ namespace Аптечный_склад
         public virtual MedicineCategory MedicineCategory { get; set; }
         public virtual MedicinePhoto MedicinePhoto { get; set; }
         public virtual ReleaseForm ReleaseForm { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PharmacySupplyContent> PharmacySupplyContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplyContent> SupplyContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
