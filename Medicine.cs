@@ -20,8 +20,6 @@ namespace Аптечный_склад
             this.ApplicationContent = new HashSet<ApplicationContent>();
             this.PharmacySupplyContent = new HashSet<PharmacySupplyContent>();
             this.SupplyContent = new HashSet<SupplyContent>();
-            this.MedicinePrice = new HashSet<MedicinePrice>();
-            this.MedicineQuantitiy = new HashSet<MedicineQuantitiy>();
         }
     
         public int MedicineCode { get; set; }
@@ -34,6 +32,8 @@ namespace Аптечный_склад
         public int ManufacturerCode { get; set; }
         public System.DateTime ExpirationDate { get; set; }
         public string StorageConditionals { get; set; }
+        public Nullable<int> QuantityCode { get; set; }
+        public Nullable<int> PriceCode { get; set; }
     
         public virtual ActiveSubstance ActiveSubstance { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
@@ -41,14 +41,12 @@ namespace Аптечный_склад
         public virtual ICollection<ApplicationContent> ApplicationContent { get; set; }
         public virtual MedicineCategory MedicineCategory { get; set; }
         public virtual MedicinePhoto MedicinePhoto { get; set; }
+        public virtual MedicinePrice MedicinePrice { get; set; }
+        public virtual MedicineQuantitiy MedicineQuantitiy { get; set; }
         public virtual ReleaseForm ReleaseForm { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PharmacySupplyContent> PharmacySupplyContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplyContent> SupplyContent { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedicinePrice> MedicinePrice { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedicineQuantitiy> MedicineQuantitiy { get; set; }
     }
 }

@@ -14,9 +14,37 @@ namespace Аптечный_склад
     
     public partial class MedicineQuantitiy
     {
-        public int MedicineCode { get; set; }
-        public int Quantity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MedicineQuantitiy()
+        {
+            this.Medicine = new HashSet<Medicine>();
+        }
     
-        public virtual Medicine Medicine { get; set; }
+        public int QuantityCode { get; set; }
+        public int Quantity { get; set; }
+
+        public string ActualText
+        {
+            get
+            {
+                if (Quantity > 0)
+                    return "В наличии";
+                else
+                    return "Нет в наличии";
+            }
+        }
+
+        public string ActualTextColor
+        {
+            get
+            {
+                if (Quantity > 0)
+                    return "Green";
+                else
+                    return "Red";
+            }
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Medicine> Medicine { get; set; }
     }
 }

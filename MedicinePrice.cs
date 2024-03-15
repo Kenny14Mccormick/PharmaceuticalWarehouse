@@ -14,9 +14,16 @@ namespace Аптечный_склад
     
     public partial class MedicinePrice
     {
-        public int MedicineCode { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MedicinePrice()
+        {
+            this.Medicine = new HashSet<Medicine>();
+        }
+    
+        public int PriceCode { get; set; }
         public double Price { get; set; }
     
-        public virtual Medicine Medicine { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Medicine> Medicine { get; set; }
     }
 }

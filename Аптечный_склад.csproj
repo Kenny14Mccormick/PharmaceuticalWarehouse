@@ -254,7 +254,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\cross-cancel-sign.png" />
   </ItemGroup>
@@ -298,6 +297,8 @@
     <Resource Include="MedicinesPhoto\Цефтриаксон.jpg" />
     <Resource Include="MedicinesPhoto\Ципрофлоксацин.jpg" />
     <Resource Include="MedicinesPhoto\Эритромицин.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>

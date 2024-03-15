@@ -33,6 +33,8 @@ namespace Аптечный_склад
         public virtual DbSet<Medicine> Medicine { get; set; }
         public virtual DbSet<MedicineCategory> MedicineCategory { get; set; }
         public virtual DbSet<MedicinePhoto> MedicinePhoto { get; set; }
+        public virtual DbSet<MedicinePrice> MedicinePrice { get; set; }
+        public virtual DbSet<MedicineQuantitiy> MedicineQuantitiy { get; set; }
         public virtual DbSet<MedicineSupply> MedicineSupply { get; set; }
         public virtual DbSet<Pharmacy> Pharmacy { get; set; }
         public virtual DbSet<PharmacyManager> PharmacyManager { get; set; }
@@ -45,7 +47,5 @@ namespace Аптечный_склад
         public virtual DbSet<ApplicationContent> ApplicationContent { get; set; }
         public virtual DbSet<PharmacySupplyContent> PharmacySupplyContent { get; set; }
         public virtual DbSet<SupplyContent> SupplyContent { get; set; }
-        public virtual DbSet<MedicinePrice> MedicinePrice { get; set; }
-        public virtual DbSet<MedicineQuantitiy> MedicineQuantitiy { get; set; }
     }
 }
