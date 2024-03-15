@@ -48,7 +48,7 @@
                 <TextBlock Text="Выберите период" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
                 <Button Grid.Column="2" Content="Сброс" Margin="5" Click="ResetDatesBtn_Click" FontSize="17"/>
             </Grid>
-            <ComboBox x:Name="comboboxDate" Grid.Row="1" Grid.Column="0" Margin="15 0" >
+            <ComboBox x:Name="comboboxDate" Grid.Row="1" Grid.Column="0" Margin="15 0" SelectedIndex="0" >
                 <ComboBoxItem Content="По умолчанию"/>
                 <ComboBoxItem Content="По возрастанию"/>
                 <ComboBoxItem Content="По убыванию"/>

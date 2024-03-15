@@ -112,9 +112,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Pharmacist\Pages\AddApplication.xaml.cs">
-      <DependentUpon>AddApplication.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pharmacist\Pages\DetailedApplication.xaml.cs">
       <DependentUpon>DetailedApplication.xaml</DependentUpon>
     </Compile>
@@ -126,6 +123,9 @@
     </Compile>
     <Compile Include="Pharmacist\Pages\ViewApplications.xaml.cs">
       <DependentUpon>ViewApplications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacist\Pages\ViewMedicine.xaml.cs">
+      <DependentUpon>ViewMedicine.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pharmacist\Pages\ViewSupplies.xaml.cs">
       <DependentUpon>ViewSupplies.xaml</DependentUpon>
@@ -184,10 +184,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pharmacist\Pages\AddApplication.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pharmacist\Pages\DetailedApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pharmacist\Pages\ViewApplications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pharmacist\Pages\ViewMedicine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,9 +247,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Medicine\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\cross-cancel-sign.png" />
   </ItemGroup>
@@ -273,6 +271,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\home.png" />
+    <Resource Include="MedicinesPhoto\Азитромицин.jpg" />
+    <Resource Include="MedicinesPhoto\Амоксициллин.jpg" />
+    <Resource Include="MedicinesPhoto\Ампициллин.jpg" />
+    <Resource Include="MedicinesPhoto\Аспирин.jpg" />
+    <Resource Include="MedicinesPhoto\Доксициклин.jpg" />
+    <Resource Include="MedicinesPhoto\Зиннат.jpeg" />
+    <Resource Include="MedicinesPhoto\Ибупрофен.jpeg" />
+    <Resource Include="MedicinesPhoto\Кларитромицин.jpg" />
+    <Resource Include="MedicinesPhoto\Лансопразол.jpg" />
+    <Resource Include="MedicinesPhoto\Левофлоксацин.jpg" />
+    <Resource Include="MedicinesPhoto\Метронидазол.jpg" />
+    <Resource Include="MedicinesPhoto\Омепразол.jpg" />
+    <Resource Include="MedicinesPhoto\Парацетамол.jpg" />
+    <Resource Include="MedicinesPhoto\Ранитидин.jpg" />
+    <Resource Include="MedicinesPhoto\Рокситромицин.jpg" />
+    <Resource Include="MedicinesPhoto\Цефазолин.jpg" />
+    <Resource Include="MedicinesPhoto\Цефиксим.jpg" />
+    <Resource Include="MedicinesPhoto\Цефтриаксон.jpg" />
+    <Resource Include="MedicinesPhoto\Ципрофлоксацин.jpg" />
+    <Resource Include="MedicinesPhoto\Эритромицин.jpg" />
     <Content Include="MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>

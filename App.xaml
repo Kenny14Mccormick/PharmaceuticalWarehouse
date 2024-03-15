@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:Аптечный_склад"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
         <Style TargetType="Button">
             <Setter Property="Background" Value="#4F8A9E"/>
             <Setter Property="Foreground" Value="White"/>
@@ -23,14 +22,28 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
+
         <Style TargetType="DatePicker">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="CustomTextBlockStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+
+
     </Application.Resources>
 </Application>

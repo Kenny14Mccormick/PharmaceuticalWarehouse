@@ -90,6 +90,9 @@ namespace Аптечный_склад.Pharmacist
             // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
             var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
 
+            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine());
+
+
         }
 
         private void SeeApplicationBtn_Click(object sender, RoutedEventArgs e)
