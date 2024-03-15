@@ -135,7 +135,6 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            selectedMedicinesBackup = new List<Medicine>(selectedMedicines);
             NavigationService.GoBack();
         }
 
