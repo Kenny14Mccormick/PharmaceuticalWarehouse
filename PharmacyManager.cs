@@ -20,7 +20,6 @@ namespace Аптечный_склад
             this.Application = new HashSet<Application>();
             this.MedicineSupply = new HashSet<MedicineSupply>();
             this.PharmacySupply = new HashSet<PharmacySupply>();
-            this.WareHouse = new HashSet<WareHouse>();
         }
     
         public int PharmacyManagerCode { get; set; }
@@ -29,17 +28,11 @@ namespace Аптечный_склад
         public string Patronymic { get; set; }
         public string Phone { get; set; }
     
-        public string FullName
-        {
-            get { return $"{LastName} {FirstName} {Patronymic}"; }
-        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedicineSupply> MedicineSupply { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PharmacySupply> PharmacySupply { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WareHouse> WareHouse { get; set; }
     }
 }

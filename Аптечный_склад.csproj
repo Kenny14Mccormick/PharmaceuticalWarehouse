@@ -94,6 +94,12 @@
     <Compile Include="MedicinePhoto.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MedicinePrice.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicineQuantitiy.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MedicineSupply.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -164,12 +170,6 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WareHouse.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WareHouseMedicine.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Page Include="Authorization.xaml">

@@ -42,10 +42,10 @@ namespace Аптечный_склад
         public virtual DbSet<Supplier> Supplier { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<WareHouse> WareHouse { get; set; }
         public virtual DbSet<ApplicationContent> ApplicationContent { get; set; }
         public virtual DbSet<PharmacySupplyContent> PharmacySupplyContent { get; set; }
         public virtual DbSet<SupplyContent> SupplyContent { get; set; }
-        public virtual DbSet<WareHouseMedicine> WareHouseMedicine { get; set; }
+        public virtual DbSet<MedicinePrice> MedicinePrice { get; set; }
+        public virtual DbSet<MedicineQuantitiy> MedicineQuantitiy { get; set; }
     }
 }

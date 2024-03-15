@@ -18,6 +18,7 @@ namespace Аптечный_склад
         public Application()
         {
             this.ApplicationContent = new HashSet<ApplicationContent>();
+            this.PharmacySupply = new HashSet<PharmacySupply>();
         }
     
         public int ApplicationCode { get; set; }
@@ -32,5 +33,7 @@ namespace Аптечный_склад
         public virtual PharmacyManager PharmacyManager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicationContent> ApplicationContent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PharmacySupply> PharmacySupply { get; set; }
     }
 }

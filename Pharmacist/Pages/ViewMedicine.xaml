@@ -111,9 +111,9 @@
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Срок годности:" TextWrapping="Wrap" Grid.Row="10" FontSize="15" />
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ExpirationDate, StringFormat={}{0:dd/MM/yyyy}}"  Grid.Row="11" FontSize="15" />
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding Price, StringFormat={}{0} руб.}" Grid.Row="12" FontSize="20"/>
+                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding Medicine.MedicinePrice.Price, StringFormat={}{0} руб.}" Grid.Row="12" FontSize="20"/>
 
-                            <TextBlock  Foreground="{Binding WareHouseMedicine.ActualTextColor}" HorizontalAlignment="Center" Grid.Column="0" Text="{Binding WareHouseMedicine.ActualText}" Grid.Row="12" FontSize="20"/>
+                            <TextBlock  Foreground="{Binding MedicineQuantitiy.ActualTextColor}" HorizontalAlignment="Center" Grid.Column="0" Text="{Binding MedicineQuantitiy.ActualText}" Grid.Row="12" FontSize="20"/>
 
 
                             <Button x:Name="btnAdd" Grid.Row="13" Grid.ColumnSpan="2" Content="Добавить" Click="btnAdd_Click" Margin="5"/>

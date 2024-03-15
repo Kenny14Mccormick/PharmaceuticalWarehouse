@@ -12,32 +12,11 @@ namespace Аптечный_склад
     using System;
     using System.Collections.Generic;
     
-    public partial class WareHouseMedicine
+    public partial class MedicinePrice
     {
-        public int WareHouseCode { get; set; }
         public int MedicineCode { get; set; }
-        public int Quantity { get; set; }
-
-        public string ActualText
-        {
-            get
-            {
-                if (Quantity > 0)
-                    return "В наличии";
-                else
-                    return "Нет в наличии";
-            }
-        }
-        public string ActualTextColor
-        {
-            get
-            {
-                if (Quantity > 0) return "Green";
-                else return "Red";
-            }
-        }
-
+        public double Price { get; set; }
+    
         public virtual Medicine Medicine { get; set; }
-        public virtual WareHouse WareHouse { get; set; }
     }
 }

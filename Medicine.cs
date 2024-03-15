@@ -20,7 +20,8 @@ namespace Аптечный_склад
             this.ApplicationContent = new HashSet<ApplicationContent>();
             this.PharmacySupplyContent = new HashSet<PharmacySupplyContent>();
             this.SupplyContent = new HashSet<SupplyContent>();
-            this.WareHouseMedicine = new HashSet<WareHouseMedicine>();
+            this.MedicinePrice = new HashSet<MedicinePrice>();
+            this.MedicineQuantitiy = new HashSet<MedicineQuantitiy>();
         }
     
         public int MedicineCode { get; set; }
@@ -31,7 +32,6 @@ namespace Аптечный_склад
         public int FormCode { get; set; }
         public int PhotoCode { get; set; }
         public int ManufacturerCode { get; set; }
-        public double Price { get; set; }
         public System.DateTime ExpirationDate { get; set; }
         public string StorageConditionals { get; set; }
     
@@ -47,6 +47,8 @@ namespace Аптечный_склад
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplyContent> SupplyContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WareHouseMedicine> WareHouseMedicine { get; set; }
+        public virtual ICollection<MedicinePrice> MedicinePrice { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MedicineQuantitiy> MedicineQuantitiy { get; set; }
     }
 }
