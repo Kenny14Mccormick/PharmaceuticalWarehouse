@@ -1,4 +1,4 @@
-﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.ViewMedicine"
+﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.CreateApplication"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,71 +6,18 @@
       xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ViewMedicine" FontSize="17">
+      Title="CreateApplication">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="4*"/>
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Поиск по названию" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="1" x:Name="tbFindMedicine" TextChanged="tbFindeMedicicne_tch" Margin="7"/>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25"/>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Категория" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbCategory" SelectionChanged="cbCategoryChanged" Grid.Row="2" Margin="7"/>
-
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Действующее вещество" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" Grid.Row="4" Margin="7"/>
-
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Форма выпуска" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbForm" SelectionChanged="cbFormChanged" Grid.Row="6" Margin="7"/>
-        </Grid>
-
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Button Grid.Column="2" Grid.Row="1" Content="Перейти к оформлению"/>
-            <TextBlock x:Name="tbMedicineCountInOrder" Style="{StaticResource CustomTextBlockStyle}" Text="{Binding Count, StringFormat='Добавлено в заявку: {0}'}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        </Grid>
-
         <ListView Grid.Row="1" Grid.Column="1" Margin="10" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="2" Width="260" Padding="10">
+                    <Border BorderBrush="Black" BorderThickness="2" Width="250" Padding="10">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -100,7 +47,7 @@
 
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Категория:" Grid.Row="4" FontSize="15" />
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding MedicineCategory.Title}" Grid.Row="5" FontSize="15" />
-                            
+
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Действующее вещество:" Grid.Row="6" FontSize="15" />
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ActiveSubstance.Title}"  Grid.Row="7" FontSize="15" />
 
@@ -111,16 +58,10 @@
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Срок годности:" TextWrapping="Wrap" Grid.Row="10" FontSize="15" />
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ExpirationDate, StringFormat={}{0:dd/MM/yyyy}}"  Grid.Row="11" FontSize="15" />
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding Price, StringFormat={}{0} руб.}" Grid.Row="12" FontSize="20"/>
+                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.ColumnSpan="2" Text="{Binding Price, StringFormat={}{0} руб.}" Grid.Row="12" FontSize="20"/>
 
-                            <TextBlock  Foreground="{Binding WareHouseMedicine.ActualTextColor}" HorizontalAlignment="Center" Grid.Column="0" Text="{Binding WareHouseMedicine.ActualText}" Grid.Row="12" FontSize="20"/>
+                    
 
-
-                            <Button x:Name="btnAdd" Grid.Row="13" Grid.ColumnSpan="2" Content="Добавить" Click="btnAdd_Click" Margin="5"/>
-
-                            <Border x:Name="txtAdded" Visibility="Collapsed" Grid.Row="13" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black">
-                            <TextBlock  Text="Добавлено"  HorizontalAlignment="Center"/>
-                            </Border>
                         </Grid>
                     </Border>
                 </DataTemplate>

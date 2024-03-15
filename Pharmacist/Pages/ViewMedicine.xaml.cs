@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Аптечный_склад.Pharmacist.Pages
 {
@@ -110,13 +111,46 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            _medicineCountInOrder++;
-            UpdateMedicineCountInOrder();
-            MessageBox.Show("Успешно добавлено в заявку");
-            // Скрытие кнопки "Добавить" и отображение текста "Добавлено"
-            //btnAdd.Visibility = Visibility.Collapsed;
-            //txtAdded.Visibility = Visibility.Visible;
+            Button button = sender as Button;
+            if (button != null)
+            {
+                // Увеличение счетчика лекарств в заявке и вывод сообщения
+                _medicineCountInOrder++;
+                UpdateMedicineCountInOrder();
+                MessageBox.Show("Успешно добавлено в заявку");
 
+                // Скрытие кнопки "Добавить" и отображение текста "Добавлено"
+                button.Visibility = Visibility.Collapsed;
+                Border txtAdded = FindVisualChild<Border>(button.Parent, "txtAdded");
+                if (txtAdded != null)
+                {
+                    txtAdded.Visibility = Visibility.Visible;
+                }
+            }
         }
+
+        private T FindVisualChild<T>(DependencyObject parent, string name) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child != null && child is T && ((FrameworkElement)child).Name == name)
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    T childOfChild = FindVisualChild<T>(child, name);
+                    if (childOfChild != null)
+                    {
+                        return childOfChild;
+                    }
+                }
+            }
+            return null;
+        }
+
     }
+
 }
+
