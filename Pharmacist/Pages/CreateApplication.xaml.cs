@@ -21,7 +21,6 @@ namespace Аптечный_склад.Pharmacist.Pages
     /// </summary>
     public partial class CreateApplication : Page
     {
-        private List<Medicine> selectedMedicinesBackup;
 
         private List<Medicine> selectedMedicines;
         Medicine medicine1 = new Medicine();
@@ -137,7 +136,7 @@ namespace Аптечный_склад.Pharmacist.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             selectedMedicinesBackup = new List<Medicine>(selectedMedicines);
-            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
+            NavigationService.GoBack();
         }
 
         private void btnOrderMedicine_Click(object sender, RoutedEventArgs e)
