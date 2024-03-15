@@ -22,8 +22,6 @@
           <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
           <Property Name="StatusCode" Type="int" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.ApplicationContent" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ApplicationContent">
           <Key>
             <PropertyRef Name="MedicineCode" />
@@ -41,8 +39,6 @@
           <Property Name="StatusCode" Type="int" Nullable="false" />
           <Property Name="StatusDescription" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.ApplicationSupply" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="ApplicationSupply">
           <Key>
             <PropertyRef Name="ApplicationCode" />
@@ -151,8 +147,6 @@
           <Property Name="Date" Type="date" />
           <Property Name="PharmacyManagerCode" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.PharmacySupplyContent" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="PharmacySupplyContent">
           <Key>
             <PropertyRef Name="SupplyCode" />
@@ -186,8 +180,6 @@
           <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ContactData" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Pharmaceutical_Warehouse.dbo.SupplyContent" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="SupplyContent">
           <Key>
             <PropertyRef Name="SupplyCode" />
@@ -522,7 +514,9 @@
         <EntityContainer Name="Хранилище Pharmaceutical_WarehouseModelContainer">
           <EntitySet Name="ActiveSubstance" EntityType="Self.ActiveSubstance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationContent" EntityType="Self.ApplicationContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationSupply" EntityType="Self.ApplicationSupply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoryOperations" EntityType="Self.HistoryOperations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
@@ -534,38 +528,13 @@
           <EntitySet Name="Pharmacy" EntityType="Self.Pharmacy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PharmacyManager" EntityType="Self.PharmacyManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PharmacySupply" EntityType="Self.PharmacySupply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PharmacySupplyContent" EntityType="Self.PharmacySupplyContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReleaseForm" EntityType="Self.ReleaseForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyContent" EntityType="Self.SupplyContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ApplicationContent" EntityType="Self.ApplicationContent" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ApplicationContent].[MedicineCode] AS [MedicineCode], 
-    [ApplicationContent].[ApplicationCode] AS [ApplicationCode], 
-    [ApplicationContent].[MedicineQuantity] AS [MedicineQuantity]
-    FROM [dbo].[ApplicationContent] AS [ApplicationContent]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ApplicationSupply" EntityType="Self.ApplicationSupply" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ApplicationSupply].[ApplicationCode] AS [ApplicationCode], 
-    [ApplicationSupply].[SupplyCode] AS [SupplyCode]
-    FROM [dbo].[ApplicationSupply] AS [ApplicationSupply]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PharmacySupplyContent" EntityType="Self.PharmacySupplyContent" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PharmacySupplyContent].[SupplyCode] AS [SupplyCode], 
-    [PharmacySupplyContent].[MedicineCode] AS [MedicineCode], 
-    [PharmacySupplyContent].[MedicineQuantity] AS [MedicineQuantity]
-    FROM [dbo].[PharmacySupplyContent] AS [PharmacySupplyContent]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SupplyContent" EntityType="Self.SupplyContent" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SupplyContent].[SupplyCode] AS [SupplyCode], 
-    [SupplyContent].[MedicineCode] AS [MedicineCode], 
-    [SupplyContent].[MedicineQuantity] AS [MedicineQuantity]
-    FROM [dbo].[SupplyContent] AS [SupplyContent]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Application_ApplicationStatus" Association="Self.FK_Application_ApplicationStatus">
             <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
             <End Role="Application" EntitySet="Application" />

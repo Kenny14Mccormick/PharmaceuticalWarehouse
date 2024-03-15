@@ -21,6 +21,8 @@ namespace Аптечный_склад.Pharmacist.Pages
     /// </summary>
     public partial class CreateApplication : Page
     {
+        private List<Medicine> selectedMedicinesBackup;
+
         private List<Medicine> selectedMedicines;
         Medicine medicine1 = new Medicine();
         private int pharmacyCode;
@@ -134,11 +136,18 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            selectedMedicinesBackup = new List<Medicine>(selectedMedicines);
             NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
         }
 
         private void btnOrderMedicine_Click(object sender, RoutedEventArgs e)
         {
+            // Проверка, есть ли у пользователя выбранные лекарства
+            if (selectedMedicines.Count == 0)
+            {
+                MessageBox.Show("Для создания заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Прерываем создание заявки
+            }
 
             // Создание новой заявки
             Application newApplication = new Application
@@ -182,6 +191,31 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Оповещение пользователя о успешном создании заявки
             MessageBox.Show("Заявка успешно создана и отправлена!");
         }
+
+
+        private void btnRemoveMedicine_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Medicine medicine = (Medicine)btn.DataContext;
+
+            // Подтверждение удаления лекарства
+            MessageBoxResult result = MessageBox.Show($"Вы уверены, что хотите удалить {medicine.Title}?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+
+                medicine.Quantity = 1;
+                // Удаление выбранного лекарства из списка
+                selectedMedicines.Remove(medicine);
+
+                // Обновление отображения списка лекарств в ListView
+                lvSelectedMedicine.ItemsSource = null;
+                lvSelectedMedicine.ItemsSource = selectedMedicines;
+
+                // Обновление суммы заказа
+                UpdateTotalSum();
+            }
+        }
+
 
     }
 }

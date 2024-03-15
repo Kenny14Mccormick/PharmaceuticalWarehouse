@@ -126,8 +126,6 @@ namespace Аптечный_склад.Pharmacist.Pages
                 // Увеличение счетчика лекарств в заявке и вывод сообщения
                 _medicineCountInOrder++;
                 UpdateMedicineCountInOrder();
-                MessageBox.Show("Успешно добавлено в заявку");
-
                 // Скрытие кнопки "Добавить" и отображение текста "Добавлено"
                 button.Visibility = Visibility.Collapsed;
                 Border txtAdded = FindVisualChild<Border>(button.Parent, "txtAdded");
@@ -135,6 +133,7 @@ namespace Аптечный_склад.Pharmacist.Pages
                 {
                     txtAdded.Visibility = Visibility.Visible;
                 }
+                MessageBox.Show("Успешно добавлено в заявку");
             }
         }
 
@@ -162,8 +161,16 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnCreateApplication_Click(object sender, RoutedEventArgs e)
         {
-            CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
-            NavigationService.Navigate(createApplicationPage);
+            if(_medicineCountInOrder == 0)
+            {
+               MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
+                NavigationService.Navigate(createApplicationPage);
+            }
+
         }
     }
 
