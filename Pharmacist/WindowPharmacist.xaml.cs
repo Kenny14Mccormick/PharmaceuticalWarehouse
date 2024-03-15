@@ -90,10 +90,15 @@ namespace Аптечный_склад.Pharmacist
             // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
             var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
 
-            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine());
+            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
 
-
+            // Передаем номер аптеки при создании объекта страницы ViewMedicine
+            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacy.PharmacyCode));
         }
+
 
         private void SeeApplicationBtn_Click(object sender, RoutedEventArgs e)
         {

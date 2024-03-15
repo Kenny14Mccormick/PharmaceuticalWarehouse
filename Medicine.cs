@@ -11,7 +11,8 @@ namespace Аптечный_склад
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Medicine
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +21,30 @@ namespace Аптечный_склад
             this.ApplicationContent = new HashSet<ApplicationContent>();
             this.PharmacySupplyContent = new HashSet<PharmacySupplyContent>();
             this.SupplyContent = new HashSet<SupplyContent>();
+            Quantity = 1; // Инициализация свойства Quantity
         }
-    
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private int _quantity;
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                if (_quantity != value)
+                {
+                    _quantity = value;
+                    OnPropertyChanged(nameof(Quantity));
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public int MedicineCode { get; set; }
         public string Title { get; set; }
         public string Registration_number { get; set; }

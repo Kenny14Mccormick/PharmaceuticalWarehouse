@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActiveSubstance">
           <Key>
             <PropertyRef Name="SubstanceCode" />
@@ -16,7 +16,7 @@
           <Key>
             <PropertyRef Name="ApplicationCode" />
           </Key>
-          <Property Name="ApplicationCode" Type="int" Nullable="false" />
+          <Property Name="ApplicationCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PharmacyCode" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
@@ -72,7 +72,7 @@
           <Key>
             <PropertyRef Name="MedicineCode" />
           </Key>
-          <Property Name="MedicineCode" Type="int" Nullable="false" />
+          <Property Name="MedicineCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Registration_number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CategoryCode" Type="int" Nullable="false" />
@@ -667,8 +667,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pharmaceutical_WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

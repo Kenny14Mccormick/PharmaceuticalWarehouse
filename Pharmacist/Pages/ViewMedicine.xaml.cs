@@ -11,10 +11,13 @@ namespace Аптечный_склад.Pharmacist.Pages
     {
         private List<Medicine> _filteredMedicine; // Список отфильтрованных лекарств
         private int _medicineCountInOrder; // Счетчик лекарств в заявке
+        private List<Medicine> selectedMedicines = new List<Medicine>(); // Создание коллекции выбранных лекарств
+        private int pharmacyCode;
 
-        public ViewMedicine()
+        public ViewMedicine(int pharmacyCode)
         {
             InitializeComponent();
+            this.pharmacyCode = pharmacyCode;
             InitializeFilters();
             LoadMedicine();
         }
@@ -114,6 +117,12 @@ namespace Аптечный_склад.Pharmacist.Pages
             Button button = sender as Button;
             if (button != null)
             {
+                // Получение выбранного лекарства
+                Medicine selectedMedicine = (button.DataContext as Medicine);
+
+                // Добавление выбранного лекарства в список
+                selectedMedicines.Add(selectedMedicine);
+
                 // Увеличение счетчика лекарств в заявке и вывод сообщения
                 _medicineCountInOrder++;
                 UpdateMedicineCountInOrder();
@@ -128,6 +137,7 @@ namespace Аптечный_склад.Pharmacist.Pages
                 }
             }
         }
+
 
         private T FindVisualChild<T>(DependencyObject parent, string name) where T : DependencyObject
         {
@@ -150,6 +160,11 @@ namespace Аптечный_склад.Pharmacist.Pages
             return null;
         }
 
+        private void btnCreateApplication_Click(object sender, RoutedEventArgs e)
+        {
+            CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
+            NavigationService.Navigate(createApplicationPage);
+        }
     }
 
 }

@@ -57,8 +57,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="2" Grid.Row="1" Content="Перейти к оформлению"/>
-            <TextBlock x:Name="tbMedicineCountInOrder" Style="{StaticResource CustomTextBlockStyle}" Text="{Binding Count, StringFormat='Добавлено в заявку: {0}'}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Click="btnCreateApplication_Click" Grid.Column="2" Grid.Row="1" Content="Перейти к оформлению"/>
+            <TextBlock x:Name="tbMedicineCountInOrder" Style="{StaticResource CustomTextBlockStyle}"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>
 
@@ -118,7 +118,7 @@
 
                             <Button x:Name="btnAdd" Grid.Row="13" Grid.ColumnSpan="2" Content="Добавить" Click="btnAdd_Click" Margin="5"/>
 
-                            <Border x:Name="txtAdded" Visibility="Collapsed" Grid.Row="13" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black">
+                            <Border x:Name="txtAdded" Visibility="Collapsed" Grid.Row="13" Margin="5" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black">
                             <TextBlock  Text="Добавлено"  HorizontalAlignment="Center"/>
                             </Border>
                         </Grid>
