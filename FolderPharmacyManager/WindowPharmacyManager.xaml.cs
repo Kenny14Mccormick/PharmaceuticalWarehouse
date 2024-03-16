@@ -109,7 +109,7 @@ namespace Аптечный_склад.FolderPharmacyManager
             var pharmacyMannagercode = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.FirstOrDefault(p => p.UserCode == CurrentUser.UserCode);
             // Создаем объект страницы просмотра заявок
             Pharmaceutical_WarehouseEntities dbcontext = new Pharmaceutical_WarehouseEntities();
-            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, dbcontext);
+            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode);
             // Открываем страницу просмотра заявок во фрейме
             MyFrame.NavigationService.Navigate(viewApplications);
         }
