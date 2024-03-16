@@ -67,6 +67,9 @@
     <Compile Include="ActiveSubstance.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\WindowAdministratorDB.xaml.cs">
+      <DependentUpon>WindowAdministratorDB.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,18 @@
     </Compile>
     <Compile Include="ApplicationStatus.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\DetailedApplication.xaml.cs">
+      <DependentUpon>DetailedApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\UserSettings.xaml.cs">
+      <DependentUpon>UserSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\ViewApplications.xaml.cs">
+      <DependentUpon>ViewApplications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\WindowPharmacyManager.xaml.cs">
+      <DependentUpon>WindowPharmacyManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="HistoryOperations.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
@@ -172,7 +187,27 @@
     <Compile Include="User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Page Include="AdminastratorDB\WindowAdministratorDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\Pages\DetailedApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\Pages\UserSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\Pages\ViewApplications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\WindowPharmacyManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,5 +345,6 @@
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

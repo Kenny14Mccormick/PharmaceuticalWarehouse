@@ -52,9 +52,24 @@ namespace Аптечный_склад
 
             if (user != null)
             {
-                Close();
-                Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist(user);
-                windowPharmacist.Show();
+                switch (user.RoleCode){
+                    case 1:
+                        Close();
+                        Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist(user);
+                        windowPharmacist.Show();
+                        break;
+                    case 2:
+                        Close();
+                        FolderPharmacyManager.WindowPharmacyManager windowPharmacyManager = new FolderPharmacyManager.WindowPharmacyManager(user);
+                        windowPharmacyManager.Show();
+                        break;
+                    case 3:
+                        Close();
+                        AdminastratorDB.WindowAdministratorDB windowAdministratorDB = new AdminastratorDB.WindowAdministratorDB(user);
+                        windowAdministratorDB.Show();
+                        break;
+                }
+  
             }
             else
             {

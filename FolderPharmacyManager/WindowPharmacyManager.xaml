@@ -1,11 +1,11 @@
-﻿<Window x:Class="Аптечный_склад.Pharmacist.WindowPharmacist"
+﻿<Window x:Class="Аптечный_склад.FolderPharmacyManager.WindowPharmacyManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Аптечный_склад.Pharmacist"
+        xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager"
         mc:Ignorable="d"
-        Title="Фармацевт" Height="700" Width="1300" Background="#243944"
+          Title="Провизор" Height="700" Width="1300" Background="#243944"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontSize="25">
 
     <Grid>
@@ -66,12 +66,13 @@
             </Grid.ColumnDefinitions>
             <Grid Background="#2d5b73">
                 <StackPanel Margin="30 0">
-                    <Button  Click="AddApplicationBtn_Click" x:Name="AddApplicationBtn" Content="Создание заявки" Margin="0 40 0 20"/>
+                    <Button  Click="SeeMedicinesBtn_Click" x:Name="SeeMedicinesBtn" Content="Остатки лекарств" Margin="0 40 0 20"/>
                     <Button Click="SeeApplicationBtn_Click" x:Name="SeeApplicationBtn" Content="Просмотр заявок" Margin="0 20"/>
                     <Button Click="SeeSuppliesBtn_Click" x:Name="SeeSuppliesBtn" Content="Просмотр поставок" Margin="0 20"/>
-                </StackPanel>    
-                
-                    
+                    <Button Click="ManagePharmaciesBtn_Click" x:Name="ManagePharmaciesBtn" Content="Аптеки" Margin="0 20"/>
+                </StackPanel>
+
+
             </Grid>
 
             <Grid Grid.Column="1">

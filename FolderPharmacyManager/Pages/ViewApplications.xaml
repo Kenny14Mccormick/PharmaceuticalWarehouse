@@ -1,29 +1,37 @@
-﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.ViewApplications"
+﻿<Page x:Class="Аптечный_склад.FolderPharmacyManager.Pages.ViewApplications"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
+      xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ViewApplications">
+    Title="ViewApplications">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Статус заявки" Binding="{Binding ApplicationStatus.StatusDescription}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Pharmacy.Address}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding TotalCost, StringFormat={}{0} руб.}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button  Content="Подробнее" Click="btnMore_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Content="Поставить" Click="btnMakeSupply_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -40,7 +48,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Статус заявки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
+            <TextBlock Text="Поиск по аптеке" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
             <TextBlock Text="Сортировка по дате" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
             <Grid Grid.Column="2" >
                 <Grid.ColumnDefinitions>
@@ -50,8 +58,8 @@
                 <TextBlock Text="Выберите период" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
                 <Button Grid.Column="2" Content="Сброс" Margin="5" Click="ResetDatesBtn_Click" FontSize="17"/>
             </Grid>
-   
-            <ComboBox x:Name="comboBoxStatus" Grid.Row="1" Margin="15 0"/>
+
+            <TextBox x:Name="tbPharmacy" Grid.Row="1" Margin="15 0"/>
             <ComboBox x:Name="comboboxDate" Grid.Row="1" Grid.Column="1" Margin="15 0" >
                 <ComboBoxItem Content="По умолчанию"/>
                 <ComboBoxItem Content="По возрастанию"/>
