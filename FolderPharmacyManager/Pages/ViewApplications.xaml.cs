@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,18 +22,22 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
     public partial class ViewApplications : Page
     {
         private List<Application> _applications; // Список всех заявок
+        private int pharmacyManagerCode;
 
-        public ViewApplications()
+
+        private Pharmaceutical_WarehouseEntities _dbContext;
+
+        public ViewApplications(int pharmacyManagerCode, Pharmaceutical_WarehouseEntities dbContext)
         {
             InitializeComponent();
-
-            // Устанавливаем обработчики событий для изменения фильтров
+            this.pharmacyManagerCode = pharmacyManagerCode;
+            _dbContext = dbContext; // Сохраняем контекст сущностей
+                                    // Устанавливаем обработчики событий для изменения фильтров
             dpStart.SelectedDateChanged += UpdateApplications;
             dpEnd.SelectedDateChanged += UpdateApplications;
             tbPharmacy.TextChanged += UpdateApplications;
             comboboxDate.SelectionChanged += UpdateApplications;
-            _applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
-
+            _applications = _dbContext.Application.ToList(); // Используем контекст для загрузки списка заявок
             LoadApplications();
         }
         private void LoadApplications()
@@ -50,7 +55,9 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
                 }
                 application.TotalCost = totalCost;
             }
-
+            // Фильтрация по статусу (невыполненные заявки)
+            filteredAndSortedApplications = filteredAndSortedApplications
+                .Where(app => app.StatusCode == 1).ToList();
             // Перенумеровываем заявки, начиная с 1
             for (int i = 0; i < filteredAndSortedApplications.Count; i++)
             {
@@ -128,11 +135,67 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             dpEnd.SelectedDate = null;
         }
 
-        private void btnMakeSupply_Click(object sender, RoutedEventArgs e)
+        private void UpdateApplicationsList()
         {
+            // Получаем обновленный список заявок из базы данных
+            using (var dbContext = new Pharmaceutical_WarehouseEntities())
+            {
+                _applications = dbContext.Application.ToList();
+            }
 
+            // Загружаем обновленный список заявок в DataGrid
+            LoadApplications();
         }
 
- 
+        private void btnMakeSupply_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем выбранную заявку
+            var selectedApplication = dgApplications.SelectedItem as Application;
+            if (selectedApplication != null)
+            {
+                // Создаем новую поставку
+                var newSupply = new PharmacySupply
+                {
+                    Date = DateTime.Today,
+                    PharmacyCode = selectedApplication.PharmacyCode,
+                    PharmacyManagerCode = pharmacyManagerCode
+                };
+
+                // Добавляем новую поставку в коллекцию поставок выбранной заявки
+                selectedApplication.PharmacySupply.Add(newSupply);
+
+                // Добавляем содержимое заявки в поставку
+                foreach (var content in selectedApplication.ApplicationContent)
+                {
+                    var supplyContent = new PharmacySupplyContent
+                    {
+                        MedicineCode = content.MedicineCode,
+                        MedicineQuantity = content.MedicineQuantity
+                    };
+                    newSupply.PharmacySupplyContent.Add(supplyContent);
+                }
+
+                // Устанавливаем статус заявки как выполненную
+                selectedApplication.StatusCode = 2; // Предположим, что 2 - это код для статуса "выполнена"
+
+                // Сохраняем изменения в базе данных
+                _dbContext.SaveChanges(); // Используем контекст для сохранения изменений
+
+                // Обновляем список заявок
+                LoadApplications();
+
+                // Оповещаем пользователя о успешном создании поставки
+                MessageBox.Show("Поставка успешно создана и заявка отмечена как выполненная!");
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите заявку для создания поставки!");
+            }
+        }
+
+
+
     }
+
 }
+

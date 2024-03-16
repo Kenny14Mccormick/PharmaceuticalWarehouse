@@ -137,6 +137,7 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="22" Nullable="false" />
+          <Property Name="UserCode" Type="int" />
         </EntityType>
         <EntityType Name="PharmacySupply">
           <Key>
@@ -786,6 +787,7 @@
           <NavigationProperty Name="Application" Relationship="Self.FK_Application_PharmacyManager" FromRole="PharmacyManager" ToRole="Application" />
           <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_MedicineSupply_PharmacyManager" FromRole="PharmacyManager" ToRole="MedicineSupply" />
           <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupply_PharmacyManager" FromRole="PharmacyManager" ToRole="PharmacySupply" />
+          <Property Name="UserCode" Type="Int32" />
         </EntityType>
         <EntityType Name="PharmacySupply">
           <Key>
@@ -1412,6 +1414,7 @@
           <EntitySetMapping Name="PharmacyManager">
             <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacyManager">
               <MappingFragment StoreEntitySet="PharmacyManager">
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
                 <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

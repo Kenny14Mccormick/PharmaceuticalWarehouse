@@ -55,7 +55,7 @@
                 <Image Source="/Images/logOut.png" />
             </Button>
             <Button x:Name="UserSettingsBtn" Margin="3" FontSize="18" Content="{Binding CurrentUser.Title}" Grid.Column="16" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
-
+            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title}" Grid.Column="11" Grid.ColumnSpan="5" Style="{StaticResource CustomTextBlockStyle}"/>
 
 
         </Grid>

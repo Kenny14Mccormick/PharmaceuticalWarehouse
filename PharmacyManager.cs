@@ -27,7 +27,7 @@ namespace Аптечный_склад
         public string LastName { get; set; }
         public string Patronymic { get; set; }
         public string Phone { get; set; }
-    
+        public Nullable<int> UserCode { get; set; }
         public string FullName
         {
             get
