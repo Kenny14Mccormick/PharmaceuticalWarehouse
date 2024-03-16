@@ -17,7 +17,7 @@
         <DataGrid Grid.Row="1" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Номер поставки" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Провизор" Binding="{Binding PharmacyManager.FullName}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">

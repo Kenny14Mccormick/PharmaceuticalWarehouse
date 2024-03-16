@@ -27,7 +27,8 @@ namespace Аптечный_склад
         public System.DateTime Date { get; set; }
         public int PharmacyManagerCode { get; set; }
         public int StatusCode { get; set; }
-    
+
+        public double TotalCost { get; set; }
         public virtual ApplicationStatus ApplicationStatus { get; set; }
         public virtual Pharmacy Pharmacy { get; set; }
         public virtual PharmacyManager PharmacyManager { get; set; }

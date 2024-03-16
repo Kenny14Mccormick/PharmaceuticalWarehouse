@@ -135,7 +135,7 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
         }
 
         private void btnOrderMedicine_Click(object sender, RoutedEventArgs e)
@@ -147,13 +147,17 @@ namespace Аптечный_склад.Pharmacist.Pages
                 return; // Прерываем создание заявки
             }
 
+            // Вычисление общей стоимости заявки
+            double totalCost = selectedMedicines.Sum(m => m.MedicinePrice.Price * m.Quantity);
+
             // Создание новой заявки
             Application newApplication = new Application
             {
                 PharmacyCode = pharmacyCode,
                 Date = DateTime.Today,
                 PharmacyManagerCode = 1,
-                StatusCode = 1
+                StatusCode = 1,
+                TotalCost = totalCost // Присвоение общей стоимости новой заявке
             };
 
             // Добавление заявки в таблицу Application

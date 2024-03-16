@@ -41,9 +41,21 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Применяем фильтрацию и сортировку к списку заявок
             var filteredAndSortedApplications = FilterAndSortApplications(_applications);
 
+            // Подсчитываем общую стоимость каждой заявки
+            foreach (var application in filteredAndSortedApplications)
+            {
+                double totalCost = 0;
+                foreach (var content in application.ApplicationContent)
+                {
+                    totalCost += content.MedicineQuantity * content.Medicine.MedicinePrice.Price;
+                }
+                application.TotalCost = totalCost;
+            }
+
             // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
             dgApplications.ItemsSource = filteredAndSortedApplications;
         }
+
 
 
         private List<Application> FilterAndSortApplications(List<Application> applications)

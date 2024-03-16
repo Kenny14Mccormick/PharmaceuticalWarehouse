@@ -18,6 +18,7 @@
                 <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Статус заявки" Binding="{Binding ApplicationStatus.StatusDescription}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Общая стоимось" Binding="{Binding TotalCost, StringFormat={}{0} руб.}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
