@@ -25,13 +25,11 @@ namespace Аптечный_склад
         public int DisplayApplicationCode { get; set; }
         public int PharmacyCode { get; set; }
         public System.DateTime Date { get; set; }
-        public int PharmacyManagerCode { get; set; }
         public int StatusCode { get; set; }
 
         public double TotalCost { get; set; }
         public virtual ApplicationStatus ApplicationStatus { get; set; }
         public virtual Pharmacy Pharmacy { get; set; }
-        public virtual PharmacyManager PharmacyManager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicationContent> ApplicationContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

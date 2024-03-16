@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActiveSubstance">
           <Key>
             <PropertyRef Name="SubstanceCode" />
@@ -19,7 +19,6 @@
           <Property Name="ApplicationCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PharmacyCode" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
           <Property Name="StatusCode" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ApplicationContent">
@@ -78,8 +77,8 @@
           <Property Name="ManufacturerCode" Type="int" Nullable="false" />
           <Property Name="ExpirationDate" Type="date" Nullable="false" />
           <Property Name="StorageConditionals" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="QuantityCode" Type="int" />
-          <Property Name="PriceCode" Type="int" />
+          <Property Name="QuantityCode" Type="int" Nullable="false" />
+          <Property Name="PriceCode" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MedicineCategory">
           <Key>
@@ -143,10 +142,10 @@
           <Key>
             <PropertyRef Name="SupplyCode" />
           </Key>
-          <Property Name="SupplyCode" Type="int" Nullable="false" />
-          <Property Name="PharmacyCode" Type="int" />
-          <Property Name="Date" Type="date" />
-          <Property Name="PharmacyManagerCode" Type="int" />
+          <Property Name="SupplyCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PharmacyCode" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PharmacySupplyContent">
           <Key>
@@ -233,18 +232,6 @@
             </Principal>
             <Dependent Role="Application">
               <PropertyRef Name="PharmacyCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Application_PharmacyManager">
-          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
-          <End Role="Application" Type="Self.Application" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PharmacyManager">
-              <PropertyRef Name="PharmacyManagerCode" />
-            </Principal>
-            <Dependent Role="Application">
-              <PropertyRef Name="PharmacyManagerCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -357,7 +344,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Medicine_MedicinePrice">
-          <End Role="MedicinePrice" Type="Self.MedicinePrice" Multiplicity="0..1" />
+          <End Role="MedicinePrice" Type="Self.MedicinePrice" Multiplicity="1" />
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MedicinePrice">
@@ -369,7 +356,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Medicine_MedicineQuantitiy">
-          <End Role="MedicineQuantitiy" Type="Self.MedicineQuantitiy" Multiplicity="0..1" />
+          <End Role="MedicineQuantitiy" Type="Self.MedicineQuantitiy" Multiplicity="1" />
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MedicineQuantitiy">
@@ -417,7 +404,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PharmacySupply_Pharmacy">
-          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
           <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pharmacy">
@@ -429,7 +416,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PharmacySupply_PharmacyManager">
-          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="0..1" />
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
           <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PharmacyManager">
@@ -544,10 +531,6 @@
             <End Role="Pharmacy" EntitySet="Pharmacy" />
             <End Role="Application" EntitySet="Application" />
           </AssociationSet>
-          <AssociationSet Name="FK_Application_PharmacyManager" Association="Self.FK_Application_PharmacyManager">
-            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
-            <End Role="Application" EntitySet="Application" />
-          </AssociationSet>
           <AssociationSet Name="FK_ApplicationContent_Application" Association="Self.FK_ApplicationContent_Application">
             <End Role="Application" EntitySet="Application" />
             <End Role="ApplicationContent" EntitySet="ApplicationContent" />
@@ -637,7 +620,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pharmaceutical_WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -653,16 +637,26 @@
           <Key>
             <PropertyRef Name="ApplicationCode" />
           </Key>
-          <Property Name="ApplicationCode" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PharmacyCode" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
           <Property Name="StatusCode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ApplicationStatus" Relationship="Self.FK_Application_ApplicationStatus" FromRole="Application" ToRole="ApplicationStatus" />
           <NavigationProperty Name="Pharmacy" Relationship="Self.FK_Application_Pharmacy" FromRole="Application" ToRole="Pharmacy" />
-          <NavigationProperty Name="PharmacyManager" Relationship="Self.FK_Application_PharmacyManager" FromRole="Application" ToRole="PharmacyManager" />
           <NavigationProperty Name="ApplicationContent" Relationship="Self.FK_ApplicationContent_Application" FromRole="Application" ToRole="ApplicationContent" />
           <NavigationProperty Name="PharmacySupply" Relationship="Self.ApplicationSupply" FromRole="Application" ToRole="PharmacySupply" />
+        </EntityType>
+        <EntityType Name="ApplicationContent">
+          <Key>
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="ApplicationCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_ApplicationContent_Application" FromRole="ApplicationContent" ToRole="Application" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_ApplicationContent_Medicine" FromRole="ApplicationContent" ToRole="Medicine" />
         </EntityType>
         <EntityType Name="ApplicationStatus">
           <Key>
@@ -695,7 +689,7 @@
           <Key>
             <PropertyRef Name="MedicineCode" />
           </Key>
-          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Registration_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CategoryCode" Type="Int32" Nullable="false" />
@@ -705,11 +699,11 @@
           <Property Name="ManufacturerCode" Type="Int32" Nullable="false" />
           <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="StorageConditionals" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="QuantityCode" Type="Int32" />
-          <Property Name="PriceCode" Type="Int32" />
+          <Property Name="QuantityCode" Type="Int32" Nullable="false" />
+          <Property Name="PriceCode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ActiveSubstance" Relationship="Self.FK_Medicine_ActiveSubstance" FromRole="Medicine" ToRole="ActiveSubstance" />
-          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Medicine_Manufacturer" FromRole="Medicine" ToRole="Manufacturer" />
           <NavigationProperty Name="ApplicationContent" Relationship="Self.FK_ApplicationContent_Medicine" FromRole="Medicine" ToRole="ApplicationContent" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Medicine_Manufacturer" FromRole="Medicine" ToRole="Manufacturer" />
           <NavigationProperty Name="MedicineCategory" Relationship="Self.FK_Medicine_MedicineCategory" FromRole="Medicine" ToRole="MedicineCategory" />
           <NavigationProperty Name="MedicinePhoto" Relationship="Self.FK_Medicine_MedicinePhoto" FromRole="Medicine" ToRole="MedicinePhoto" />
           <NavigationProperty Name="MedicinePrice" Relationship="Self.FK_Medicine_MedicinePrice" FromRole="Medicine" ToRole="MedicinePrice" />
@@ -784,23 +778,34 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="22" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Application" Relationship="Self.FK_Application_PharmacyManager" FromRole="PharmacyManager" ToRole="Application" />
+          <Property Name="UserCode" Type="Int32" />
           <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_MedicineSupply_PharmacyManager" FromRole="PharmacyManager" ToRole="MedicineSupply" />
           <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupply_PharmacyManager" FromRole="PharmacyManager" ToRole="PharmacySupply" />
-          <Property Name="UserCode" Type="Int32" />
         </EntityType>
         <EntityType Name="PharmacySupply">
           <Key>
             <PropertyRef Name="SupplyCode" />
           </Key>
-          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
-          <Property Name="PharmacyCode" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="PharmacyManagerCode" Type="Int32" />
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PharmacyCode" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PharmacyManagerCode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pharmacy" Relationship="Self.FK_PharmacySupply_Pharmacy" FromRole="PharmacySupply" ToRole="Pharmacy" />
           <NavigationProperty Name="PharmacyManager" Relationship="Self.FK_PharmacySupply_PharmacyManager" FromRole="PharmacySupply" ToRole="PharmacyManager" />
           <NavigationProperty Name="PharmacySupplyContent" Relationship="Self.FK_PharmacySupplyContent_PharmacySupply" FromRole="PharmacySupply" ToRole="PharmacySupplyContent" />
           <NavigationProperty Name="Application" Relationship="Self.ApplicationSupply" FromRole="PharmacySupply" ToRole="Application" />
+        </EntityType>
+        <EntityType Name="PharmacySupplyContent">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_PharmacySupplyContent_Medicine" FromRole="PharmacySupplyContent" ToRole="Medicine" />
+          <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupplyContent_PharmacySupply" FromRole="PharmacySupplyContent" ToRole="PharmacySupply" />
         </EntityType>
         <EntityType Name="ReleaseForm">
           <Key>
@@ -828,6 +833,18 @@
           <Property Name="ContactData" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_MedicineSupply_Supplier" FromRole="Supplier" ToRole="MedicineSupply" />
         </EntityType>
+        <EntityType Name="SupplyContent">
+          <Key>
+            <PropertyRef Name="SupplyCode" />
+            <PropertyRef Name="MedicineCode" />
+            <PropertyRef Name="MedicineQuantity" />
+          </Key>
+          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
+          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Medicine" Relationship="Self.FK_SupplyContent_Medicine" FromRole="SupplyContent" ToRole="Medicine" />
+          <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_SupplyContent_MedicineSupply" FromRole="SupplyContent" ToRole="MedicineSupply" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -851,42 +868,6 @@
           <NavigationProperty Name="HistoryOperations" Relationship="Self.FK_HistoryOperations_User" FromRole="User" ToRole="HistoryOperations" />
           <NavigationProperty Name="Pharmacy" Relationship="Self.FK_User_Pharmacy" FromRole="User" ToRole="Pharmacy" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
-        </EntityType>
-        <EntityType Name="ApplicationContent">
-          <Key>
-            <PropertyRef Name="MedicineCode" />
-            <PropertyRef Name="ApplicationCode" />
-            <PropertyRef Name="MedicineQuantity" />
-          </Key>
-          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
-          <Property Name="ApplicationCode" Type="Int32" Nullable="false" />
-          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Application" Relationship="Self.FK_ApplicationContent_Application" FromRole="ApplicationContent" ToRole="Application" />
-          <NavigationProperty Name="Medicine" Relationship="Self.FK_ApplicationContent_Medicine" FromRole="ApplicationContent" ToRole="Medicine" />
-        </EntityType>
-        <EntityType Name="PharmacySupplyContent">
-          <Key>
-            <PropertyRef Name="SupplyCode" />
-            <PropertyRef Name="MedicineCode" />
-            <PropertyRef Name="MedicineQuantity" />
-          </Key>
-          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
-          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
-          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Medicine" Relationship="Self.FK_PharmacySupplyContent_Medicine" FromRole="PharmacySupplyContent" ToRole="Medicine" />
-          <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupplyContent_PharmacySupply" FromRole="PharmacySupplyContent" ToRole="PharmacySupply" />
-        </EntityType>
-        <EntityType Name="SupplyContent">
-          <Key>
-            <PropertyRef Name="SupplyCode" />
-            <PropertyRef Name="MedicineCode" />
-            <PropertyRef Name="MedicineQuantity" />
-          </Key>
-          <Property Name="SupplyCode" Type="Int32" Nullable="false" />
-          <Property Name="MedicineCode" Type="Int32" Nullable="false" />
-          <Property Name="MedicineQuantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Medicine" Relationship="Self.FK_SupplyContent_Medicine" FromRole="SupplyContent" ToRole="Medicine" />
-          <NavigationProperty Name="MedicineSupply" Relationship="Self.FK_SupplyContent_MedicineSupply" FromRole="SupplyContent" ToRole="MedicineSupply" />
         </EntityType>
         <Association Name="FK_Medicine_ActiveSubstance">
           <End Role="ActiveSubstance" Type="Self.ActiveSubstance" Multiplicity="1" />
@@ -924,18 +905,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Application_PharmacyManager">
-          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
-          <End Role="Application" Type="Self.Application" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PharmacyManager">
-              <PropertyRef Name="PharmacyManagerCode" />
-            </Principal>
-            <Dependent Role="Application">
-              <PropertyRef Name="PharmacyManagerCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ApplicationContent_Application">
           <End Role="Application" Type="Self.Application" Multiplicity="1" />
           <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
@@ -945,6 +914,18 @@
             </Principal>
             <Dependent Role="ApplicationContent">
               <PropertyRef Name="ApplicationCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationContent_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="MedicineCode" />
+            </Principal>
+            <Dependent Role="ApplicationContent">
+              <PropertyRef Name="MedicineCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -969,18 +950,6 @@
             </Principal>
             <Dependent Role="Medicine">
               <PropertyRef Name="ManufacturerCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ApplicationContent_Medicine">
-          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
-          <End Role="ApplicationContent" Type="Self.ApplicationContent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medicine">
-              <PropertyRef Name="MedicineCode" />
-            </Principal>
-            <Dependent Role="ApplicationContent">
-              <PropertyRef Name="MedicineCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1009,7 +978,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Medicine_MedicinePrice">
-          <End Role="MedicinePrice" Type="Self.MedicinePrice" Multiplicity="0..1" />
+          <End Role="MedicinePrice" Type="Self.MedicinePrice" Multiplicity="1" />
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MedicinePrice">
@@ -1021,7 +990,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Medicine_MedicineQuantitiy">
-          <End Role="MedicineQuantitiy" Type="Self.MedicineQuantitiy" Multiplicity="0..1" />
+          <End Role="MedicineQuantitiy" Type="Self.MedicineQuantitiy" Multiplicity="1" />
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MedicineQuantitiy">
@@ -1105,7 +1074,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PharmacySupply_Pharmacy">
-          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="0..1" />
+          <End Role="Pharmacy" Type="Self.Pharmacy" Multiplicity="1" />
           <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pharmacy">
@@ -1129,7 +1098,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PharmacySupply_PharmacyManager">
-          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="0..1" />
+          <End Role="PharmacyManager" Type="Self.PharmacyManager" Multiplicity="1" />
           <End Role="PharmacySupply" Type="Self.PharmacySupply" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PharmacyManager">
@@ -1171,6 +1140,7 @@
         <EntityContainer Name="Pharmaceutical_WarehouseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ActiveSubstance" EntityType="Self.ActiveSubstance" />
           <EntitySet Name="Application" EntityType="Self.Application" />
+          <EntitySet Name="ApplicationContent" EntityType="Self.ApplicationContent" />
           <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" />
           <EntitySet Name="HistoryOperations" EntityType="Self.HistoryOperations" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
@@ -1183,14 +1153,13 @@
           <EntitySet Name="Pharmacy" EntityType="Self.Pharmacy" />
           <EntitySet Name="PharmacyManager" EntityType="Self.PharmacyManager" />
           <EntitySet Name="PharmacySupply" EntityType="Self.PharmacySupply" />
+          <EntitySet Name="PharmacySupplyContent" EntityType="Self.PharmacySupplyContent" />
           <EntitySet Name="ReleaseForm" EntityType="Self.ReleaseForm" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="SupplyContent" EntityType="Self.SupplyContent" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="ApplicationContent" EntityType="Self.ApplicationContent" />
-          <EntitySet Name="PharmacySupplyContent" EntityType="Self.PharmacySupplyContent" />
-          <EntitySet Name="SupplyContent" EntityType="Self.SupplyContent" />
           <AssociationSet Name="FK_Medicine_ActiveSubstance" Association="Self.FK_Medicine_ActiveSubstance">
             <End Role="ActiveSubstance" EntitySet="ActiveSubstance" />
             <End Role="Medicine" EntitySet="Medicine" />
@@ -1203,12 +1172,12 @@
             <End Role="Pharmacy" EntitySet="Pharmacy" />
             <End Role="Application" EntitySet="Application" />
           </AssociationSet>
-          <AssociationSet Name="FK_Application_PharmacyManager" Association="Self.FK_Application_PharmacyManager">
-            <End Role="PharmacyManager" EntitySet="PharmacyManager" />
-            <End Role="Application" EntitySet="Application" />
-          </AssociationSet>
           <AssociationSet Name="FK_ApplicationContent_Application" Association="Self.FK_ApplicationContent_Application">
             <End Role="Application" EntitySet="Application" />
+            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationContent_Medicine" Association="Self.FK_ApplicationContent_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
             <End Role="ApplicationContent" EntitySet="ApplicationContent" />
           </AssociationSet>
           <AssociationSet Name="FK_HistoryOperations_User" Association="Self.FK_HistoryOperations_User">
@@ -1218,10 +1187,6 @@
           <AssociationSet Name="FK_Medicine_Manufacturer" Association="Self.FK_Medicine_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Medicine" EntitySet="Medicine" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ApplicationContent_Medicine" Association="Self.FK_ApplicationContent_Medicine">
-            <End Role="Medicine" EntitySet="Medicine" />
-            <End Role="ApplicationContent" EntitySet="ApplicationContent" />
           </AssociationSet>
           <AssociationSet Name="FK_Medicine_MedicineCategory" Association="Self.FK_Medicine_MedicineCategory">
             <End Role="MedicineCategory" EntitySet="MedicineCategory" />
@@ -1308,8 +1273,16 @@
                 <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
                 <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
                 <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationContent">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.ApplicationContent">
+              <MappingFragment StoreEntitySet="ApplicationContent">
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
+                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1414,12 +1387,12 @@
           <EntitySetMapping Name="PharmacyManager">
             <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacyManager">
               <MappingFragment StoreEntitySet="PharmacyManager">
-                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
                 <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1430,6 +1403,15 @@
                 <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="PharmacyManagerCode" ColumnName="PharmacyManagerCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PharmacySupplyContent">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacySupplyContent">
+              <MappingFragment StoreEntitySet="PharmacySupplyContent">
+                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1459,6 +1441,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SupplyContent">
+            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.SupplyContent">
+              <MappingFragment StoreEntitySet="SupplyContent">
+                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
+                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
+                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -1479,33 +1470,6 @@
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ApplicationContent">
-            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.ApplicationContent">
-              <MappingFragment StoreEntitySet="ApplicationContent">
-                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
-                <ScalarProperty Name="ApplicationCode" ColumnName="ApplicationCode" />
-                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PharmacySupplyContent">
-            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.PharmacySupplyContent">
-              <MappingFragment StoreEntitySet="PharmacySupplyContent">
-                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
-                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
-                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SupplyContent">
-            <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.SupplyContent">
-              <MappingFragment StoreEntitySet="SupplyContent">
-                <ScalarProperty Name="SupplyCode" ColumnName="SupplyCode" />
-                <ScalarProperty Name="MedicineCode" ColumnName="MedicineCode" />
-                <ScalarProperty Name="MedicineQuantity" ColumnName="MedicineQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

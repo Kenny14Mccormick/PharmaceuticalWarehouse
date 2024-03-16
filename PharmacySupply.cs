@@ -23,9 +23,10 @@ namespace Аптечный_склад
     
         public int SupplyCode { get; set; }
         public int DisplaySupplyCode { get; set; }
-        public Nullable<int> PharmacyCode { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> PharmacyManagerCode { get; set; }
+
+        public int PharmacyCode { get; set; }
+        public System.DateTime Date { get; set; }
+        public int PharmacyManagerCode { get; set; }
     
         public virtual Pharmacy Pharmacy { get; set; }
         public virtual PharmacyManager PharmacyManager { get; set; }

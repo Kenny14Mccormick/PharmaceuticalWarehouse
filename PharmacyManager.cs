@@ -17,7 +17,6 @@ namespace Аптечный_склад
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PharmacyManager()
         {
-            this.Application = new HashSet<Application>();
             this.MedicineSupply = new HashSet<MedicineSupply>();
             this.PharmacySupply = new HashSet<PharmacySupply>();
         }

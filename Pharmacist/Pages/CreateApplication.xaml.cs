@@ -135,6 +135,10 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            foreach(var a in selectedMedicines)
+            {
+                a.Quantity = 1;
+            }
             NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
         }
 
@@ -155,7 +159,6 @@ namespace Аптечный_склад.Pharmacist.Pages
             {
                 PharmacyCode = pharmacyCode,
                 Date = DateTime.Today,
-                PharmacyManagerCode = 1,
                 StatusCode = 1,
                 TotalCost = totalCost // Присвоение общей стоимости новой заявке
             };

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -138,47 +139,53 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             var selectedApplication = dgApplications.SelectedItem as Application;
             if (selectedApplication != null)
             {
-                // Создаем новую поставку
-                var newSupply = new PharmacySupply
-                {
-                    Date = DateTime.Today,
-                    PharmacyCode = selectedApplication.PharmacyCode,
-                    PharmacyManagerCode = pharmacyManagerCode
-                };
-
-                // Добавляем новую поставку в коллекцию поставок выбранной заявки
-                selectedApplication.PharmacySupply.Add(newSupply);
-
-                // Добавляем содержимое заявки в поставку
-                foreach (var content in selectedApplication.ApplicationContent)
-                {
-                    var supplyContent = new PharmacySupplyContent
-                    {
-                        MedicineCode = content.MedicineCode,
-                        MedicineQuantity = content.MedicineQuantity
-                    };
-                    newSupply.PharmacySupplyContent.Add(supplyContent);
-                }
-
-                // Устанавливаем статус заявки как выполненную
-                selectedApplication.StatusCode = 2; // Предположим, что 2 - это код для статуса "выполнена"
-
-                // Сохраняем изменения в базе данных
                 using (var dbContext = new Pharmaceutical_WarehouseEntities())
                 {
+                    // Создаем новую поставку
+                    var newSupply = new PharmacySupply
+                    {
+                        Date = DateTime.Now,
+                        PharmacyCode = selectedApplication.PharmacyCode,
+                        PharmacyManagerCode = pharmacyManagerCode
+                    };
+                    dbContext.PharmacySupply.Add(newSupply);
                     dbContext.SaveChanges();
+
+                    // Добавляем лекарства из заявки в содержимое поставки
+                    foreach (var content in selectedApplication.ApplicationContent)
+                    {
+                        var newSupplyContent = new PharmacySupplyContent
+                        {
+                            SupplyCode = newSupply.SupplyCode,
+                            MedicineCode = content.MedicineCode,
+                            MedicineQuantity = content.MedicineQuantity
+                        };
+                        dbContext.PharmacySupplyContent.Add(newSupplyContent);
+                    }
+
+                    // Получаем заявку из текущего контекста данных
+                    var applicationToUpdate = dbContext.Application.FirstOrDefault(a => a.ApplicationCode == selectedApplication.ApplicationCode);
+
+                    if (applicationToUpdate != null)
+                    {
+                        // Обновляем статус заявки на "Выполнена"
+                        applicationToUpdate.StatusCode = 2; // предполагая, что 2 означает "Выполнена"
+                        dbContext.SaveChanges();
+                        
+                    }
+                    
                 }
 
-                // Оповещаем пользователя о успешном создании поставки
-                MessageBox.Show("Поставка успешно создана и заявка отмечена как выполненная!");
-                // Обновляем список заявок
-                LoadApplications();
+                MessageBox.Show("Поставка успешно создана и заявка обновлена на 'Выполнена'!");
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите заявку для создания поставки!");
+                MessageBox.Show("Пожалуйста, выберите заявку для создания поставки.");
             }
         }
+
+
+
 
 
     }

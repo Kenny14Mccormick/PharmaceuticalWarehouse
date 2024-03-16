@@ -27,6 +27,7 @@ namespace Аптечный_склад
     
         public virtual DbSet<ActiveSubstance> ActiveSubstance { get; set; }
         public virtual DbSet<Application> Application { get; set; }
+        public virtual DbSet<ApplicationContent> ApplicationContent { get; set; }
         public virtual DbSet<ApplicationStatus> ApplicationStatus { get; set; }
         public virtual DbSet<HistoryOperations> HistoryOperations { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
@@ -39,13 +40,12 @@ namespace Аптечный_склад
         public virtual DbSet<Pharmacy> Pharmacy { get; set; }
         public virtual DbSet<PharmacyManager> PharmacyManager { get; set; }
         public virtual DbSet<PharmacySupply> PharmacySupply { get; set; }
+        public virtual DbSet<PharmacySupplyContent> PharmacySupplyContent { get; set; }
         public virtual DbSet<ReleaseForm> ReleaseForm { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
+        public virtual DbSet<SupplyContent> SupplyContent { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<ApplicationContent> ApplicationContent { get; set; }
-        public virtual DbSet<PharmacySupplyContent> PharmacySupplyContent { get; set; }
-        public virtual DbSet<SupplyContent> SupplyContent { get; set; }
     }
 }

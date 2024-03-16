@@ -4,11 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ca5f6354b931486cb2eb6987402af768" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="4a4387252657484592ad69b5366acbd6" Name="Diagram1">
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ActiveSubstance" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Application" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ApplicationStatus" Width="1.5" PointX="1.5" PointY="29.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.HistoryOperations" Width="1.5" PointX="8.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ApplicationContent" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ApplicationStatus" Width="1.5" PointX="1.5" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.HistoryOperations" Width="1.5" PointX="8.25" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Manufacturer" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Medicine" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.MedicineCategory" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
@@ -16,25 +17,23 @@
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.MedicinePrice" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.MedicineQuantitiy" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.MedicineSupply" Width="1.5" PointX="3" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Pharmacy" Width="1.5" PointX="0.75" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.PharmacyManager" Width="1.5" PointX="0.75" PointY="33.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.PharmacySupply" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ReleaseForm" Width="1.5" PointX="0.75" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Role" Width="1.5" PointX="3.75" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Supplier" Width="1.5" PointX="0.75" PointY="36.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.User" Width="1.5" PointX="6" PointY="25.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ApplicationContent" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Pharmacy" Width="1.5" PointX="0.75" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.PharmacyManager" Width="1.5" PointX="0.75" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.PharmacySupply" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.PharmacySupplyContent" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.ReleaseForm" Width="1.5" PointX="0.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Role" Width="1.5" PointX="3.75" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.Supplier" Width="1.5" PointX="0.75" PointY="36.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.SupplyContent" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pharmaceutical_WarehouseModel.User" Width="1.5" PointX="6" PointY="25.375" IsExpanded="true" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Medicine_ActiveSubstance" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Application_ApplicationStatus" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Application_Pharmacy" ManuallyRouted="false" />
-        <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Application_PharmacyManager" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_ApplicationContent_Application" ManuallyRouted="false" />
+        <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_ApplicationContent_Medicine" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_HistoryOperations_User" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Medicine_Manufacturer" ManuallyRouted="false" />
-        <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_ApplicationContent_Medicine" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Medicine_MedicineCategory" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Medicine_MedicinePhoto" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_Medicine_MedicinePrice" ManuallyRouted="false" />

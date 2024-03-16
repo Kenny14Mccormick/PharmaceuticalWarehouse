@@ -55,13 +55,13 @@ namespace Аптечный_склад
         public int ManufacturerCode { get; set; }
         public System.DateTime ExpirationDate { get; set; }
         public string StorageConditionals { get; set; }
-        public Nullable<int> QuantityCode { get; set; }
-        public Nullable<int> PriceCode { get; set; }
+        public int QuantityCode { get; set; }
+        public int PriceCode { get; set; }
     
         public virtual ActiveSubstance ActiveSubstance { get; set; }
-        public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ApplicationContent> ApplicationContent { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
         public virtual MedicineCategory MedicineCategory { get; set; }
         public virtual MedicinePhoto MedicinePhoto { get; set; }
         public virtual MedicinePrice MedicinePrice { get; set; }
