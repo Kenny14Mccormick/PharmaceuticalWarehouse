@@ -141,48 +141,72 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             {
                 using (var dbContext = new Pharmaceutical_WarehouseEntities())
                 {
-                    // Создаем новую поставку
-                    var newSupply = new PharmacySupply
-                    {
-                        Date = DateTime.Now,
-                        PharmacyCode = selectedApplication.PharmacyCode,
-                        PharmacyManagerCode = pharmacyManagerCode
-                    };
-                    dbContext.PharmacySupply.Add(newSupply);
-                    dbContext.SaveChanges();
+                    bool isEnoughMedicine = true;
 
-                    // Добавляем лекарства из заявки в содержимое поставки
+                    // Проверяем, достаточно ли всех лекарств на складе
                     foreach (var content in selectedApplication.ApplicationContent)
                     {
-                        var newSupplyContent = new PharmacySupplyContent
+                        var medicine = dbContext.Medicine.FirstOrDefault(o => o.MedicineCode == content.MedicineCode);
+                        if (medicine.MedicineQuantitiy.Quantity < content.MedicineQuantity)
                         {
-                            SupplyCode = newSupply.SupplyCode,
-                            MedicineCode = content.MedicineCode,
-                            MedicineQuantity = content.MedicineQuantity
-                        };
-                        dbContext.PharmacySupplyContent.Add(newSupplyContent);
+                            isEnoughMedicine = false;
+                            MessageBox.Show($"Недостаточно {medicine.Title} на складе.");
+                            break;
+                        }
                     }
 
-                    // Получаем заявку из текущего контекста данных
-                    var applicationToUpdate = dbContext.Application.FirstOrDefault(a => a.ApplicationCode == selectedApplication.ApplicationCode);
-
-                    if (applicationToUpdate != null)
+                    if (isEnoughMedicine)
                     {
-                        // Обновляем статус заявки на "Выполнена"
-                        applicationToUpdate.StatusCode = 2; // предполагая, что 2 означает "Выполнена"
+                        // Создаем новую поставку
+                        var newSupply = new PharmacySupply
+                        {
+                            Date = DateTime.Now,
+                            PharmacyCode = selectedApplication.PharmacyCode,
+                            PharmacyManagerCode = pharmacyManagerCode
+                        };
+                        dbContext.PharmacySupply.Add(newSupply);
                         dbContext.SaveChanges();
+
+                        // Добавляем лекарства из заявки в содержимое поставки
+                        foreach (var content in selectedApplication.ApplicationContent)
+                        {
+                            var newSupplyContent = new PharmacySupplyContent
+                            {
+                                SupplyCode = newSupply.SupplyCode,
+                                MedicineCode = content.MedicineCode,
+                                MedicineQuantity = content.MedicineQuantity
+                            };
+                            var medicine = dbContext.Medicine.FirstOrDefault(o => o.MedicineCode == content.MedicineCode);
+                            medicine.MedicineQuantitiy.Quantity -= content.MedicineQuantity;
+                            dbContext.PharmacySupplyContent.Add(newSupplyContent);
+                        }
+
+                        // Получаем заявку из текущего контекста данных
+                        var applicationToUpdate = dbContext.Application.FirstOrDefault(a => a.ApplicationCode == selectedApplication.ApplicationCode);
+
+                        if (applicationToUpdate != null)
+                        {
+                            // Обновляем статус заявки на "Выполнена"
+                            applicationToUpdate.StatusCode = 2; // предполагая, что 2 означает "Выполнена"
+                            dbContext.SaveChanges();
+                        }
+                        dgApplications.ItemsSource = dbContext.Application.ToList();
+                        LoadApplications();
+                        MessageBox.Show("Поставка успешно создана и заявка обновлена на 'Выполнена'!");
                         
                     }
-                    
+                    else
+                    {
+                        MessageBox.Show("Поставка не создана из-за недостатка лекарств на складе.");
+                    }
                 }
-
-                MessageBox.Show("Поставка успешно создана и заявка обновлена на 'Выполнена'!");
             }
             else
             {
                 MessageBox.Show("Пожалуйста, выберите заявку для создания поставки.");
             }
         }
+
 
 
 

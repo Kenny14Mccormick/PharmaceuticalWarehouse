@@ -1,0 +1,51 @@
+﻿<Page x:Class="Аптечный_склад.FolderPharmacyManager.Pages.SeeMedicine"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SeeMedicine">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Номер лекарства" Binding="{Binding MedicineCode}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Категория" Binding="{Binding MedicineCategory.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Производитель" Binding="{Binding Manufacturer.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество" Binding="{Binding MedicineQuantitiy.Quantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена" Binding="{Binding MedicinePrice.Price}"></DataGridTextColumn>
+
+              
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Поиск по названию" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
+            <Grid Grid.Column="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <TextBox TextChanged="tbFindPMeidicne" x:Name="tbMedicine" Grid.Row="1" Grid.Column="1" Margin="15 0"/>
+            <Button Grid.Row="1"  Content="Заказ лекарств" FontSize="20" VerticalContentAlignment="Center" Click="Button_Click"/>
+        </Grid>
+    </Grid>
+</Page>
