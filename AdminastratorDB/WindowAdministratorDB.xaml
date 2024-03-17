@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад.AdminastratorDB"
         mc:Ignorable="d"
-        Title="WindowAdministratorDB" Height="450" Width="800">
+         Title="Администратор" Height="700" Width="1300" Background="#243944"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontSize="25">
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="MinimizeButton_Click" Grid.Column="19" Style="{StaticResource panel}">
+                <Image Source="/Images/wrap.png"/>
+            </Button>
+            <Button Click="HomeButton_Click" Grid.Column="1" Style="{StaticResource panel}">
+                <Image Source="/Images/home.png"/>
+            </Button>
+            <Button  Click="MaximizeButton_Click" Grid.Column="20" Style="{StaticResource panel}">
+                <Image Source="/Images/maximize.png" />
+
+            </Button>
+            <Button  Click="CloseButton_Click" Grid.Column="21" Style="{StaticResource panel}">
+                <Image Source="/Images/cross-cancel-sign.png" />
+            </Button>
+            <Button  Click="QuitButton_Click" Grid.Column="0" Style="{StaticResource panel}">
+                <Image Source="/Images/logOut.png" />
+            </Button>
+            <Button x:Name="UserSettingsBtn" Margin="3" FontSize="18" Content="{Binding CurrentUser.Title}" Grid.Column="16" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
+
+
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="#2d5b73">
+                <StackPanel Margin="30 0">
+                    <Button  Click="SeeMedicinesBtn_Click" x:Name="SeeMedicinesBtn" Content="Справочник лекарств" Margin="0 40 0 20"/>
+                    <Button Click="SeeUsersBtn_Click" x:Name="SeeUsersBtn" Content="Пользователи" Margin="0 20"/>
+                    <Button Click="SeeHistoryBtn_Click" x:Name="SeeHistoryBtn" Content="История входов" Margin="0 20"/>
+                </StackPanel>
+
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Frame NavigationUIVisibility="Hidden" x:Name="MyFrame" Margin="20"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

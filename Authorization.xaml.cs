@@ -48,33 +48,48 @@ namespace Аптечный_склад
             string login = tbLogin.Text;
             string password = tbPassword.Password;
 
-            var user = MainWindow.Pharmaceutical_Warehouse.User.FirstOrDefault(u => u.Login == login && u.Password == password);
+            using (var dbContext = new Pharmaceutical_WarehouseEntities())
+            {
+                var user = dbContext.User.FirstOrDefault(u => u.Login == login && u.Password == password);
 
-            if (user != null)
-            {
-                switch (user.RoleCode){
-                    case 1:
-                        Close();
-                        Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist(user);
-                        windowPharmacist.Show();
-                        break;
-                    case 2:
-                        Close();
-                        FolderPharmacyManager.WindowPharmacyManager windowPharmacyManager = new FolderPharmacyManager.WindowPharmacyManager(user);
-                        windowPharmacyManager.Show();
-                        break;
-                    case 3:
-                        Close();
-                        AdminastratorDB.WindowAdministratorDB windowAdministratorDB = new AdminastratorDB.WindowAdministratorDB(user);
-                        windowAdministratorDB.Show();
-                        break;
+                if (user != null)
+                {
+                    // Создаем новую запись в HistoryOperations
+                    var historyOperation = new HistoryOperations
+                    {
+                        UserCode = user.UserCode,
+                        Date = DateTime.Now,
+                        Details = "Вход в систему",
+                        Type = "Авторизация"
+                    };
+                    dbContext.HistoryOperations.Add(historyOperation);
+                    dbContext.SaveChanges();
+
+                    switch (user.RoleCode)
+                    {
+                        case 1:
+                            Close();
+                            Pharmacist.WindowPharmacist windowPharmacist = new Pharmacist.WindowPharmacist(user);
+                            windowPharmacist.Show();
+                            break;
+                        case 2:
+                            Close();
+                            FolderPharmacyManager.WindowPharmacyManager windowPharmacyManager = new FolderPharmacyManager.WindowPharmacyManager(user);
+                            windowPharmacyManager.Show();
+                            break;
+                        case 3:
+                            Close();
+                            AdminastratorDB.WindowAdministratorDB windowAdministratorDB = new AdminastratorDB.WindowAdministratorDB(user);
+                            windowAdministratorDB.Show();
+                            break;
+                    }
                 }
-  
-            }
-            else
-            {
-                MessageBox.Show("Неккоректный логин или пароль!");
+                else
+                {
+                    MessageBox.Show("Неккоректный логин или пароль!");
+                }
             }
         }
+
     }
 }

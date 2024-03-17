@@ -67,6 +67,15 @@
     <Compile Include="ActiveSubstance.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\Pages\SeeHistory.xaml.cs">
+      <DependentUpon>SeeHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminastratorDB\Pages\SeeMedicine.xaml.cs">
+      <DependentUpon>SeeMedicine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminastratorDB\Pages\SeeUsers.xaml.cs">
+      <DependentUpon>SeeUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminastratorDB\WindowAdministratorDB.xaml.cs">
       <DependentUpon>WindowAdministratorDB.xaml</DependentUpon>
     </Compile>
@@ -199,6 +208,18 @@
     <Compile Include="User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Page Include="AdminastratorDB\Pages\SeeHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminastratorDB\Pages\SeeMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminastratorDB\Pages\SeeUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminastratorDB\WindowAdministratorDB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

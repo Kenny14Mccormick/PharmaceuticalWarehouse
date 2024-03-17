@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Pharmaceutical_WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActiveSubstance">
           <Key>
             <PropertyRef Name="SubstanceCode" />
@@ -50,7 +50,7 @@
           <Key>
             <PropertyRef Name="OperationCode" />
           </Key>
-          <Property Name="OperationCode" Type="int" Nullable="false" />
+          <Property Name="OperationCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserCode" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -60,7 +60,7 @@
           <Key>
             <PropertyRef Name="ManufacturerCode" />
           </Key>
-          <Property Name="ManufacturerCode" Type="int" Nullable="false" />
+          <Property Name="ManufacturerCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Medicine">
@@ -121,7 +121,7 @@
           <Key>
             <PropertyRef Name="PharmacyCode" />
           </Key>
-          <Property Name="PharmacyCode" Type="int" Nullable="false" />
+          <Property Name="PharmacyCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PharmacistName" Type="nvarchar" MaxLength="70" Nullable="false" />
           <Property Name="PharmacistPhone" Type="nvarchar" MaxLength="25" Nullable="false" />
@@ -204,7 +204,7 @@
           <Key>
             <PropertyRef Name="UserCode" />
           </Key>
-          <Property Name="UserCode" Type="int" Nullable="false" />
+          <Property Name="UserCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="RoleCode" Type="int" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -620,8 +620,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pharmaceutical_WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
