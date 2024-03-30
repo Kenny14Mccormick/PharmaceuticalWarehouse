@@ -169,5 +169,10 @@ namespace Аптечный_склад.Pharmacist
             SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
             UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
         }
+
+        private void CatalogBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

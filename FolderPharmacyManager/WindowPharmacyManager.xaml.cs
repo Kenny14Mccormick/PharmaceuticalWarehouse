@@ -110,12 +110,15 @@ namespace Аптечный_склад.FolderPharmacyManager
             UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
             ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
             var pharmacyMannagercode = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.FirstOrDefault(p => p.UserCode == CurrentUser.UserCode);
-            // Создаем объект страницы просмотра заявок
-            Pharmaceutical_WarehouseEntities dbcontext = new Pharmaceutical_WarehouseEntities();
-            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode);
+            var _applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
+
+            // Передаем pharmacyMannagercode.PharmacyManagerCode в конструктор ViewApplications
+            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, _applications);
+
             // Открываем страницу просмотра заявок во фрейме
             MyFrame.NavigationService.Navigate(viewApplications);
         }
+
 
         private void SeeSuppliesBtn_Click(object sender, RoutedEventArgs e)
         {

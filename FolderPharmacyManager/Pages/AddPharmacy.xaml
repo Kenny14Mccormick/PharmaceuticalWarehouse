@@ -10,36 +10,33 @@
 
     <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Название" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Name="txtTitle" Margin="120 10" Grid.Row="1"/>
+        <StackPanel>
+        <StackPanel Margin="0 15">
+                <TextBlock Margin="0 0 0 10" Style="{StaticResource CustomTextBlockStyle}" Text="Название" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Name="txtTitle"  Height="40" Margin="0 0 20 0" Grid.Row="1"/>
+        </StackPanel>
 
-        <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="ФИО фармацевта" Grid.Row="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Name="txtPharmacistName" Margin="120 10" Grid.Row="3"/>
-
-        <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Телефон" Grid.Row="4" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Name="txtPharmacistPhone"  Margin="120 10" Grid.Row="5"/>
-
-        <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Адрес" Grid.Row="6" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Name="txtAddress"  Margin="120 10" Grid.Row="7"/>
-        <Grid Grid.Row="8">
+            <StackPanel Margin="0 15">
+                <TextBlock Margin="0 0 0 10" Style="{StaticResource CustomTextBlockStyle}" Text="ФИО фармацевта" Grid.Row="2" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Name="txtPharmacistName" Height="40" Margin="0 0 20 0" Grid.Row="3"/>
+        </StackPanel>
+            <StackPanel Margin="0 15">
+                <TextBlock Margin="0 0 0 10" Style="{StaticResource CustomTextBlockStyle}" Text="Телефон" Grid.Row="4" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Name="txtPharmacistPhone"  Height="40" Margin="0 0 20 0" Grid.Row="5"/>
+        </StackPanel>
+            <StackPanel Margin="0 15">
+                <TextBlock Margin="0 0 0 10" Style="{StaticResource CustomTextBlockStyle}" Text="Адрес" Grid.Row="6" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Name="txtAddress"  Height="40" Margin="0 0 20 0" Grid.Row="7"/>
+        </StackPanel>
+        </StackPanel>
+        <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Name="btnAddPharmacy" Content="Добавить аптеку" FontSize="20" Margin="20 5" Click="btnAddPharmacy_Click"/>
-            <Button Name="btnBack" Content="Отмена" FontSize="20" Margin="20 5" Grid.Column="1" Click="Back_Click"/>
-
+            <Button Name="btnAddPharmacy" Content="Добавить аптеку" FontSize="20" Height="40" VerticalAlignment="Bottom" Margin="20 5" Click="btnAddPharmacy_Click"/>
+            <Button Name="btnBack" Content="Отмена" FontSize="20" Margin="20 5" Height="40" VerticalAlignment="Bottom" Grid.Column="1" Click="Back_Click"/>
         </Grid>
+
     </Grid>
 </Page>

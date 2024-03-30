@@ -55,7 +55,7 @@
                 <Image Source="/Images/logOut.png" />
             </Button>
             <Button x:Name="UserSettingsBtn" Margin="3" FontSize="18" Content="{Binding CurrentUser.Title}" Grid.Column="16" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
-            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title}" Grid.Column="11" Grid.ColumnSpan="5" Style="{StaticResource CustomTextBlockStyle}"/>
+            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title,StringFormat={}Аптека: {0}}" Grid.Column="11" Grid.ColumnSpan="5" Style="{StaticResource CustomTextBlockStyle}"/>
 
 
         </Grid>
@@ -66,7 +66,8 @@
             </Grid.ColumnDefinitions>
             <Grid Background="#2d5b73">
                 <StackPanel Margin="30 0">
-                    <Button  Click="AddApplicationBtn_Click" x:Name="AddApplicationBtn" Content="Создание заявки" Margin="0 40 0 20"/>
+                    <Button  Click="AddApplicationBtn_Click" x:Name="AddApplicationBtn" Content="Заказ лекарств" Margin="0 40 0 20"/>
+                    <Button  Click="CatalogBtn_Click" x:Name="CatalogBtn" Content="Каталог лекарств" Margin="0 20"/>
                     <Button Click="SeeApplicationBtn_Click" x:Name="SeeApplicationBtn" Content="Просмотр заявок" Margin="0 20"/>
                     <Button Click="SeeSuppliesBtn_Click" x:Name="SeeSuppliesBtn" Content="Просмотр поставок" Margin="0 20"/>
                 </StackPanel>    

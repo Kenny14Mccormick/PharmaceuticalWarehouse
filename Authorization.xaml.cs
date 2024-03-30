@@ -29,11 +29,6 @@ namespace Аптечный_склад
             this.WindowState = WindowState.Minimized;
         }
 
-        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();

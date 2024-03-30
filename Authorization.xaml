@@ -32,14 +32,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Click="MinimizeButton_Click" Grid.Column="13" Style="{StaticResource panel}">
+            <Button Click="MinimizeButton_Click" Grid.Column="14" Style="{StaticResource panel}">
                 <Image Source="/Images/wrap.png"/>
             </Button>
 
-            <Button  Click="MaximizeButton_Click" Grid.Column="14" Style="{StaticResource panel}">
-            <Image Source="/Images/maximize.png" />
-
-            </Button>
+     
             <Button  Click="CloseButton_Click" Grid.Column="15" Style="{StaticResource panel}">
                 <Image Source="/Images/cross-cancel-sign.png" />
             </Button>
