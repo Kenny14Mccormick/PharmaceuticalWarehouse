@@ -36,7 +36,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25"/>
+            <!--<TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25"/>-->
             <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Категория" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <ComboBox Foreground="Black" x:Name="cbCategory" SelectionChanged="cbCategoryChanged" Grid.Row="2" Margin="7"/>
 
@@ -62,7 +62,7 @@
 
         </Grid>
 
-        <ListView Grid.Row="1" Grid.Column="1" Margin="10" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+        <ListView Grid.Row="1" Grid.Column="1" Margin="10" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontSize="15">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel HorizontalAlignment="Center"></WrapPanel>
@@ -92,28 +92,28 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Foreground="Black" FontSize="25" TextAlignment="Center" TextWrapping="Wrap" Margin="10,10,10,0" Text="{Binding Title}" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+                            <TextBlock Foreground="Black"  TextAlignment="Center" TextWrapping="Wrap" Margin="10,10,10,0" Text="{Binding Title}" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
                             <Image Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Source="{Binding MedicinePhoto.ImageSource}" Height="150"   Stretch="Fill"/>
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Производитель:" Grid.Row="2" FontSize="15" />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Manufacturer.Title}" Grid.Row="3" FontSize="15" />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Производитель:" Grid.Row="2"  />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Manufacturer.Title}" Grid.Row="3"/>
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Категория:" Grid.Row="4" FontSize="15" />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding MedicineCategory.Title}" Grid.Row="5" FontSize="15" />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Категория:" Grid.Row="4" />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding MedicineCategory.Title}" Grid.Row="5"/>
                             
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Действующее вещество:" Grid.Row="6" FontSize="15" />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ActiveSubstance.Title}"  Grid.Row="7" FontSize="15" />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Действующее вещество:" Grid.Row="6"/>
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ActiveSubstance.Title}"  Grid.Row="7"/>
 
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Форма выпуска:" TextWrapping="Wrap" Grid.Row="8" FontSize="15" />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ReleaseForm.Title}"  Grid.Row="9" FontSize="15" />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Форма выпуска:" TextWrapping="Wrap" Grid.Row="8"/>
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ReleaseForm.Title}"  Grid.Row="9"/>
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Срок годности:" TextWrapping="Wrap" Grid.Row="10" FontSize="15" />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ExpirationDate, StringFormat={}{0:dd/MM/yyyy}}"  Grid.Row="11" FontSize="15" />
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Срок годности:" TextWrapping="Wrap" Grid.Row="10"/>
+                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ExpirationDate, StringFormat={}{0:dd/MM/yyyy}}"  Grid.Row="11"/>
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding MedicinePrice.Price, StringFormat={}{0} руб.}" Grid.Row="12" FontSize="20"/>
+                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding MedicinePrice.Price, StringFormat={}{0} руб.}" Grid.Row="12"/>
 
-                            <TextBlock  Foreground="{Binding MedicineQuantitiy.ActualTextColor}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Text="{Binding MedicineQuantitiy.ActualText}" Grid.Row="12" FontSize="15"/>
+                            <TextBlock  Foreground="{Binding MedicineQuantitiy.ActualTextColor}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Text="{Binding MedicineQuantitiy.ActualText}" Grid.Row="12" />
 
 
                             <Button x:Name="btnAdd" Grid.Row="13" Grid.ColumnSpan="2" Content="Добавить" Click="btnAdd_Click" Margin="5"/>
