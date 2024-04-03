@@ -23,9 +23,16 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Текущее имя: "/>
                 <TextBlock Grid.Column="1" x:Name="tblTitle" Text="{Binding CurrentUser.Title}"/>
-                <TextBox Grid.Column="1" x:Name="tbTitle" Visibility="Collapsed" Text="{Binding CurrentUser.Title}"/>
-                <Button Grid.Column="2" x:Name="ChangeTitleButton" Content="Изменить" Margin="20 0" Click="ChangeTitleButton_Click"/>
-                <Button Grid.Column="2" x:Name="SaveTitleButton" Visibility="Collapsed" Margin="20 0" Content="Сохранить" Click="SaveTitleButton_Click"/>
+                <TextBox Grid.Column="1" x:Name="tbTitle" Visibility="Collapsed" HorizontalContentAlignment="Left" Margin="0 0 50 0" Text="{Binding CurrentUser.Title}"/>
+                <Grid  Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.ColumnSpan="2" x:Name="ChangeTitleButton" Content="Изменить" Margin="20 0" Click="ChangeTitleButton_Click"/>
+                    <Button  x:Name="SaveTitleButton" Visibility="Collapsed" Margin="20 0" Content="Сохранить" Click="SaveTitleButton_Click"/>
+                    <Button Grid.Column="1" x:Name="CancelUpdatingTitleButton" Visibility="Collapsed" Margin="20 0" Content="Отмена" Click="CancelUpdatingTitleButton_Click"/>
+                </Grid>
             </Grid>
         </Border>
 
@@ -38,9 +45,17 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="1" Text="Текущий логин: "/>
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tblLogin" Text="{Binding CurrentUser.Login}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbLogin" Visibility="Collapsed" Text="{Binding CurrentUser.Login}"/>
-                <Button Grid.Row="1" Grid.Column="2" x:Name="ChangeLoginButton" Content="Изменить" Margin="20 0" Click="ChangeLoginButton_Click"/>
-                <Button Grid.Row="1" Grid.Column="2" Visibility="Collapsed" x:Name="SaveLoginButton" Content="Сохранить" Margin="20 0" Click="SaveLoginButton_Click"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbLogin" Visibility="Collapsed" HorizontalContentAlignment="Left" Margin="0 0 50 0" Text="{Binding CurrentUser.Login}"/>
+
+                <Grid Grid.Row="1" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" x:Name="ChangeLoginButton" Content="Изменить" Margin="20 0" Click="ChangeLoginButton_Click"/>
+                    <Button  Visibility="Collapsed" x:Name="SaveLoginButton" Content="Сохранить" Margin="20 0" Click="SaveLoginButton_Click"/>
+                    <Button Grid.Column="1" Visibility="Collapsed" x:Name="CancelUpdatingLoginButton" Content="Отмена" Margin="20 0" Click="CancelUpdatingLoginButton_Click"/>
+                </Grid>
             </Grid>
         </Border>
         <Border Grid.Row="2" BorderBrush="#5F9EA0" BorderThickness="1">
@@ -53,10 +68,18 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="2" Text="Текущий пароль: "/>
                 <TextBlock Grid.Column="1" Grid.Row="2" x:Name="tblPassword" Text="{Binding CurrentUser.Password}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" x:Name="tbPassword" Visibility="Collapsed" Text="{Binding CurrentUser.Password}"/>
-                <Button Grid.Row="2" Grid.Column="2" Content="Изменить" x:Name="ChangePasswordButton" Margin="20 0" Click="ChangePasswordButton_Click"/>
-                <Button Grid.Row="2" Grid.Column="2" Visibility="Collapsed" Content="Сохранить" x:Name="SavePasswordButton" Margin="20 0" Click="SavePasswordButton_Click"/>
+                <TextBox Grid.Column="1" Grid.Row="2" x:Name="tbPassword" Visibility="Collapsed" HorizontalContentAlignment="Left" Margin="0 0 50 0" Text="{Binding CurrentUser.Password}"/>
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.ColumnSpan="2" Content="Изменить" x:Name="ChangePasswordButton" Margin="20 0" Click="ChangePasswordButton_Click"/>
+                    <Button Grid.Column="0" Visibility="Collapsed" Content="Сохранить" x:Name="SavePasswordButton" Margin="20 0" Click="SavePasswordButton_Click"/>
+                    <Button Grid.Column="1" Visibility="Collapsed" Content="Отмена" x:Name="CancelUpdatingPasswordButton" Margin="20 0" Click="CancelUpdatingPasswordButton_Click"/>
+                </Grid>
             </Grid>
         </Border>
     </Grid>
+
 </Page>
