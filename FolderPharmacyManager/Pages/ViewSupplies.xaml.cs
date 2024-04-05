@@ -24,22 +24,22 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
         public ViewSupplies()
         {
             InitializeComponent();
-            _supplies = MainWindow.Pharmaceutical_Warehouse.PharmacySupply.OrderBy(x=>x.SupplyCode).ToList();
+            _supplies = MainWindow.Pharmaceutical_Warehouse.PharmacySupply.OrderBy(x => x.SupplyCode).ToList();
 
             LoadSupplies();
             dpStart.SelectedDateChanged += UpdateSupplies;
-
             dpEnd.SelectedDateChanged += UpdateSupplies;
-
-            comboboxDate.SelectionChanged += UpdateSupplies;
         }
 
+        private void UpdateSupplies(object sender, RoutedEventArgs e)
+        {
+            LoadSupplies();
+        }
 
         private void LoadSupplies()
         {
             // Применяем фильтрацию и сортировку к списку поставок
-            var filteredSupplies = FilterSupplies(_supplies);
-            var sortedSupplies = SortSupplies(filteredSupplies);
+            var sortedSupplies = FilterSupplies(_supplies);
 
             // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
             dgSupplies.ItemsSource = sortedSupplies;
@@ -55,31 +55,14 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             DateTime endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
             filteredSupplies = filteredSupplies.Where(supply => supply.Date >= startDate && supply.Date <= endDate).ToList();
 
-            // Здесь можно добавить другие фильтры по вашему желанию
+            
+      
 
             return filteredSupplies;
         }
 
-        private List<PharmacySupply> SortSupplies(List<PharmacySupply> supplies)
-        {
-            var sortedSupplies = supplies;
 
-            // Проверяем выбранный вариант сортировки
-            switch (comboboxDate.SelectedIndex)
-            {
-                case 0: // По умолчанию
-                    sortedSupplies = sortedSupplies.OrderBy(supply => supply.Date).ToList();
-                    break;
-                case 1: // По возрастанию
-                    sortedSupplies = sortedSupplies.OrderBy(supply => supply.Date).ToList();
-                    break;
-                case 2: // По убыванию
-                    sortedSupplies = sortedSupplies.OrderByDescending(supply => supply.Date).ToList();
-                    break;
-            }
 
-            return sortedSupplies;
-        }
 
         // Обработчик события нажатия кнопки "Подробнее"
         private void btnMore_Click(object sender, RoutedEventArgs e)
@@ -94,11 +77,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             }
         }
 
-        // Метод для обновления списка поставок при изменении фильтров
-        private void UpdateSupplies(object sender, RoutedEventArgs e)
-        {
-            LoadSupplies();
-        }
+ 
 
         private void ResetDatesBtn_Click(object sender, RoutedEventArgs e)
         {

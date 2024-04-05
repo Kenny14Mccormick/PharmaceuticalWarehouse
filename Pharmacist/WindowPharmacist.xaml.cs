@@ -73,10 +73,12 @@ namespace Аптечный_склад.Pharmacist
 
         private void UserSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            AddApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+            MagazineMedicinesBtn.ClearValue(Control.BackgroundProperty);
+
             // Создаем объект страницы настроек
             Pharmacist.Pages.UserSettings userSettingsPage = new Pharmacist.Pages.UserSettings(CurrentUser);
 
@@ -90,10 +92,11 @@ namespace Аптечный_склад.Pharmacist
             // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
             var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
 
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500")); 
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            MagazineMedicinesBtn.ClearValue(Control.BackgroundProperty);
 
             // Передаем номер аптеки при создании объекта страницы ViewMedicine
             MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacy.PharmacyCode));
@@ -103,10 +106,11 @@ namespace Аптечный_склад.Pharmacist
         private void SeeApplicationBtn_Click(object sender, RoutedEventArgs e)
         {
             SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            
+            AddApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            MagazineMedicinesBtn.ClearValue(Control.BackgroundProperty);
+
             // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
             var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
 
@@ -133,10 +137,11 @@ namespace Аптечный_склад.Pharmacist
         private void SeeSuppliesBtn_Click(object sender, RoutedEventArgs e)
         {
             // Изменение внешнего вида кнопок навигации
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            AddApplicationBtn.ClearValue(Control.BackgroundProperty);
             SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            MagazineMedicinesBtn.ClearValue(Control.BackgroundProperty);
 
             // Получаем текущую аптеку пользователя
             var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
@@ -164,15 +169,28 @@ namespace Аптечный_склад.Pharmacist
         {
             MyFrame.Content = null;
             // Изменение внешнего вида кнопок навигации
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            AddApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            AddApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            MagazineMedicinesBtn.ClearValue(Control.BackgroundProperty);
         }
 
-        private void CatalogBtn_Click(object sender, RoutedEventArgs e)
+        private void MagazineMedicinesBtn_Click(object sender, RoutedEventArgs e)
         {
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            AddApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            MagazineMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
 
+            // Открываем страницу просмотра заявок во фрейме
+            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.MedicineMagazine());
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Разработчик: Степан Хортов Васильевич");
         }
     }
 }

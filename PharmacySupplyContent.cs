@@ -11,14 +11,23 @@ namespace Аптечный_склад
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class PharmacySupplyContent
     {
         public int SupplyCode { get; set; }
         public int MedicineCode { get; set; }
         public int MedicineQuantity { get; set; }
-    
+        public double MedicineTotalCost
+        {
+            get
+            {
+                return Medicine.MedicinePrice.Price * MedicineQuantity;
+            }
+        }
         public virtual Medicine Medicine { get; set; }
         public virtual PharmacySupply PharmacySupply { get; set; }
+
+  
+
     }
 }

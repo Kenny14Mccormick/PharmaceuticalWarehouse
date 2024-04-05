@@ -24,10 +24,7 @@ namespace Аптечный_склад
             InitializeComponent();
         }
 
-        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+    
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -86,5 +83,9 @@ namespace Аптечный_склад
             }
         }
 
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Введите логин или пароль для дальнейшей работы");
+        }
     }
 }

@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад"
+ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
   Title="Авторизация" Height="700" Width="600" Background="#243944"
-        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="White" FontSize="20">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -27,49 +28,52 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Click="MinimizeButton_Click" Grid.Column="14" Style="{StaticResource panel}">
-                <Image Source="/Images/wrap.png"/>
+            <Button Click="HelpButton_Click" Grid.Column="10" Style="{StaticResource panel}">
+                <materialDesign:PackIcon Kind="Help" Height="30" Width="50"/>
+
             </Button>
 
      
             <Button  Click="CloseButton_Click" Grid.Column="15" Style="{StaticResource panel}">
-                <Image Source="/Images/cross-cancel-sign.png" />
+                <materialDesign:PackIcon Kind="WindowClose" Height="30" Width="50"/>
+
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="60 0">
+        <Grid Grid.Row="1" Margin="50 0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition />
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Логотип" FontSize="45" Foreground="White" TextAlignment ="Center" VerticalAlignment="Center"/>
-            <TextBlock Text="Авторизация" FontSize="45" Foreground="White" TextAlignment ="Center" VerticalAlignment="Center" Grid.Row="1"/>
-            <Grid Grid.Row="2" Margin="0 10">
+            <Grid Grid.Row="3" Margin="0 ">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Логин" Foreground="White" FontSize="30" Margin="10 0"/>
-                <TextBox Grid.Row="1" x:Name="tbLogin" FontSize="30"/>
+                <TextBox Grid.Row="3"  Padding="17 0 0 0" materialDesign:HintAssist.Hint="Логин"
+  Style="{StaticResource MaterialDesignFloatingHintTextBox}" x:Name="tbLogin" materialDesign:TextFieldAssist.HasClearButton="True"/>
+
             </Grid>
-            <Grid Grid.Row="3" Margin="0 10">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Пароль" Foreground="White" FontSize="30" Margin="10 0"/>
-                <PasswordBox Grid.Row="1" x:Name="tbPassword" FontSize="30"/>
-            </Grid>
-            <Button Content="Войти" FontSize="30" Grid.Row="5" Margin="0 0 0 60" Click="btnAutorization_Click"/>
+            <StackPanel Grid.Row="4">
+                <PasswordBox
+                    x:Name="tbPassword"
+    materialDesign:HintAssist.Hint="Пароль"
+    materialDesign:TextFieldAssist.HasClearButton="True"
+    IsEnabled="{Binding ElementName=RevealPasswordFilledEnabled, Path=IsChecked}"
+    Style="{StaticResource MaterialDesignFilledRevealPasswordBox}" Background="Transparent"/>
+            </StackPanel>
+
+            <Image Source="/Images/Log.png" VerticalAlignment="Top" Height="270" Grid.RowSpan="3" Margin="20 40 20 0"/>
+            <TextBlock Text="Аптечный склад" Grid.Row="3" VerticalAlignment="Top" Margin="0 0 0 0" FontSize="30" TextAlignment="Center"/>
+
+
+            <Button Content="Войти" FontSize="25" Height="50" Grid.Row="5" Margin="0 0 0 60" Foreground="White" Click="btnAutorization_Click"/>
         </Grid>
+        
     </Grid>
 </Window>

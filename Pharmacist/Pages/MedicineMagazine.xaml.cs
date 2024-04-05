@@ -1,23 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Аптечный_склад.Pharmacist.Pages
 {
-    public partial class ViewMedicine : Page
+    /// <summary>
+    /// Логика взаимодействия для MedicineMagazine.xaml
+    /// </summary>
+    public partial class MedicineMagazine : Page
     {
         private List<Medicine> _filteredMedicine; // Список отфильтрованных лекарств
         private int _medicineCountInOrder; // Счетчик лекарств в заявке
         private List<Medicine> selectedMedicines = new List<Medicine>(); // Создание коллекции выбранных лекарств
-        private int pharmacyCode;
 
-        public ViewMedicine(int pharmacyCode)
+        public MedicineMagazine()
         {
             InitializeComponent();
-            this.pharmacyCode = pharmacyCode;
             InitializeFilters();
             LoadMedicine();
         }
@@ -161,21 +170,33 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnCreateApplication_Click(object sender, RoutedEventArgs e)
         {
-            if(_medicineCountInOrder == 0)
-            {
-               MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
-                NavigationService.Navigate(createApplicationPage);
-            }
+            //if (_medicineCountInOrder == 0)
+            //{
+            //    MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            //else
+            //{
+            //    CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
+            //    NavigationService.Navigate(createApplicationPage);
+            //}
 
         }
 
-        private void ClearFilledComboBox_Click(object sender, RoutedEventArgs e)
+        private void ClearFilledCategoryComboBox_Click(object sender, RoutedEventArgs e)
         {
             cbCategory.SelectedIndex = 0;
+        }
+
+        private void ClearFilledFormComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            cbForm.SelectedIndex = 0;
+
+        }
+
+        private void ClearFilledSubstanceComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            cbSubstance.SelectedIndex = 0;
+
         }
     }
 

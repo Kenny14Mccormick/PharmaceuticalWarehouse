@@ -4,17 +4,33 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
+ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ViewSupplies">
+      Title="ViewSupplies" FontSize="15" >
 
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
+
+        <StackPanel Orientation="Horizontal"    VerticalAlignment="Center">
+            <TextBlock Text="Поиск по номеру" Style="{StaticResource CustomTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbSupplyCode" materialDesign:HintAssist.Hint="Номер поставки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBlock  Text="С" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
+            <TextBlock Text="По" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center"/>
+
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
+
+            <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="10 0" Click="ResetDatesBtn_Click" Height="30"  Width="200" VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+
+        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Номер поставки" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
@@ -23,38 +39,14 @@
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button  Content="Подробнее" Click="btnMore_Click"/>
+                            <Button Foreground="White" Content="Подробнее" Click="btnMore_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Сортировка по дате" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <Grid Grid.Column="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Выберите период" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-                <Button Grid.Column="2" Content="Сброс" Margin="5" Click="ResetDatesBtn_Click" FontSize="17"/>
-            </Grid>
-            <ComboBox x:Name="comboboxDate" Grid.Row="1" Grid.Column="0" Margin="15 0" SelectedIndex="0" >
-                <ComboBoxItem Content="По умолчанию"/>
-                <ComboBoxItem Content="По возрастанию"/>
-                <ComboBoxItem Content="По убыванию"/>
-            </ComboBox>
-            <DatePicker x:Name="dpStart" Grid.Row="1" Grid.Column="2"/>
-            <DatePicker x:Name="dpEnd" Grid.Row="2" Grid.Column="2"/>
-        </Grid>
+
+
+
     </Grid>
 </Page>

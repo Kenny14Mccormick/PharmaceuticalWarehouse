@@ -13,29 +13,57 @@ namespace Аптечный_склад.Pharmacist.Pages
         public ViewApplications(List<Application> applications)
         {
             InitializeComponent();
-            comboboxDate.SelectedIndex = 0;
             comboBoxStatus.SelectedIndex = 0;
-            // Создаем коллекцию строк с описанием статусов заявок
             List<string> statusDescriptions = new List<string>
-                {
-                    "Все статусы",
-                    "в ожидании",
-                    "выполнена",
-                    "отклонена"
-                };
-
-            // Устанавливаем список описаний статусов как источник данных для ComboBox
+    {
+        "Все статусы",
+        "в ожидании",
+        "выполнена",
+        "отклонена"
+    };
             comboBoxStatus.ItemsSource = statusDescriptions;
-
-            // Устанавливаем обработчики событий для изменения фильтров
             dpStart.SelectedDateChanged += UpdateApplications;
             dpEnd.SelectedDateChanged += UpdateApplications;
             comboBoxStatus.SelectionChanged += UpdateApplications;
-            comboboxDate.SelectionChanged += UpdateApplications;
-
+            tbApplicationCode.TextChanged += UpdateApplications; // Добавляем обработчик событий для текстового поля
             _applications = applications;
             LoadApplications();
         }
+
+        private List<Application> FilterAndSortApplications(List<Application> applications)
+        {
+            var filteredAndSortedApplications = applications;
+            var startDate = dpStart.SelectedDate ?? DateTime.MinValue;
+            var endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
+
+            filteredAndSortedApplications = filteredAndSortedApplications.Where(app =>
+                app.Date >= startDate && app.Date <= endDate).ToList();
+
+            var selectedStatus = comboBoxStatus.SelectedItem as string;
+            if (comboBoxStatus.SelectedIndex >= 0 && selectedStatus != "Все статусы")
+            {
+                filteredAndSortedApplications = filteredAndSortedApplications
+                    .Where(app => app.ApplicationStatus.StatusDescription == selectedStatus).ToList();
+            }
+
+            // Фильтрация по номеру заявки
+            string applicationCodeText = tbApplicationCode.Text;
+            if (!string.IsNullOrEmpty(applicationCodeText))
+            {
+                if (int.TryParse(applicationCodeText, out int applicationCode))
+                {
+                    filteredAndSortedApplications = filteredAndSortedApplications.Where(application => application.DisplayApplicationCode == applicationCode).ToList();
+                }
+                else
+                {
+
+                }
+            }
+
+
+            return filteredAndSortedApplications;
+        }
+
         private void LoadApplications()
         {
             // Применяем фильтрацию и сортировку к списку заявок
@@ -58,45 +86,7 @@ namespace Аптечный_склад.Pharmacist.Pages
 
 
 
-        private List<Application> FilterAndSortApplications(List<Application> applications)
-        {
-            var filteredAndSortedApplications = applications;
-
-            // Применяем фильтры
-            var startDate = dpStart.SelectedDate ?? DateTime.MinValue;
-            var endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
-
-            // Фильтрация по дате
-            filteredAndSortedApplications = filteredAndSortedApplications.Where(app =>
-                app.Date >= startDate && app.Date <= endDate).ToList();
-
-            // Фильтрация по статусу (если выбран какой-то статус, кроме "Все статусы")
-            var selectedStatus = comboBoxStatus.SelectedItem as string;
-            if (comboBoxStatus.SelectedIndex >= 0 && selectedStatus != "Все статусы")
-            {
-                filteredAndSortedApplications = filteredAndSortedApplications
-                    .Where(app => app.ApplicationStatus.StatusDescription == selectedStatus).ToList();
-            }
-
-            // Применяем сортировку
-            switch (comboboxDate.SelectedIndex)
-            {
-                case 0: // По умолчанию
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderBy(app => app.Date).ToList();
-                    break;
-                case 1: // По возрастанию
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderBy(app => app.Date).ToList();
-                    break;
-                case 2: // По убыванию
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderByDescending(app => app.Date).ToList();
-                    break;
-                default: 
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderBy(app => app.Date).ToList();
-                    break;
-            }
-
-            return filteredAndSortedApplications;
-        }
+       
 
 
         private void btnMore_Click(object sender, RoutedEventArgs e)

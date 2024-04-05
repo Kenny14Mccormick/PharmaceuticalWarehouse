@@ -11,8 +11,19 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border  BorderBrush="#5F9EA0" BorderThickness="1">
+
+        <Border Grid.Row="0" BorderBrush="#5F9EA0" BorderThickness="1">
+
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="10 30">
+                <TextBlock Text="ФИО: " VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" x:Name="tblName" Text="{Binding CurrentUser.Pharmacy.PharmacistName}" />
+            </StackPanel>
+
+        </Border>
+        <Border Grid.Row="1" BorderBrush="#5F9EA0" BorderThickness="1">
 
             <Grid Grid.Row="0" Margin="10 30">
             <Grid.ColumnDefinitions>
@@ -35,7 +46,7 @@
         </Grid>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#5F9EA0" BorderThickness="1">
+        <Border Grid.Row="2" BorderBrush="#5F9EA0" BorderThickness="1">
             <Grid  Margin="10 30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -57,7 +68,7 @@
         </Grid>
         </Grid>
         </Border>
-        <Border Grid.Row="2" BorderBrush="#5F9EA0" BorderThickness="1">
+        <Border Grid.Row="3" BorderBrush="#5F9EA0" BorderThickness="1">
 
                 <Grid  Margin="10 30">
                 <Grid.ColumnDefinitions>

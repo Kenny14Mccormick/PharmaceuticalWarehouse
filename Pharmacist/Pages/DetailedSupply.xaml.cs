@@ -21,18 +21,37 @@ namespace Аптечный_склад.Pharmacist.Pages
     public partial class DetailedSupply : Page
     {
         private List<PharmacySupply> _supplies;
-
+        private PharmacySupply pharmacySupply;
+        
         public DetailedSupply(PharmacySupply pharmacySupply, List<PharmacySupply> supplies)
         {
             InitializeComponent();
             _supplies = supplies;
+            this.pharmacySupply = pharmacySupply;
+            tblCodeSupply.Text = $"Номер поставки: {pharmacySupply.DisplaySupplyCode}";
+            tblDateSupply.Text = $"Дата поставки: {pharmacySupply.Date.ToString($"dd'/'MM'/'yyyy")}";
+            tblPharmacyManagerSupply.Text = $"Провизор: {pharmacySupply.PharmacyManager.FullName}";
+            double totalcost = 0;
+            foreach(var content in pharmacySupply.PharmacySupplyContent)
+            {
+                totalcost += content.MedicineTotalCost;
+            }
+            tblTotalCost.Text = $"Общая сумма: {totalcost} рублей";
+
             dgDetailedSupply.ItemsSource = MainWindow.Pharmaceutical_Warehouse.PharmacySupplyContent.Where(a => a.SupplyCode == pharmacySupply.SupplyCode).ToList();
 
         }
+
+
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             // Возвращаемся на страницу с просмотром всех заявок и передаем список заявок
             NavigationService.Navigate(new Pharmacist.Pages.ViewSupplies(_supplies));
+        }
+
+        private void btnInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Здесь будет накладная по поставке в WORD)");
         }
     }
 }

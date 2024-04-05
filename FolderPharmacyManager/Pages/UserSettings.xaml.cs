@@ -45,6 +45,8 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             _currentUser = currentUser;
             InitializeComponent();
 
+            var fio = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.Where(x => x.UserCode == currentUser.UserCode).ToList();
+            tblName.Text = fio[0].FullName;
             // Сохраняем оригинальные значения
             _originalTitle = currentUser.Title;
             _originalLogin = currentUser.Login;

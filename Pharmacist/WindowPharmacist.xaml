@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад.Pharmacist"
+ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
         mc:Ignorable="d"
         Title="Фармацевт" Height="700" Width="1300" Background="#243944"
-        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontSize="20">
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontSize="18" Foreground="White">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -39,23 +41,35 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Click="MinimizeButton_Click" Grid.Column="19" Style="{StaticResource panel}">
-                <Image Source="/Images/wrap.png"/>
+                <materialDesign:PackIcon Kind="WindowMinimize" Height="30" Width="50"/>
+            </Button>
+            <Button Click="HelpButton_Click" Grid.Column="18" Style="{StaticResource panel}">
+                <materialDesign:PackIcon Kind="Help" Height="30" Width="50"/>
             </Button>
             <Button Click="HomeButton_Click" Grid.Column="1" Style="{StaticResource panel}">
-                <Image Source="/Images/home.png"/>
+                <materialDesign:PackIcon Kind="Home" Height="30" Width="50"/>
             </Button>
             <Button  Click="MaximizeButton_Click" Grid.Column="20" Style="{StaticResource panel}">
-                <Image Source="/Images/maximize.png" />
+                <materialDesign:PackIcon Kind="WindowMaximize" Height="30" Width="50"/>
 
             </Button>
             <Button  Click="CloseButton_Click" Grid.Column="21" Style="{StaticResource panel}">
-                <Image Source="/Images/cross-cancel-sign.png" />
+                <materialDesign:PackIcon Kind="WindowClose" Height="30" Width="50"/>
             </Button>
             <Button  Click="QuitButton_Click" Grid.Column="0" Style="{StaticResource panel}">
-                <Image Source="/Images/logOut.png" />
+                <materialDesign:PackIcon Kind="ExitToApp" Height="30" Width="50" RenderTransformOrigin="0.5,0.5" >
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
+                </materialDesign:PackIcon>
             </Button>
-            <Button x:Name="UserSettingsBtn" Margin="3" FontSize="18" Content="{Binding CurrentUser.Title}" Grid.Column="16" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
-            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title,StringFormat={}Аптека: {0}}" Grid.Column="12" Grid.ColumnSpan="4" VerticalAlignment="Center" Style="{StaticResource CustomTextBlockStyle}"/>
+            <Button Foreground="White" x:Name="UserSettingsBtn"  FontSize="15" Content="{Binding CurrentUser.Title}" Grid.Column="15" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
+            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title,StringFormat={}Аптека: {0}}" Grid.Column="11" Grid.ColumnSpan="4" VerticalAlignment="Center" Style="{StaticResource CustomTextBlockStyle}"/>
 
 
         </Grid>
@@ -66,13 +80,13 @@
             </Grid.ColumnDefinitions>
             <Grid Background="#2d5b73">
                 <StackPanel Margin="30 0">
-                    <Button  Click="AddApplicationBtn_Click" x:Name="AddApplicationBtn" Content="Заказ лекарств" Margin="0 40 0 20"/>
-                    <Button  Click="CatalogBtn_Click" x:Name="CatalogBtn" Content="Каталог лекарств" Margin="0 20"/>
-                    <Button Click="SeeApplicationBtn_Click" x:Name="SeeApplicationBtn" Content="Просмотр заявок" Margin="0 20"/>
-                    <Button Click="SeeSuppliesBtn_Click" x:Name="SeeSuppliesBtn" Content="Просмотр поставок" Margin="0 20"/>
-                </StackPanel>    
-                
-                    
+                    <Button FontSize="17" Foreground="White" Click="AddApplicationBtn_Click" x:Name="AddApplicationBtn" Content="Заказ лекарств" Margin="0 40 0 20"/>
+                    <Button FontSize="17" Foreground="White" Click="MagazineMedicinesBtn_Click" x:Name="MagazineMedicinesBtn" Content="Каталог лекарств" Margin="0 20"/>
+                    <Button FontSize="17" Foreground="White" Click="SeeApplicationBtn_Click" x:Name="SeeApplicationBtn" Content="Просмотр заявок" Margin="0 20"/>
+                    <Button FontSize="17" Foreground="White" Click="SeeSuppliesBtn_Click" x:Name="SeeSuppliesBtn" Content="Просмотр поставок" Margin="0 20"/>
+                </StackPanel>
+
+
             </Grid>
 
             <Grid Grid.Column="1">

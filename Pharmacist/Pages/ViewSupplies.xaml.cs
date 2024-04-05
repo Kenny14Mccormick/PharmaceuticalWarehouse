@@ -27,13 +27,11 @@ namespace Аптечный_склад.Pharmacist.Pages
             InitializeComponent();
             _supplies = supplies;
             LoadSupplies();
-
             dpStart.SelectedDateChanged += UpdateSupplies;
-
             dpEnd.SelectedDateChanged += UpdateSupplies;
-
-            comboboxDate.SelectionChanged += UpdateSupplies;
+            tbSupplyCode.TextChanged += UpdateSupplies; 
         }
+
 
 
         private void LoadSupplies()
@@ -45,7 +43,6 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
             dgApplications.ItemsSource = sortedSupplies;
         }
-
         private List<PharmacySupply> FilterSupplies(List<PharmacySupply> supplies)
         {
             // Применяем фильтры
@@ -56,28 +53,30 @@ namespace Аптечный_склад.Pharmacist.Pages
             DateTime endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
             filteredSupplies = filteredSupplies.Where(supply => supply.Date >= startDate && supply.Date <= endDate).ToList();
 
-            // Здесь можно добавить другие фильтры по вашему желанию
+            // Фильтрация по номеру заявки
+            string supplyCodeText = tbSupplyCode.Text;
+            if (!string.IsNullOrEmpty(supplyCodeText))
+            {
+                if (int.TryParse(supplyCodeText, out int supplyCode))
+                {
+                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode == supplyCode).ToList();
+                }
+                else
+                {
+
+                }
+            }
 
             return filteredSupplies;
         }
+
+
+
 
         private List<PharmacySupply> SortSupplies(List<PharmacySupply> supplies)
         {
             var sortedSupplies = supplies;
 
-            // Проверяем выбранный вариант сортировки
-            switch (comboboxDate.SelectedIndex)
-            {
-                case 0: // По умолчанию
-                    sortedSupplies = sortedSupplies.OrderBy(supply => supply.Date).ToList();
-                    break;
-                case 1: // По возрастанию
-                    sortedSupplies = sortedSupplies.OrderBy(supply => supply.Date).ToList();
-                    break;
-                case 2: // По убыванию
-                    sortedSupplies = sortedSupplies.OrderByDescending(supply => supply.Date).ToList();
-                    break;
-            }
 
             return sortedSupplies;
         }

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.ViewMedicine"
+﻿<Page x:Class="Аптечный_склад.Pharmacist.Pages.MedicineMagazine"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ViewMedicine" FontSize="17">
+   Title="ViewMedicine" FontSize="17">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,24 +30,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition/>
-                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <!--<TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25"/>-->
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Категория" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <StackPanel Grid.Row="2" >
+            <StackPanel Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    
+                    <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Категория"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
                     <Button
-      Click="ClearFilledComboBox_Click"
+      Click="ClearFilledCategoryComboBox_Click"
       Grid.Column="1"
       HorizontalAlignment="Right"
       Content="Очистить"
@@ -60,11 +57,49 @@
                     Background="White"/>
             </StackPanel>
 
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Действующее вещество" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" Grid.Row="4" Margin="7"/>
+            <StackPanel Grid.Row="3" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource CustomTextBlockStyle}"  Text="Действующее вещество"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Форма выпуска" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbForm" SelectionChanged="cbFormChanged" Grid.Row="6" Margin="7"/>
+                    <Button
+      Click="ClearFilledSubstanceComboBox_Click"
+      Grid.Column="1"
+      HorizontalAlignment="Right"
+      Content="Очистить"
+      Style="{StaticResource MaterialDesignFlatButton}" />
+                </Grid>
+                <ComboBox
+                    SelectionChanged="cbSubstanceChanged"
+    x:Name="cbSubstance"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                    Background="White"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Форма выпуска"  HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Button
+      Click="ClearFilledFormComboBox_Click"
+      Grid.Column="1"
+      HorizontalAlignment="Right"
+      Content="Очистить"
+      Style="{StaticResource MaterialDesignFlatButton}" />
+                </Grid>
+                <ComboBox
+                    SelectionChanged="cbFormChanged"
+    x:Name="cbForm"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                    Background="White"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Column="1">
@@ -120,7 +155,7 @@
 
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Категория:" Grid.Row="4" />
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding MedicineCategory.Title}" Grid.Row="5"/>
-                            
+
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Действующее вещество:" Grid.Row="6"/>
                             <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ActiveSubstance.Title}"  Grid.Row="7"/>
 
@@ -139,7 +174,7 @@
                             <Button x:Name="btnAdd" Grid.Row="13" Grid.ColumnSpan="2" Content="Добавить" Click="btnAdd_Click" Margin="5"/>
 
                             <Border x:Name="txtAdded" Visibility="Collapsed" Grid.Row="13" Margin="5" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black">
-                            <TextBlock  Text="Добавлено"  HorizontalAlignment="Center"/>
+                                <TextBlock  Text="Добавлено"  HorizontalAlignment="Center"/>
                             </Border>
                         </Grid>
                     </Border>
