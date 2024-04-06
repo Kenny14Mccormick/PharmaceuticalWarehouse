@@ -34,6 +34,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             this.selectedApplication = selectedApplication;
             tblDate.Text = $"Дата заявки: {selectedApplication.Date.ToShortDateString()}";
             tblPharmacy.Text = $"Аптека: {selectedApplication.Pharmacy.Title}";
+            tblApplicationCode.Text = $"Номер поставки: {selectedApplication.DisplayApplicationCode}";
 
             // Проходимся по всем позициям в заявке и вычисляем общую стоимость
             foreach (var content in selectedApplication.ApplicationContent)

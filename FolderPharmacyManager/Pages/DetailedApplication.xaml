@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-     Title="DetailedApplication" FontSize="25">
+     Title="DetailedApplication" FontSize="17">
 
     <Grid Margin="10">
         
@@ -18,20 +18,23 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid  Grid.Row="1" Grid.ColumnSpan="2" x:Name="dgDetailedApplication" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
+        <DataGrid Grid.Row="1" x:Name="dgDetailedApplication" FontSize="15" Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Лекарство" Binding="{Binding Medicine.Title}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Количество" Binding="{Binding MedicineQuantity}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена" Binding="{Binding Medicine.MedicinePrice.Price, StringFormat={}{0} руб.}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество (уп.)" Binding="{Binding MedicineQuantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена за упаковку (руб.)" Binding="{Binding Medicine.MedicinePrice.Price}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Сумма (руб.)" Binding="{Binding MedicineTotalCost}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" x:Name="tblPharmacy"/>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Margin="20 0" Style="{StaticResource CustomTextBlockStyle}" x:Name="tblApplicationCode"/>
+            <TextBlock Margin="20 0" Style="{StaticResource CustomTextBlockStyle}" x:Name="tblPharmacy"/>
             <TextBlock Style="{StaticResource CustomTextBlockStyle}" x:Name="tblDate"/>
         </StackPanel>
-        <Button Grid.Row="2" Margin="0 25 20 25" Content="Назад"  Click="btnBack_Click"/>
-        <Button Grid.Row="2" Grid.Column="1" Margin="20 25 0 25" Content="Поставить"  Click="btnMakeSupply_Click"/>
-        <TextBlock x:Name="tblTotalCost" Style="{StaticResource CustomTextBlockStyle}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Foreground="White" Grid.Row="0" Margin="0 0 25 0" Content="Назад" FontSize="17" Click="btnBack_Click"/>
+        <Button Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0 0 50 0 " FontSize="17" Grid.ColumnSpan="2" Content="Поставить лекарства"  Click="btnMakeSupply_Click"/>
+        <TextBlock  x:Name="tblTotalCost" Style="{StaticResource CustomTextBlockStyle}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>

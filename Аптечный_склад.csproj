@@ -87,6 +87,9 @@
     <Compile Include="AdminastratorDB\Pages\SeeUsers.xaml.cs">
       <DependentUpon>SeeUsers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\Pages\UserSettings.xaml.cs">
+      <DependentUpon>UserSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminastratorDB\WindowAdministratorDB.xaml.cs">
       <DependentUpon>WindowAdministratorDB.xaml</DependentUpon>
     </Compile>
@@ -102,11 +105,17 @@
     <Compile Include="ApplicationStatus.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FolderPharmacyManager\Pages\AddPharmacy.xaml.cs">
+    <Compile Include="FolderPharmacyManager\AddPharmacy.xaml.cs">
       <DependentUpon>AddPharmacy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\MedicineMoreInfo.xaml.cs">
+      <DependentUpon>MedicineMoreInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderPharmacyManager\Pages\DetailedApplication.xaml.cs">
       <DependentUpon>DetailedApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\DetailedSupply.xaml.cs">
+      <DependentUpon>DetailedSupply.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderPharmacyManager\Pages\SeeMedicine.xaml.cs">
       <DependentUpon>SeeMedicine.xaml</DependentUpon>
@@ -238,6 +247,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdminastratorDB\Pages\UserSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminastratorDB\WindowAdministratorDB.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,11 +259,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FolderPharmacyManager\Pages\AddPharmacy.xaml">
+    <Page Include="FolderPharmacyManager\AddPharmacy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\MedicineMoreInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FolderPharmacyManager\Pages\DetailedApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\Pages\DetailedSupply.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

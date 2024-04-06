@@ -29,8 +29,7 @@
 
         </StackPanel>
 
-
-        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgSupplies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Номер поставки" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
@@ -46,8 +45,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-
 
     </Grid>
 </Page>

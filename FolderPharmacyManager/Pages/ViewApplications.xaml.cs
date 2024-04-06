@@ -34,7 +34,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             dpStart.SelectedDateChanged += UpdateApplications;
             dpEnd.SelectedDateChanged += UpdateApplications;
             tbPharmacy.TextChanged += UpdateApplications;
-            comboboxDate.SelectionChanged += UpdateApplications;
+            tbApplicationCode.TextChanged += UpdateApplications;
             LoadApplications();
         }
 
@@ -88,25 +88,23 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
                     app.Pharmacy.Title.ToLower().Contains(pharmacyNameFilter)).ToList();
             }
 
-            // Применяем сортировку
-            switch (comboboxDate.SelectedIndex)
+            // Фильтрация по номеру заявки
+            string appCodeText = tbApplicationCode.Text;
+            if (!string.IsNullOrEmpty(appCodeText))
             {
-                case 0: // По умолчанию
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderBy(app => app.Date).ToList();
-                    break;
-                case 1: // По возрастанию
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderBy(app => app.Date).ToList();
-                    break;
-                case 2: // По убыванию
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderByDescending(app => app.Date).ToList();
-                    break;
-                default:
-                    filteredAndSortedApplications = filteredAndSortedApplications.OrderBy(app => app.Date).ToList();
-                    break;
+                if (int.TryParse(appCodeText, out int appCode))
+                {
+                    filteredAndSortedApplications = filteredAndSortedApplications.Where(app => app.DisplayApplicationCode == appCode).ToList();
+                }
+                else
+                {
+
+                }
             }
 
             return filteredAndSortedApplications;
         }
+
 
 
         private void btnMore_Click(object sender, RoutedEventArgs e)

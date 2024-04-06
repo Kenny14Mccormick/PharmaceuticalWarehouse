@@ -39,9 +39,9 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.ColumnSpan="2" x:Name="ChangeTitleButton" Content="Изменить" Margin="20 0" Click="ChangeTitleButton_Click"/>
-        <Button  x:Name="SaveTitleButton" Visibility="Collapsed" Margin="20 0" Content="Сохранить" Click="SaveTitleButton_Click"/>
-        <Button Grid.Column="1" x:Name="CancelUpdatingTitleButton" Visibility="Collapsed" Margin="20 0" Content="Отмена" Click="CancelUpdatingTitleButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.ColumnSpan="2" x:Name="ChangeTitleButton" Content="Изменить" Margin="20 0" Click="ChangeTitleButton_Click"/>
+                    <Button Foreground="White" FontSize="17" x:Name="SaveTitleButton" Visibility="Collapsed" Margin="20 0" Content="Сохранить" Click="SaveTitleButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.Column="1" x:Name="CancelUpdatingTitleButton" Visibility="Collapsed" Margin="20 0" Content="Отмена" Click="CancelUpdatingTitleButton_Click"/>
         </Grid>
         </Grid>
         </Border>
@@ -62,9 +62,9 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                <Button Grid.Row="1" Grid.ColumnSpan="2" x:Name="ChangeLoginButton" Content="Изменить" Margin="20 0" Click="ChangeLoginButton_Click"/>
-                <Button  Visibility="Collapsed" x:Name="SaveLoginButton" Content="Сохранить" Margin="20 0" Click="SaveLoginButton_Click"/>
-                    <Button Grid.Column="1" Visibility="Collapsed" x:Name="CancelUpdatingLoginButton" Content="Отмена" Margin="20 0" Click="CancelUpdatingLoginButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.Row="1" Grid.ColumnSpan="2" x:Name="ChangeLoginButton" Content="Изменить" Margin="20 0" Click="ChangeLoginButton_Click"/>
+                    <Button Foreground="White" FontSize="17"  Visibility="Collapsed" x:Name="SaveLoginButton" Content="Сохранить" Margin="20 0" Click="SaveLoginButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.Column="1" Visibility="Collapsed" x:Name="CancelUpdatingLoginButton" Content="Отмена" Margin="20 0" Click="CancelUpdatingLoginButton_Click"/>
         </Grid>
         </Grid>
         </Border>
@@ -84,9 +84,9 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                <Button Grid.ColumnSpan="2" Content="Изменить" x:Name="ChangePasswordButton" Margin="20 0" Click="ChangePasswordButton_Click"/>
-                <Button Grid.Column="0" Visibility="Collapsed" Content="Сохранить" x:Name="SavePasswordButton" Margin="20 0" Click="SavePasswordButton_Click"/>
-                    <Button Grid.Column="1" Visibility="Collapsed" Content="Отмена" x:Name="CancelUpdatingPasswordButton" Margin="20 0" Click="CancelUpdatingPasswordButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.ColumnSpan="2" Content="Изменить" x:Name="ChangePasswordButton" Margin="20 0" Click="ChangePasswordButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.Column="0" Visibility="Collapsed" Content="Сохранить" x:Name="SavePasswordButton" Margin="20 0" Click="SavePasswordButton_Click"/>
+                    <Button Foreground="White" FontSize="17" Grid.Column="1" Visibility="Collapsed" Content="Отмена" x:Name="CancelUpdatingPasswordButton" Margin="20 0" Click="CancelUpdatingPasswordButton_Click"/>
                 </Grid>
             </Grid>
         </Border>

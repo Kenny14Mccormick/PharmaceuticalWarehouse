@@ -41,7 +41,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             var sortedSupplies = SortSupplies(filteredSupplies);
 
             // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
-            dgApplications.ItemsSource = sortedSupplies;
+            dgSupplies.ItemsSource = sortedSupplies;
         }
         private List<PharmacySupply> FilterSupplies(List<PharmacySupply> supplies)
         {
@@ -53,7 +53,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             DateTime endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
             filteredSupplies = filteredSupplies.Where(supply => supply.Date >= startDate && supply.Date <= endDate).ToList();
 
-            // Фильтрация по номеру заявки
+            // Фильтрация по номеру поставки
             string supplyCodeText = tbSupplyCode.Text;
             if (!string.IsNullOrEmpty(supplyCodeText))
             {
@@ -85,7 +85,7 @@ namespace Аптечный_склад.Pharmacist.Pages
         private void btnMore_Click(object sender, RoutedEventArgs e)
         {
             // Получаем выбранную поставку
-            var selectedSupply = dgApplications.SelectedItem as PharmacySupply;
+            var selectedSupply = dgSupplies.SelectedItem as PharmacySupply;
             if (selectedSupply != null)
             {
                 // Создаем страницу с подробной информацией о поставке и передаем выбранную поставку

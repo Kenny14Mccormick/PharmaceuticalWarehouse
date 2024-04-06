@@ -19,7 +19,7 @@
 
         <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
+                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
                 <TextBox materialDesign:HintAssist.Hint="Название лекарства" Foreground="White" BorderBrush="Gray" x:Name="tbFindMedicine"
                          TextChanged="tbFindeMedicicne_tch"
              Style="{StaticResource MaterialDesignFloatingHintTextBox}"

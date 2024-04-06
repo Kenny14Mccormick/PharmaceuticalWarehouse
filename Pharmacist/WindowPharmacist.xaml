@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Аптечный_склад.Pharmacist"
- xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Фармацевт" Height="700" Width="1300" Background="#243944"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontSize="18" Foreground="White">

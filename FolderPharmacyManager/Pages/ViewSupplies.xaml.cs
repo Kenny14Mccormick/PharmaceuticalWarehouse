@@ -29,6 +29,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             LoadSupplies();
             dpStart.SelectedDateChanged += UpdateSupplies;
             dpEnd.SelectedDateChanged += UpdateSupplies;
+            tbSupplyCode.TextChanged += UpdateSupplies;
         }
 
         private void UpdateSupplies(object sender, RoutedEventArgs e)
@@ -55,8 +56,19 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             DateTime endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
             filteredSupplies = filteredSupplies.Where(supply => supply.Date >= startDate && supply.Date <= endDate).ToList();
 
-            
-      
+            // Фильтрация по номеру поставки
+            string supplyCodeText = tbSupplyCode.Text;
+            if (!string.IsNullOrEmpty(supplyCodeText))
+            {
+                if (int.TryParse(supplyCodeText, out int supplyCode))
+                {
+                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode == supplyCode).ToList();
+                }
+                else
+                {
+
+                }
+            }
 
             return filteredSupplies;
         }

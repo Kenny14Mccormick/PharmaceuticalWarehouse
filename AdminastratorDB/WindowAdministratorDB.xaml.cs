@@ -71,12 +71,12 @@ namespace Аптечный_склад.AdminastratorDB
 
         private void UserSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeUsersBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
             UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            SeeHistoryBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeUsersBtn.ClearValue(Control.BackgroundProperty);
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
             // Создаем объект страницы настроек
-            FolderPharmacyManager.Pages.UserSettings userSettings = new FolderPharmacyManager.Pages.UserSettings(CurrentUser);
+            AdminastratorDB.Pages.UserSettings userSettings = new AdminastratorDB.Pages.UserSettings(CurrentUser);
 
             // Открываем страницу настроек во фрейме
             MyFrame.NavigationService.Navigate(userSettings);
@@ -86,18 +86,18 @@ namespace Аптечный_склад.AdminastratorDB
         {
             MyFrame.Content = null;
             // Изменение внешнего вида кнопок навигации
-            SeeUsersBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeHistoryBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeUsersBtn.ClearValue(Control.BackgroundProperty);
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
         }
 
         private void SeeMedicinesBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeUsersBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeUsersBtn.ClearValue(Control.BackgroundProperty);
             SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeHistoryBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
 
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeeMedicine());
 
@@ -106,9 +106,9 @@ namespace Аптечный_склад.AdminastratorDB
         private void SeeUsersBtn_Click(object sender, RoutedEventArgs e)
         {
             SeeUsersBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeHistoryBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
 
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeeUsers());
 
@@ -116,11 +116,16 @@ namespace Аптечный_склад.AdminastratorDB
 
         private void SeeHistoryBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeUsersBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeUsersBtn.ClearValue(Control.BackgroundProperty);
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             SeeHistoryBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeeHistory());
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Справка");
         }
     }
 }

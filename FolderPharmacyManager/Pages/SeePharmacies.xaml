@@ -5,17 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
       mc:Ignorable="d" 
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SeePharmacies">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="*" FontSize="15" x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Номер аптеки" Binding="{Binding PharmacyCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО фармацевта" Binding="{Binding PharmacistName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон" Binding="{Binding PharmacistPhone}"></DataGridTextColumn>
@@ -24,27 +29,17 @@
                 
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
             <TextBlock Text="Поиск по названию" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <Grid Grid.Column="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-            </Grid>
+            <TextBox VerticalAlignment="Center" FontSize="17" MaxWidth="200" TextChanged="tbFindPharmacy" x:Name="tbPharmacy"  Margin="15 0" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Название аптеки"/>
+            <TextBlock Text="Поиск по адресу" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
+            <TextBox VerticalAlignment="Center" FontSize="17" MaxWidth="200"  TextChanged="tbFindAddress" x:Name="tbAddress"  Margin="15 0" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Адрес аптеки"/>
+            <TextBlock Text="Поиск по фармацевту" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
+            <TextBox VerticalAlignment="Center" FontSize="17" MaxWidth="200"  TextChanged="tbFindPharmacist" x:Name="tbPharmacist"  Margin="15 0" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="ФИО фармацевта"/>
+        </StackPanel>
+        
+        <Button Foreground="White" Grid.Column="1" Margin="20 0 0 0" Grid.Row="2" Content="Добавить аптеку" FontSize="17" VerticalContentAlignment="Center" Click="btnAddPharmacy_Click"/>
+        <Button Foreground="White" Grid.Column="0" Margin="0 0 20 0" Grid.Row="2" Content="Удалить аптеку" FontSize="17" VerticalContentAlignment="Center" Click="btnRemovePharmacy_Click"/>
 
-            <TextBox TextChanged="tbFindPharmacy" x:Name="tbPharmacy" Grid.Row="1" Grid.Column="1" Margin="15 0"/>
-            <Button Grid.RowSpan="3" Margin="100 25" Content="+" FontSize="40" VerticalContentAlignment="Center" Click="Button_Click"/>
-        </Grid>
     </Grid>
 </Page>

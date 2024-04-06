@@ -73,11 +73,11 @@ namespace Аптечный_склад.FolderPharmacyManager
 
         private void UserSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
             // Создаем объект страницы настроек
             FolderPharmacyManager.Pages.UserSettings userSettings = new FolderPharmacyManager.Pages.UserSettings(CurrentUser);
 
@@ -86,34 +86,31 @@ namespace Аптечный_склад.FolderPharmacyManager
         }
 
 
-        private void AddApplicationBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // Получаем аптеку, в которой работает текущий пользователь (фармацевт)
-            var pharmacy = MainWindow.Pharmaceutical_Warehouse.Pharmacy.FirstOrDefault(p => p.PharmacyCode == CurrentUser.PharmacyCode);
-
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-
-            // Передаем номер аптеки при создании объекта страницы ViewMedicine
-            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacy.PharmacyCode));
-        }
-
 
         private void SeeApplicationBtn_Click(object sender, RoutedEventArgs e)
         {
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
             SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             var pharmacyMannagercode = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.FirstOrDefault(p => p.UserCode == CurrentUser.UserCode);
-            var _applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
+            var applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
+            // Перенумеровываем заявки, начиная с 1
+            int applicationNumber = 1;
 
+            using (var context = new Pharmaceutical_WarehouseEntities())
+            {
+                foreach (var app in applications)
+                {
+                    app.DisplayApplicationCode = applicationNumber;
+                    applicationNumber++;
+                }
+                context.SaveChanges();
+            }
+      
             // Передаем pharmacyMannagercode.PharmacyManagerCode в конструктор ViewApplications
-            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, _applications);
+            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, applications);
 
             // Открываем страницу просмотра заявок во фрейме
             MyFrame.NavigationService.Navigate(viewApplications);
@@ -122,12 +119,11 @@ namespace Аптечный_склад.FolderPharmacyManager
 
         private void SeeSuppliesBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Изменение внешнего вида кнопок навигации
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
             SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
 
             // Пронумеруем поставки с единицы
             int supplyNumber = 1;
@@ -143,20 +139,20 @@ namespace Аптечный_склад.FolderPharmacyManager
         {
             MyFrame.Content = null;
             // Изменение внешнего вида кнопок навигации
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
         }
 
         private void SeeMedicinesBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
             SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
+            ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
 
             MyFrame.NavigationService.Navigate(new FolderPharmacyManager.Pages.SeeMedicine());
 
@@ -164,13 +160,18 @@ namespace Аптечный_склад.FolderPharmacyManager
 
         private void ManagePharmaciesBtn_Click(object sender, RoutedEventArgs e)
         {
-            SeeApplicationBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeMedicinesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
-            UserSettingsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#4F8A9E"));
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            SeeApplicationBtn.ClearValue(Control.BackgroundProperty);
+            SeeSuppliesBtn.ClearValue(Control.BackgroundProperty);
             ManagePharmaciesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             MyFrame.NavigationService.Navigate(new FolderPharmacyManager.Pages.SeePharmacies());
 
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Справка");
         }
     }
 }

@@ -4,18 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800" FontSize="15"
     Title="ViewApplications">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}" />
                 <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Pharmacy.Address}"></DataGridTextColumn>
@@ -24,42 +25,30 @@
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button  Content="Подробнее" Click="btnMore_Click"/>
+                            <Button  Content="Подробнее" Click="btnMore_Click" Foreground="White"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Поиск по аптеке" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <TextBlock Text="Сортировка по дате" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <Grid Grid.Column="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Выберите период" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-                <Button Grid.Column="2" Content="Сброс" Margin="5" Click="ResetDatesBtn_Click" FontSize="17"/>
-            </Grid>
+        <StackPanel Orientation="Horizontal"    VerticalAlignment="Center">
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbPharmacy" materialDesign:HintAssist.Hint="Название аптеки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
 
-            <TextBox x:Name="tbPharmacy" Grid.Row="1" Margin="15 0"/>
-            <ComboBox x:Name="comboboxDate" Grid.Row="1" Grid.Column="1" Margin="15 0" >
-                <ComboBoxItem Content="По умолчанию"/>
-                <ComboBoxItem Content="По возрастанию"/>
-                <ComboBoxItem Content="По убыванию"/>
-            </ComboBox>
-            <DatePicker x:Name="dpStart" Grid.Row="1" Grid.Column="2"/>
-            <DatePicker x:Name="dpEnd" Grid.Row="2" Grid.Column="2"/>
-        </Grid>
+            </StackPanel>
+            <TextBlock  Text="С" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
+            <TextBlock Text="По" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center"/>
+
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
+
+            <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="10 0" Click="ResetDatesBtn_Click" Height="30"  Width="200" VerticalAlignment="Center"/>
+
+        </StackPanel>
     </Grid>
 </Page>

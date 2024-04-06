@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Аптечный_склад.Pharmacist
+namespace Аптечный_склад.FolderPharmacyManager
 {
     /// <summary>
     /// Логика взаимодействия для MedicineMoreInfo.xaml
@@ -26,7 +26,7 @@ namespace Аптечный_склад.Pharmacist
             // Устанавливаем DataContext на выбранное лекарство
             DataContext = selectedMedicine;
         }
-                private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
