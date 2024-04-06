@@ -154,6 +154,13 @@ namespace Аптечный_склад.Pharmacist.Pages
             // Вычисление общей стоимости заявки
             double totalCost = selectedMedicines.Sum(m => m.MedicinePrice.Price * m.Quantity);
 
+            // Проверка, что общая сумма не равна 0
+            if (totalCost == 0)
+            {
+                MessageBox.Show("Общая сумма заказа равна 0. Добавьте лекарства в заявку перед созданием.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Прерываем создание заявки
+            }
+
             // Создание новой заявки
             Application newApplication = new Application
             {
@@ -198,13 +205,14 @@ namespace Аптечный_склад.Pharmacist.Pages
         }
 
 
+
         private void btnRemoveMedicine_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             Medicine medicine = (Medicine)btn.DataContext;
 
             // Подтверждение удаления лекарства
-            MessageBoxResult result = MessageBox.Show($"Вы уверены, что хотите удалить {medicine.Title}?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"Вы уверены, что хотите убрать {medicine.Title} из списка?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
 

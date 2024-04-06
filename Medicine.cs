@@ -13,7 +13,7 @@ namespace Аптечный_склад
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    public partial class Medicine
+    public partial class Medicine:INotifyPropertyChanged
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Medicine()
@@ -39,6 +39,22 @@ namespace Аптечный_склад
                 }
             }
         }
+        private bool _isAdded;
+        public bool IsAdded
+        {
+            get { return _isAdded; }
+            set
+            {
+                if (_isAdded != value)
+                {
+                    _isAdded = value;
+                    OnPropertyChanged(nameof(IsAdded));
+                    OnPropertyChanged(nameof(ButtonText)); // Уведомляем об изменении текста кнопки
+
+                }
+            }
+        }
+        public string ButtonText => IsAdded ? "Добавлено" : "Добавить";
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

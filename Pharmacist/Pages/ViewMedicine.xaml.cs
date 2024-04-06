@@ -18,6 +18,7 @@ namespace Аптечный_склад.Pharmacist.Pages
         {
             InitializeComponent();
             this.pharmacyCode = pharmacyCode;
+            
             InitializeFilters();
             LoadMedicine();
         }
@@ -44,6 +45,10 @@ namespace Аптечный_склад.Pharmacist.Pages
         private void LoadMedicine()
         {
             _filteredMedicine = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
+            foreach (var medicine in _filteredMedicine)
+            {
+                medicine.IsAdded = false; // Устанавливаем IsAdded в false для каждого лекарства
+            }
             ApplyFilters();
 
 
@@ -89,7 +94,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             }
 
             _filteredMedicine = filteredMedicine;
-            lvMedicine.ItemsSource = _filteredMedicine;
+            dgMedicine.ItemsSource = _filteredMedicine;
         }
 
         private void tbFindeMedicicne_tch(object sender, TextChangedEventArgs e)
@@ -112,6 +117,17 @@ namespace Аптечный_склад.Pharmacist.Pages
             ApplyFilters();
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            LoadMedicine();
+        }
+
+
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -123,16 +139,15 @@ namespace Аптечный_склад.Pharmacist.Pages
                 // Добавление выбранного лекарства в список
                 selectedMedicines.Add(selectedMedicine);
 
+                // Установка свойства IsAdded в true
+                selectedMedicine.IsAdded = true;
+
                 // Увеличение счетчика лекарств в заявке и вывод сообщения
                 _medicineCountInOrder++;
                 UpdateMedicineCountInOrder();
-                // Скрытие кнопки "Добавить" и отображение текста "Добавлено"
-                button.Visibility = Visibility.Collapsed;
-                Border txtAdded = FindVisualChild<Border>(button.Parent, "txtAdded");
-                if (txtAdded != null)
-                {
-                    txtAdded.Visibility = Visibility.Visible;
-                }
+
+ 
+                btnCreateApplication.IsEnabled = true;
                 MessageBox.Show("Успешно добавлено в заявку");
             }
         }
@@ -161,9 +176,9 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnCreateApplication_Click(object sender, RoutedEventArgs e)
         {
-            if(_medicineCountInOrder == 0)
+            if (_medicineCountInOrder == 0)
             {
-               MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -173,11 +188,18 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         }
 
-        private void ClearFilledComboBox_Click(object sender, RoutedEventArgs e)
+        private void btnMoreInfo_Click(object sender, RoutedEventArgs e)
         {
-            cbCategory.SelectedIndex = 0;
+            // Получаем выбранное лекарство из ListView
+            Medicine selectedMedicine = (sender as Button)?.DataContext as Medicine;
+
+            if (selectedMedicine != null)
+            {
+                // Создаем новое окно MedicineMoreInfo и передаем выбранное лекарство
+                MedicineMoreInfo moreInfoWindow = new MedicineMoreInfo(selectedMedicine);
+                moreInfoWindow.Show();
+            }
         }
     }
 
 }
-

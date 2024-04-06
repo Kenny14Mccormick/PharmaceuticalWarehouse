@@ -7,67 +7,32 @@
       xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ViewMedicine" FontSize="17">
+      Title="ViewMedicine" FontSize="17" Foreground="White">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+            <!--<RowDefinition/>-->
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Поиск по названию" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="1" x:Name="tbFindMedicine" TextChanged="tbFindeMedicicne_tch" Margin="7"/>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <!--<TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25"/>-->
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Категория" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <StackPanel Grid.Row="2" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button
-      Click="ClearFilledComboBox_Click"
-      Grid.Column="1"
-      HorizontalAlignment="Right"
-      Content="Очистить"
-      Style="{StaticResource MaterialDesignFlatButton}" />
-                </Grid>
-                <ComboBox
-                    SelectionChanged="cbCategoryChanged"
-    x:Name="cbCategory"
-    Style="{StaticResource MaterialDesignOutlinedComboBox}" 
-                    Background="White"/>
-            </StackPanel>
-
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Действующее вещество" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" Grid.Row="4" Margin="7"/>
-
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" Text="Форма выпуска" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <ComboBox Foreground="Black" x:Name="cbForm" SelectionChanged="cbFormChanged" Grid.Row="6" Margin="7"/>
-        </Grid>
-
-        <Grid Grid.Column="1">
+        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+            <Button Click="btnFirstPage_Click">
+                <materialDesign:PackIcon Kind="PageFirst" />
+            </Button>
+            <Button Click="btnPreviousPage_Click">
+                <materialDesign:PackIcon Kind="ChevronLeft" />
+            </Button>
+            <TextBox x:Name="tbPage"/>
+            <Button Click="btnNextPage_Click">
+                <materialDesign:PackIcon Kind="ChevronRight" />
+            </Button>
+            <Button Click="btnLastPage_Click">
+                <materialDesign:PackIcon Kind="PageLast" />
+            </Button>
+            <TextBlock x:Name="tblCurrentPage" VerticalAlignment="Center"/>
+        </StackPanel>-->
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -75,76 +40,69 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Click="btnCreateApplication_Click" Grid.Column="2" Grid.Row="1" Content="Перейти к оформлению"/>
+            <Button Foreground="White" Click="btnCreateApplication_Click" Grid.Column="2" x:Name="btnCreateApplication" IsEnabled="False" Grid.Row="1" Content="Перейти к оформлению"/>
             <TextBlock x:Name="tbMedicineCountInOrder" Style="{StaticResource CustomTextBlockStyle}"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>
+        <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
+                <TextBox materialDesign:HintAssist.Hint="Название лекарства" Foreground="White" BorderBrush="Gray" x:Name="tbFindMedicine"
+                         TextChanged="tbFindeMedicicne_tch"
+             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+             VerticalAlignment="Center" Margin="5,0,0,0"/>
+            </StackPanel>
+            <ComboBox  Margin="20 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbCategory" SelectionChanged="cbCategoryChanged"  materialDesign:HintAssist.Hint="Категория"  BorderBrush="Gray"/>
+            <ComboBox  Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" materialDesign:HintAssist.Hint="Действующее вещство" materialDesign:HintAssist.Foreground="Gray" BorderBrush="Gray"/>
+            <ComboBox Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbForm" SelectionChanged="cbFormChanged" materialDesign:HintAssist.Hint="Форма выпуска"  BorderBrush="Gray"/>
+            <CheckBox Content="Только в наличии" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
 
-        <ListView Grid.Row="1" Grid.Column="1" Margin="10" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled" FontSize="15">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel HorizontalAlignment="Center"></WrapPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="2" Width="260" Padding="10">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition />
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Foreground="Black"  TextAlignment="Center" TextWrapping="Wrap" Margin="10,10,10,0" Text="{Binding Title}" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-                            <Image Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Source="{Binding MedicinePhoto.ImageSource}" Height="150"   Stretch="Fill"/>
+        </StackPanel>
 
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Производитель:" Grid.Row="2"  />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Manufacturer.Title}" Grid.Row="3"/>
-
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Категория:" Grid.Row="4" />
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding MedicineCategory.Title}" Grid.Row="5"/>
-                            
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Действующее вещество:" Grid.Row="6"/>
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ActiveSubstance.Title}"  Grid.Row="7"/>
-
-
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Форма выпуска:" TextWrapping="Wrap" Grid.Row="8"/>
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ReleaseForm.Title}"  Grid.Row="9"/>
-
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="Срок годности:" TextWrapping="Wrap" Grid.Row="10"/>
-                            <TextBlock Foreground="Black" HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding ExpirationDate, StringFormat={}{0:dd/MM/yyyy}}"  Grid.Row="11"/>
-
-                            <TextBlock Foreground="Black" HorizontalAlignment="Center" Grid.Column="1" Text="{Binding MedicinePrice.Price, StringFormat={}{0} руб.}" Grid.Row="12"/>
-
-                            <TextBlock  Foreground="{Binding MedicineQuantitiy.ActualTextColor}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Text="{Binding MedicineQuantitiy.ActualText}" Grid.Row="12" />
-
-
-                            <Button x:Name="btnAdd" Grid.Row="13" Grid.ColumnSpan="2" Content="Добавить" Click="btnAdd_Click" Margin="5"/>
-
-                            <Border x:Name="txtAdded" Visibility="Collapsed" Grid.Row="13" Margin="5" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black">
-                            <TextBlock  Text="Добавлено"  HorizontalAlignment="Center"/>
+        <DataGrid ItemsSource="{Binding Path=MedicineView}" ColumnWidth="*" Grid.Row="1" Grid.Column="1"  Name="dgMedicine" AutoGenerateColumns="False" FontSize="15" IsReadOnly="True">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена за упаковку (руб.)" Binding="{Binding MedicinePrice.Price}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Наличие" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <TextBlock Text="{Binding MedicineQuantitiy.ActualText}" 
+                           Foreground="{Binding MedicineQuantitiy.ActualTextColor}" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="btnAdd_Click" 
+        Foreground="White" 
+        IsEnabled="{Binding IsAdded, Converter={StaticResource InverseBooleanConverter}}">
+                                <TextBlock Text="{Binding ButtonText}" />
+                            </Button>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Подробнее" Click="btnMoreInfo_Click" x:Name="btnMoreInfo" Foreground="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

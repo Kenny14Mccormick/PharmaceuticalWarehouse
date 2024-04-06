@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Аптечный_склад"
+             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -16,8 +17,7 @@
                 <Setter Property="BorderBrush" Value="#5F9EA0"/>
             </Style>-->
 
-
-
+            <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
             <Style x:Key="panel" TargetType="Button">
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Background" Value="Transparent"/>

@@ -21,8 +21,6 @@ namespace Аптечный_склад.Pharmacist.Pages
     public partial class MedicineMagazine : Page
     {
         private List<Medicine> _filteredMedicine; // Список отфильтрованных лекарств
-        private int _medicineCountInOrder; // Счетчик лекарств в заявке
-        private List<Medicine> selectedMedicines = new List<Medicine>(); // Создание коллекции выбранных лекарств
 
         public MedicineMagazine()
         {
@@ -54,17 +52,9 @@ namespace Аптечный_склад.Pharmacist.Pages
         {
             _filteredMedicine = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
             ApplyFilters();
-
-
-            _medicineCountInOrder = 0;
-            UpdateMedicineCountInOrder();
         }
 
-        private void UpdateMedicineCountInOrder()
-        {
-            // Обновление отображения счетчика лекарств в заявке
-            tbMedicineCountInOrder.Text = $"Добавлено в заявку: {_medicineCountInOrder}";
-        }
+
         private void ApplyFilters()
         {
             var filteredMedicine = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
@@ -121,82 +111,18 @@ namespace Аптечный_склад.Pharmacist.Pages
             ApplyFilters();
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+
+        private void btnMedicineInfo_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
+            // Получаем выбранное лекарство из ListView
+            Medicine selectedMedicine = (sender as Button)?.DataContext as Medicine;
+
+            if (selectedMedicine != null)
             {
-                // Получение выбранного лекарства
-                Medicine selectedMedicine = (button.DataContext as Medicine);
-
-                // Добавление выбранного лекарства в список
-                selectedMedicines.Add(selectedMedicine);
-
-                // Увеличение счетчика лекарств в заявке и вывод сообщения
-                _medicineCountInOrder++;
-                UpdateMedicineCountInOrder();
-                // Скрытие кнопки "Добавить" и отображение текста "Добавлено"
-                button.Visibility = Visibility.Collapsed;
-                Border txtAdded = FindVisualChild<Border>(button.Parent, "txtAdded");
-                if (txtAdded != null)
-                {
-                    txtAdded.Visibility = Visibility.Visible;
-                }
-                MessageBox.Show("Успешно добавлено в заявку");
+                // Создаем новое окно MedicineMoreInfo и передаем выбранное лекарство
+                MedicineMoreInfo moreInfoWindow = new MedicineMoreInfo(selectedMedicine);
+                moreInfoWindow.Show();
             }
-        }
-
-
-        private T FindVisualChild<T>(DependencyObject parent, string name) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-            {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                if (child != null && child is T && ((FrameworkElement)child).Name == name)
-                {
-                    return (T)child;
-                }
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child, name);
-                    if (childOfChild != null)
-                    {
-                        return childOfChild;
-                    }
-                }
-            }
-            return null;
-        }
-
-        private void btnCreateApplication_Click(object sender, RoutedEventArgs e)
-        {
-            //if (_medicineCountInOrder == 0)
-            //{
-            //    MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            //else
-            //{
-            //    CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
-            //    NavigationService.Navigate(createApplicationPage);
-            //}
-
-        }
-
-        private void ClearFilledCategoryComboBox_Click(object sender, RoutedEventArgs e)
-        {
-            cbCategory.SelectedIndex = 0;
-        }
-
-        private void ClearFilledFormComboBox_Click(object sender, RoutedEventArgs e)
-        {
-            cbForm.SelectedIndex = 0;
-
-        }
-
-        private void ClearFilledSubstanceComboBox_Click(object sender, RoutedEventArgs e)
-        {
-            cbSubstance.SelectedIndex = 0;
-
         }
     }
 

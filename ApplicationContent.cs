@@ -17,7 +17,14 @@ namespace Аптечный_склад
         public int MedicineCode { get; set; }
         public int ApplicationCode { get; set; }
         public int MedicineQuantity { get; set; }
-    
+
+        public double MedicineTotalCost
+        {
+            get
+            {
+                return Medicine.MedicinePrice.Price * MedicineQuantity;
+            }
+        }
         public virtual Application Application { get; set; }
         public virtual Medicine Medicine { get; set; }
     }

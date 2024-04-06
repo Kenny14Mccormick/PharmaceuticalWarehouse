@@ -129,6 +129,7 @@
     <Compile Include="HistoryOperations.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="Manufacturer.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -164,6 +165,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pharmacist\MedicineMoreInfo.xaml.cs">
+      <DependentUpon>MedicineMoreInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pharmacist\Pages\CreateApplication.xaml.cs">
       <DependentUpon>CreateApplication.xaml</DependentUpon>
@@ -285,6 +289,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pharmacist\MedicineMoreInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pharmacist\Pages\CreateApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

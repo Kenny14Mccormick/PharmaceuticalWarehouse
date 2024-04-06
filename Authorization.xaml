@@ -37,7 +37,6 @@
      
             <Button  Click="CloseButton_Click" Grid.Column="15" Style="{StaticResource panel}">
                 <materialDesign:PackIcon Kind="WindowClose" Height="30" Width="50"/>
-
             </Button>
         </Grid>
 

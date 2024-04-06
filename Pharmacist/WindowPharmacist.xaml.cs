@@ -190,7 +190,7 @@ namespace Аптечный_склад.Pharmacist
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Разработчик: Степан Хортов Васильевич");
+            MessageBox.Show("Разработчик: Степан Хортов Васильевич (НЕ ЗАБУДЬ СДЕЛАТЬ СПРАВКУ)");
         }
     }
 }

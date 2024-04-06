@@ -15,7 +15,7 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal"  Grid.Row="1"  VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal"  Grid.Row="0"  VerticalAlignment="Center">
             <TextBlock Text="Поиск по номеру" Style="{StaticResource CustomTextBlockStyle}" VerticalAlignment="Center" />
             <TextBox  materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
         </StackPanel>
@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Статус заявки" Binding="{Binding ApplicationStatus.StatusDescription}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Сумма" Binding="{Binding TotalCost, StringFormat={}{0} руб.}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
@@ -36,7 +36,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Статус заявки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
             <ComboBox x:Name="comboBoxStatus" Width="150" Margin="15 0" BorderBrush="Gray"/>
                 <TextBlock  Text="С" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center" />

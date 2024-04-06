@@ -35,6 +35,7 @@
                 <DataGridTextColumn Header="Номер поставки" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Провизор" Binding="{Binding PharmacyManager.FullName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
