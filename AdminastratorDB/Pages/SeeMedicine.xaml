@@ -5,8 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Аптечный_склад.AdminastratorDB.Pages"
       mc:Ignorable="d" 
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SeeMedicine">
+      Title="SeeMedicine" FontSize="17" Foreground="White">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -15,37 +17,35 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Номер лекарства" Binding="{Binding MedicineCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Категория" Binding="{Binding MedicineCategory.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Производитель" Binding="{Binding Manufacturer.Title}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Количество" Binding="{Binding MedicineQuantitiy.Quantity}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена" Binding="{Binding MedicinePrice.Price}"></DataGridTextColumn>
 
 
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Click="btnEditMedicine_Click" x:Name="btnEditMedicine" Foreground="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить" Click="btnDeleteMedicine_Click" x:Name="btnDeleteMedicine" Foreground="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Поиск по названию" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <Grid Grid.Column="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-
-            <TextBox TextChanged="tbFindPMeidicne" x:Name="tbMedicine" Grid.Row="1" Grid.Column="1" Margin="15 0"/>
-            <Button Grid.Row="1"  Content="Добавить" FontSize="20" VerticalContentAlignment="Center" Click="BtnAddMedicine_Click"/>
-        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbMedicine" materialDesign:HintAssist.Hint="Название лекарства" TextChanged="tbFindPMeidicne" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
+            <Button Grid.Row="1"  Content="Добавить" FontSize="17" Foreground="White" VerticalContentAlignment="Center" Click="BtnAddMedicine_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

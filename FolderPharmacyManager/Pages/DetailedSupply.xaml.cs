@@ -30,6 +30,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             this.pharmacySupply = pharmacySupply;
             tblCodeSupply.Text = $"Номер поставки: {pharmacySupply.DisplaySupplyCode}";
             tblDateSupply.Text = $"Дата поставки: {pharmacySupply.Date.ToString($"dd'/'MM'/'yyyy")}";
+            tblPharmacy.Text = $"Аптека: {pharmacySupply.Pharmacy.Title}";
             tblPharmacyManagerSupply.Text = $"Провизор: {pharmacySupply.PharmacyManager.FullName}";
             double totalcost = 0;
             foreach (var content in pharmacySupply.PharmacySupplyContent)

@@ -1,0 +1,34 @@
+﻿<Window x:Class="Аптечный_склад.AdminastratorDB.WindowEditUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Аптечный_склад.AdminastratorDB"
+        mc:Ignorable="d"
+         Height="500"       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+Width="500" Background="#2d5b73" Foreground="White" FontSize="15" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.07*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.20*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
+        <StackPanel Grid.Row="1">
+            <TextBox VerticalAlignment="Center"  FontSize="17"  x:Name="tbUserTitle"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Имя пользователя"/>
+            <ComboBox VerticalAlignment="Center" FontSize="17"  x:Name="tbUserRole"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Роль пользователя"/>
+            <TextBox VerticalAlignment="Center" FontSize="17" x:Name="tbPhone"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Логин"/>
+            <TextBox VerticalAlignment="Center" FontSize="17" x:Name="tbPharmacyAddress"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Пароль"/>
+            <ComboBox VerticalAlignment="Center" FontSize="17"  x:Name="tbPharmacy" Visibility="Collapsed"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Аптека"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="10 0" Content="Добавить" Foreground="White" FontSize="17" Click="btnEditUser_Click"/>
+            <Button Grid.Column="1" Margin="10 0" Content="Закрыть" Foreground="White" FontSize="17" Click="btn_Close"/>
+        </Grid>
+    </Grid>
+</Window>

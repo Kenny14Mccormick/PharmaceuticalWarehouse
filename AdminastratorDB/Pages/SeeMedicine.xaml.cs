@@ -36,5 +36,15 @@ namespace Аптечный_склад.AdminastratorDB.Pages
             string MedicineTitle = tbMedicine.Text;
             dgMedicines.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Medicine.Where(app => app.Title.ToLower().Contains(MedicineTitle)).ToList();
         }
+
+        private void btnEditMedicine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteMedicine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

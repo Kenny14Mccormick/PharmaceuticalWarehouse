@@ -93,6 +93,9 @@
     <Compile Include="AdminastratorDB\WindowAdministratorDB.xaml.cs">
       <DependentUpon>WindowAdministratorDB.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\WindowEditUser.xaml.cs">
+      <DependentUpon>WindowEditUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminastratorDB\WindowAdministratorDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminastratorDB\WindowEditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

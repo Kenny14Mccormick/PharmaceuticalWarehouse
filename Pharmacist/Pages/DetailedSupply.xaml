@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="DetailedSupply" FontSize="17" Foreground="Yellow">
+      Title="DetailedSupply" FontSize="17" Foreground="White">
 
     <Grid>
         <Grid.RowDefinitions>

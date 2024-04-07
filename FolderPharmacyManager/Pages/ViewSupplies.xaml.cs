@@ -84,7 +84,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             if (selectedSupply != null)
             {
                 // Создаем страницу с подробной информацией о поставке и передаем выбранную поставку
-                Pharmacist.Pages.DetailedSupply detailedSupplyPage = new Pharmacist.Pages.DetailedSupply(selectedSupply, _supplies);
+                FolderPharmacyManager.Pages.DetailedSupply detailedSupplyPage = new FolderPharmacyManager.Pages.DetailedSupply(selectedSupply, _supplies);
                 NavigationService.Navigate(detailedSupplyPage);
             }
         }

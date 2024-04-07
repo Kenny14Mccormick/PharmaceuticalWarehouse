@@ -30,5 +30,10 @@ namespace Аптечный_склад.AdminastratorDB.Pages
         {
 
         }
+
+        private void ResetDatesBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

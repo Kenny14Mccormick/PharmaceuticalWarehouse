@@ -16,11 +16,11 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Row="1" x:Name="dgDetailedSupply" FontSize="15" Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
+        <DataGrid Grid.Row="1" x:Name="dgDetailedSupply" FontSize="17" Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Лекарство" Binding="{Binding Medicine.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Количество (уп.)" Binding="{Binding MedicineQuantity}"></DataGridTextColumn>
@@ -28,15 +28,15 @@
                 <DataGridTextColumn Header="Сумма (руб.)" Binding="{Binding MedicineTotalCost}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" VerticalAlignment="Center" Grid.Column="1" >
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="4" VerticalAlignment="Center" Grid.Column="0" >
             <TextBlock x:Name="tblCodeSupply"/>
             <TextBlock Margin="20 0" x:Name="tblDateSupply"  />
-
+            <TextBlock Margin="20 0" x:Name="tblPharmacy"  />
             <TextBlock Margin="20 0" x:Name="tblPharmacyManagerSupply"/>
         </StackPanel>
         <TextBlock x:Name="tblTotalCost" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
 
-        <Button Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Width="200" Content="Назад" Foreground="White" FontSize="17" Height="40" Click="btnBack_Click"/>
-        <Button Grid.Row="2"  Content="Накладная по поставке" Grid.ColumnSpan="2" Foreground="White" FontSize="17" Height="40" Click="btnInvoice_Click"/>
+        <Button Grid.Row="2" Grid.Column="0" Margin="0 0 0 0" HorizontalAlignment="Left" Width="200" Content="Назад" Foreground="White" FontSize="17" Height="40" Click="btnBack_Click"/>
+        <Button Grid.Row="2" Margin="40 0 0 0" Grid.Column="1" Content="Накладная по поставке" Grid.ColumnSpan="1" Foreground="White" FontSize="17" Height="40" Click="btnInvoice_Click"/>
     </Grid>
 </Page>
