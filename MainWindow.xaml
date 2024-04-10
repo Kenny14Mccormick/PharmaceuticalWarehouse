@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:Аптечный_склад"
         mc:Ignorable="d"
         Title="Авторизация" Height="450" Width="800" Background="CadetBlue" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
-    <TextBlock Style="{StaticResource CustomTextBlockStyle}" FontSize="40" Text="Добро пожаловать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <TextBlock Foreground="White" FontSize="40" Text="Добро пожаловать" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 </Window>

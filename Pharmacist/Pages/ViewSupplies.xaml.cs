@@ -58,7 +58,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             if (!string.IsNullOrEmpty(supplyCodeText))
             {
          
-                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode == supplyCodeText).ToList();
+                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode.Contains(supplyCodeText)).ToList();
                 
         
             }

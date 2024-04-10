@@ -68,7 +68,7 @@
                 </materialDesign:PackIcon>
             </Button>
             <Button Foreground="White" x:Name="UserSettingsBtn"  FontSize="15" Content="{Binding CurrentUser.Title}" Grid.Column="15" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
-            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title,StringFormat={}Аптека: {0}}" Grid.Column="11" Grid.ColumnSpan="4" VerticalAlignment="Center" Style="{StaticResource CustomTextBlockStyle}"/>
+            <TextBlock Text="{Binding CurrentUser.Pharmacy.Title,StringFormat={}Аптека: {0}}" Grid.Column="11" Grid.ColumnSpan="4" VerticalAlignment="Center" />
 
 
         </Grid>

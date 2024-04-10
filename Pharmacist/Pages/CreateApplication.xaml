@@ -26,7 +26,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" x:Name="tblSum"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <TextBlock  x:Name="tblSum"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <Button Grid.Row="1" Margin="20" Content="Заказать" Foreground="White" Click="btnOrderMedicine_Click"/>
         </Grid>
         

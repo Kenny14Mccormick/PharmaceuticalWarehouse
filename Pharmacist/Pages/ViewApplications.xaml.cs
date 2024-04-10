@@ -17,9 +17,8 @@ namespace Аптечный_склад.Pharmacist.Pages
             List<string> statusDescriptions = new List<string>
     {
         "Все статусы",
-        "в ожидании",
-        "выполнена",
-        "отклонена"
+        "В ожидании",
+        "Выполнена"
     };
             comboBoxStatus.ItemsSource = statusDescriptions;
             dpStart.SelectedDateChanged += UpdateApplications;

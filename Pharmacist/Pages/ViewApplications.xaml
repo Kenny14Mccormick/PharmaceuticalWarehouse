@@ -11,13 +11,24 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition />
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal"  Grid.Row="0"  VerticalAlignment="Center">
-            <TextBlock Text="Поиск по номеру" Style="{StaticResource CustomTextBlockStyle}" VerticalAlignment="Center" />
-            <TextBox  materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal"   VerticalAlignment="Center">
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
+            <TextBlock Text="Статус заявки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+            <ComboBox x:Name="comboBoxStatus" Width="130" Margin="15 0" BorderBrush="Gray"/>
+            <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
+            <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
+
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
+
+            <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="10 0" Click="ResetDatesBtn_Click" Height="30"  Width="150" VerticalAlignment="Center"/>
+
         </StackPanel>
         <DataGrid Grid.Row="2" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
@@ -36,16 +47,16 @@
             </DataGrid.Columns>
         </DataGrid>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <!--<StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Статус заявки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
             <ComboBox x:Name="comboBoxStatus" Width="150" Margin="15 0" BorderBrush="Gray"/>
-                <TextBlock  Text="С" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center" />
+                <TextBlock  Text="С"  Margin="10 0" VerticalAlignment="Center" />
                 <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
-                <TextBlock Text="По" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center"/>
+                <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
                 <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
                 <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="25 0" Click="ResetDatesBtn_Click" Height="30"  Width="200" VerticalAlignment="Center"/>
 
-            </StackPanel>
+            </StackPanel>-->
             
     </Grid>
 </Page>

@@ -26,9 +26,10 @@ namespace Аптечный_склад
         public MainWindow()
         {
             InitializeComponent();
-            ShowSplashScreen();
             Pharmaceutical_Warehouse = new Pharmaceutical_WarehouseEntities();
             LoadApplicationAndSupplyNumbers();
+            ShowSplashScreen();
+
         }
 
         private void LoadApplicationAndSupplyNumbers()

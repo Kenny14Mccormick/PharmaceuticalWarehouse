@@ -17,11 +17,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal"    VerticalAlignment="Center">
-            <TextBlock Text="Поиск по номеру" Style="{StaticResource CustomTextBlockStyle}" VerticalAlignment="Center" />
+            <TextBlock Text="Поиск по номеру"  VerticalAlignment="Center" />
             <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbSupplyCode" materialDesign:HintAssist.Hint="Номер поставки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <TextBlock  Text="С" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center" />
+            <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
-            <TextBlock Text="По" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center"/>
+            <TextBlock Text="По" Margin="10 0" VerticalAlignment="Center"/>
 
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
 

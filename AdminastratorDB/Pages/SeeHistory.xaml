@@ -24,9 +24,9 @@
                 <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbPharmacy" materialDesign:HintAssist.Hint="Название аптеки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
 
             </StackPanel>
-            <TextBlock  Text="С" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center" />
+            <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
-            <TextBlock Text="По" Style="{StaticResource CustomTextBlockStyle}" Margin="10 0" VerticalAlignment="Center"/>
+            <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
 
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
 

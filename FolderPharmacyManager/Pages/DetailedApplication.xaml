@@ -29,12 +29,12 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Margin="20 0" Style="{StaticResource CustomTextBlockStyle}" x:Name="tblApplicationCode"/>
-            <TextBlock Margin="20 0" Style="{StaticResource CustomTextBlockStyle}" x:Name="tblPharmacy"/>
-            <TextBlock Style="{StaticResource CustomTextBlockStyle}" x:Name="tblDate"/>
+            <TextBlock Margin="20 0"  x:Name="tblApplicationCode"/>
+            <TextBlock Margin="20 0"  x:Name="tblPharmacy"/>
+            <TextBlock  x:Name="tblDate"/>
         </StackPanel>
         <Button Foreground="White" Grid.Row="0" Margin="0 0 25 0" Content="Назад" FontSize="17" Click="btnBack_Click"/>
         <Button Foreground="White" Grid.Row="2" Grid.Column="0" Margin="0 0 50 0 " FontSize="17" Grid.ColumnSpan="2" Content="Поставить лекарства"  Click="btnMakeSupply_Click"/>
-        <TextBlock  x:Name="tblTotalCost" Style="{StaticResource CustomTextBlockStyle}" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock  x:Name="tblTotalCost"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>
