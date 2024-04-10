@@ -96,18 +96,6 @@ namespace Аптечный_склад.FolderPharmacyManager
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             var pharmacyMannagercode = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.FirstOrDefault(p => p.UserCode == CurrentUser.UserCode);
             var applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
-            // Перенумеровываем заявки, начиная с 1
-            int applicationNumber = 1;
-
-            using (var context = new Pharmaceutical_WarehouseEntities())
-            {
-                foreach (var app in applications)
-                {
-                    app.DisplayApplicationCode = applicationNumber;
-                    applicationNumber++;
-                }
-                context.SaveChanges();
-            }
       
             // Передаем pharmacyMannagercode.PharmacyManagerCode в конструктор ViewApplications
             FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, applications);
@@ -124,14 +112,6 @@ namespace Аптечный_склад.FolderPharmacyManager
             SeeSuppliesBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
             ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
-
-            // Пронумеруем поставки с единицы
-            int supplyNumber = 1;
-            foreach (var supply in MainWindow.Pharmaceutical_Warehouse.PharmacySupply.ToList())
-            {
-                supply.DisplaySupplyCode = supplyNumber;
-                supplyNumber++;
-            }
             MyFrame.NavigationService.Navigate(new FolderPharmacyManager.Pages.ViewSupplies());
         }
 

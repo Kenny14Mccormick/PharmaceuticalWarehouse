@@ -22,7 +22,7 @@ namespace Аптечный_склад
         }
     
         public int ApplicationCode { get; set; }
-        public int DisplayApplicationCode { get; set; }
+        public string DisplayApplicationCode { get; set; }
         public int PharmacyCode { get; set; }
         public System.DateTime Date { get; set; }
         public int StatusCode { get; set; }

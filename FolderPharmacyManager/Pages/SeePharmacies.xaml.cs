@@ -97,5 +97,9 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             }
         }
 
+        private void btnEditPharmacy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

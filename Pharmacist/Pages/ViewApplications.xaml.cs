@@ -50,14 +50,8 @@ namespace Аптечный_склад.Pharmacist.Pages
             string applicationCodeText = tbApplicationCode.Text;
             if (!string.IsNullOrEmpty(applicationCodeText))
             {
-                if (int.TryParse(applicationCodeText, out int applicationCode))
-                {
-                    filteredAndSortedApplications = filteredAndSortedApplications.Where(application => application.DisplayApplicationCode == applicationCode).ToList();
-                }
-                else
-                {
-
-                }
+       
+                    filteredAndSortedApplications = filteredAndSortedApplications.Where(application => application.DisplayApplicationCode == applicationCodeText).ToList();
             }
 
 

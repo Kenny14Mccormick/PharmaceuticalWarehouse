@@ -19,14 +19,28 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="*" FontSize="15" x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="*" FontSize="13" x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО фармацевта" Binding="{Binding PharmacistName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон" Binding="{Binding PharmacistPhone}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"></DataGridTextColumn>
 
-                
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Click="btnEditPharmacy_Click" x:Name="btnEditPharmacy" Foreground="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить" Click="btnRemovePharmacy_Click" x:Name="btnRemovePharmacy" Foreground="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
@@ -39,7 +53,6 @@
         </StackPanel>
         
         <Button Foreground="White" Grid.Column="1" Margin="20 0 0 0" Grid.Row="2" Content="Добавить аптеку" FontSize="17" VerticalContentAlignment="Center" Click="btnAddPharmacy_Click"/>
-        <Button Foreground="White" Grid.Column="0" Margin="0 0 20 0" Grid.Row="2" Content="Удалить аптеку" FontSize="17" VerticalContentAlignment="Center" Click="btnRemovePharmacy_Click"/>
 
     </Grid>
 </Page>

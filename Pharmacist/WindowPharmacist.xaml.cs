@@ -119,14 +119,6 @@ namespace Аптечный_склад.Pharmacist
                 .Where(app => app.PharmacyCode == pharmacy.PharmacyCode)
                 .ToList();
 
-            // Пронумеруем заявки с единицы
-            int applicationNumber = 1;
-            foreach (var application in pharmacyApplications)
-            {
-                application.DisplayApplicationCode = applicationNumber;
-                applicationNumber++;
-            }
-
             // Создаем объект страницы просмотра заявок
             Pharmacist.Pages.ViewApplications viewApplicationsPage = new Pharmacist.Pages.ViewApplications(pharmacyApplications);
 
@@ -155,7 +147,7 @@ namespace Аптечный_склад.Pharmacist
             int supplyNumber = 1;
             foreach (var supply in pharmacySupplies)
             {
-                supply.DisplaySupplyCode = supplyNumber;
+                supply.DisplaySupplyCode = $"{supply.Pharmacy.DisplayDocumentCode}{supplyNumber}";
                 supplyNumber++;
             }
             // Создаем страницу просмотра поставок для текущей аптеки

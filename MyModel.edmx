@@ -126,6 +126,7 @@
           <Property Name="PharmacistName" Type="nvarchar" MaxLength="70" Nullable="false" />
           <Property Name="PharmacistPhone" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DisplayDocumentCode" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="PharmacyManager">
           <Key>
@@ -767,6 +768,7 @@
           <NavigationProperty Name="Application" Relationship="Self.FK_Application_Pharmacy" FromRole="Pharmacy" ToRole="Application" />
           <NavigationProperty Name="PharmacySupply" Relationship="Self.FK_PharmacySupply_Pharmacy" FromRole="Pharmacy" ToRole="PharmacySupply" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Pharmacy" FromRole="Pharmacy" ToRole="User" />
+          <Property Name="DisplayDocumentCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="PharmacyManager">
           <Key>
@@ -1375,6 +1377,7 @@
           <EntitySetMapping Name="Pharmacy">
             <EntityTypeMapping TypeName="Pharmaceutical_WarehouseModel.Pharmacy">
               <MappingFragment StoreEntitySet="Pharmacy">
+                <ScalarProperty Name="DisplayDocumentCode" ColumnName="DisplayDocumentCode" />
                 <ScalarProperty Name="PharmacyCode" ColumnName="PharmacyCode" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PharmacistName" ColumnName="PharmacistName" />

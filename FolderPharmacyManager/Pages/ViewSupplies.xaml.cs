@@ -60,14 +60,9 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             string supplyCodeText = tbSupplyCode.Text;
             if (!string.IsNullOrEmpty(supplyCodeText))
             {
-                if (int.TryParse(supplyCodeText, out int supplyCode))
-                {
-                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode == supplyCode).ToList();
-                }
-                else
-                {
 
-                }
+                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode == supplyCodeText).ToList();
+
             }
 
             return filteredSupplies;
