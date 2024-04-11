@@ -14,23 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Аптечный_склад.Pharmacist.Pages
+namespace Аптечный_склад.FolderPharmacyManager.Pages
 {
     /// <summary>
     /// Логика взаимодействия для CreateApplication.xaml
     /// </summary>
     public partial class CreateApplication : Page
     {
-
         private List<Medicine> selectedMedicines;
-        private int pharmacyCode;
+        private int pharmacyManagerCode;
         private double sum;
 
-        public CreateApplication(List<Medicine> selectedMedicines, int pharmacyCode)
+        public CreateApplication(List<Medicine> selectedMedicines, int pharmacyManagerCode)
         {
             InitializeComponent();
             this.selectedMedicines = selectedMedicines;
-            this.pharmacyCode = pharmacyCode;
+            this.pharmacyManagerCode = pharmacyManagerCode;
 
             lvSelectedMedicine.ItemsSource = selectedMedicines;
 
@@ -41,7 +40,7 @@ namespace Аптечный_склад.Pharmacist.Pages
 
             tblSum.Text = $"Итого: {sum} рублей";
 
-            // Добавьте этот код
+            
             foreach (var item in selectedMedicines)
             {
                 item.PropertyChanged += MedicinePropertyChanged;
@@ -134,11 +133,11 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var a in selectedMedicines)
+            foreach (var a in selectedMedicines)
             {
                 a.Quantity = 1;
             }
-            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
+            NavigationService.Navigate(new FolderPharmacyManager.Pages.OrderMedicines(pharmacyManagerCode));
         }
 
         private void btnOrderMedicine_Click(object sender, RoutedEventArgs e)
@@ -160,48 +159,68 @@ namespace Аптечный_склад.Pharmacist.Pages
                 return; // Прерываем создание заявки
             }
 
+            Random ran = new Random();
             // Создание новой заявки
-            Application newApplication = new Application
+            MedicineSupply newMedicineSupply = new MedicineSupply
             {
-                PharmacyCode = pharmacyCode,
                 Date = DateTime.Today,
-                StatusCode = 1,
-                TotalCost = totalCost // Присвоение общей стоимости новой заявке
+                SupplierCode = ran.Next(1, 21),
+                TotalCost = totalCost,
+                PharmacyManagerCode = pharmacyManagerCode
             };
 
             // Добавление заявки в таблицу Application
             using (var dbContext = new Pharmaceutical_WarehouseEntities())
             {
-                dbContext.Application.Add(newApplication);
+                dbContext.MedicineSupply.Add(newMedicineSupply);
                 dbContext.SaveChanges();
             }
 
             // Получение кода только что созданной заявки
-            int newApplicationCode = newApplication.ApplicationCode;
+            int newSupplyCode = newMedicineSupply.SupplyCode;
 
             // Создание объектов ApplicationContent для каждого выбранного лекарства и их количества
-            List<ApplicationContent> applicationContents = new List<ApplicationContent>();
+            List<SupplyContent> SupplyContent = new List<SupplyContent>();
             foreach (var medicine in selectedMedicines)
             {
-                ApplicationContent content = new ApplicationContent
+                SupplyContent content = new SupplyContent
                 {
-                    ApplicationCode = newApplicationCode,
+                    SupplyCode = newSupplyCode,
                     MedicineCode = medicine.MedicineCode,
                     MedicineQuantity = medicine.Quantity
                 };
-                applicationContents.Add(content);
+                SupplyContent.Add(content);
             }
 
             // Добавление объектов ApplicationContent в таблицу ApplicationContent
             using (var dbContext = new Pharmaceutical_WarehouseEntities())
             {
-                dbContext.ApplicationContent.AddRange(applicationContents);
+                dbContext.SupplyContent.AddRange(SupplyContent);
+                dbContext.SaveChanges();
+            }
+
+            // Пройдемся по списку выбранных лекарств
+            foreach (var medicine in selectedMedicines)
+            {
+                // Найдем соответствующий объект лекарства в вашем хранилище данных
+                var storedMedicine = MainWindow.Pharmaceutical_Warehouse.Medicine.FirstOrDefault(m => m.MedicineCode == medicine.MedicineCode);
+
+                if (storedMedicine != null)
+                {
+                    // Увеличим количество лекарства на складе на количество из заявки
+                    storedMedicine.Quantity += medicine.Quantity;
+                }
+            }
+
+            // Сохраните изменения в вашем хранилище данных
+            using (var dbContext = new Pharmaceutical_WarehouseEntities())
+            {
                 dbContext.SaveChanges();
             }
 
             // Оповещение пользователя о успешном создании заявки
             MessageBox.Show("Заявка успешно создана и отправлена!");
-            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
+            NavigationService.Navigate(new FolderPharmacyManager.Pages.OrderMedicines(pharmacyManagerCode));
         }
 
 

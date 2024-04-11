@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Аптечный_склад.Pharmacist.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-   Title="ViewMedicine" FontSize="17" Foreground="White">
+   Title="ViewMedicine" FontSize="15" Foreground="White">
 
     <Grid Margin="40 0">
         <Grid.RowDefinitions>
@@ -17,9 +17,9 @@
 
   
 
-        <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
+        <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20  0 0 0">
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
-                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
+                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="20" Margin="0 6 0 0" Height="20"/>
                 <TextBox materialDesign:HintAssist.Hint="Название лекарства" Foreground="White" BorderBrush="Gray" x:Name="tbFindMedicine"
                          TextChanged="tbFindeMedicicne_tch"
              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -31,7 +31,7 @@
 
         </StackPanel>
 
-        <ListView  Grid.Row="2" FontSize="17" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView  Grid.Row="2" FontSize="15" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate >
                     <WrapPanel Background="White" HorizontalAlignment="Center"></WrapPanel>

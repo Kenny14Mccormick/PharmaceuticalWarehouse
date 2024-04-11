@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-           Title="ViewSupplies" FontSize="15" >
+           Title="ViewSupplies" FontSize="15" Foreground="White">
 
 
     <Grid>
@@ -16,26 +16,33 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"    VerticalAlignment="Center">
-            <TextBlock Text="Поиск по номеру"  VerticalAlignment="Center" />
-            <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbSupplyCode" materialDesign:HintAssist.Hint="Номер поставки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbSupplyCode" materialDesign:HintAssist.Hint="Номер поставки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Margin="10 0 20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbPharmacy" materialDesign:HintAssist.Hint="Название аптеки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="140" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
             <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
-            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
-            <TextBlock Text="По" Margin="10 0" VerticalAlignment="Center"/>
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
+            <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
 
-            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
 
-            <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="10 0" Click="ResetDatesBtn_Click" Height="30"  Width="200" VerticalAlignment="Center"/>
+            <Button FontSize="15" Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="20 0" Click="ResetDatesBtn_Click" Height="30"  Width="180" VerticalAlignment="Center"/>
 
         </StackPanel>
 
+
         <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgSupplies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Номер поставки" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.3*" Header="Номер" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Провизор" Binding="{Binding PharmacyManager.FullName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>

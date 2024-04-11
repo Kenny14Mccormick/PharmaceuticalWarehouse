@@ -19,15 +19,14 @@
                 <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
                 <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" />
             </StackPanel>
-            <TextBlock Text="Статус заявки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
-            <ComboBox x:Name="comboBoxStatus" Width="130" Margin="15 0" BorderBrush="Gray"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Статус заявки" x:Name="comboBoxStatus" Width="130" Margin="0 0 7 13" BorderBrush="Gray"/>
             <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
             <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
 
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
 
-            <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="10 0" Click="ResetDatesBtn_Click" Height="30"  Width="150" VerticalAlignment="Center"/>
+            <Button FontSize="15" Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="20 0" Click="ResetDatesBtn_Click" Height="30"  Width="180" VerticalAlignment="Center"/>
 
         </StackPanel>
         <DataGrid Grid.Row="2" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">

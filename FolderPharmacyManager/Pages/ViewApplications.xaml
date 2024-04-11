@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" FontSize="15"
+      d:DesignHeight="450" d:DesignWidth="800" FontSize="15" Foreground="White"
     Title="ViewApplications">
 
     <Grid>
@@ -16,11 +16,11 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}" />
-                <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.3*" Header="Номер" Binding="{Binding DisplayApplicationCode}" />
+                <DataGridTextColumn Width="0.5*" Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Pharmacy.Address}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Сумма" Binding="{Binding TotalCost, StringFormat={}{0} руб.}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Сумма" Binding="{Binding TotalCost, StringFormat={}{0} руб.}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
@@ -31,23 +31,22 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal"    VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
-                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
-                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" />
             </StackPanel>
-            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
-                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
-                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbPharmacy" materialDesign:HintAssist.Hint="Название аптеки" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
-
+            <StackPanel Margin="10 0 20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbPharmacy" materialDesign:HintAssist.Hint="Название аптеки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="140" HorizontalAlignment="Right" VerticalAlignment="Center" />
             </StackPanel>
-            <TextBlock  Text="С"  Margin="10 0" VerticalAlignment="Center" />
-            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
+            <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
             <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
 
-            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
 
-            <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="10 0" Click="ResetDatesBtn_Click" Height="30"  Width="200" VerticalAlignment="Center"/>
+            <Button FontSize="15" Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="20 0" Click="ResetDatesBtn_Click" Height="30"  Width="180" VerticalAlignment="Center"/>
 
         </StackPanel>
     </Grid>

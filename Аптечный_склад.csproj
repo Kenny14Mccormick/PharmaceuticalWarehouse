@@ -114,11 +114,17 @@
     <Compile Include="FolderPharmacyManager\MedicineMoreInfo.xaml.cs">
       <DependentUpon>MedicineMoreInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\CreateApplication.xaml.cs">
+      <DependentUpon>CreateApplication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FolderPharmacyManager\Pages\DetailedApplication.xaml.cs">
       <DependentUpon>DetailedApplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderPharmacyManager\Pages\DetailedSupply.xaml.cs">
       <DependentUpon>DetailedSupply.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\OrderMedicines.xaml.cs">
+      <DependentUpon>OrderMedicines.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderPharmacyManager\Pages\SeeMedicine.xaml.cs">
       <DependentUpon>SeeMedicine.xaml</DependentUpon>
@@ -274,11 +280,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FolderPharmacyManager\Pages\CreateApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FolderPharmacyManager\Pages\DetailedApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FolderPharmacyManager\Pages\DetailedSupply.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\Pages\OrderMedicines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

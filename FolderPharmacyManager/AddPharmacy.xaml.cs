@@ -19,9 +19,13 @@ namespace Аптечный_склад.FolderPharmacyManager
     /// </summary>
     public partial class AddPharmacy : Window
     {
-        public AddPharmacy()
+        private Pharmacy pharmacy;
+
+        public AddPharmacy(Pharmacy pharmacy)
         {
             InitializeComponent();
+            this.pharmacy = pharmacy;
+            DataContext = pharmacy;
         }
 
         private void btn_Close(object sender, RoutedEventArgs e)
@@ -33,19 +37,11 @@ namespace Аптечный_склад.FolderPharmacyManager
         {
             using (var dbContext = new Pharmaceutical_WarehouseEntities())
             {
-                var newPharmacy = new Pharmacy
-                {
-                    Title = tbPharmacy.Text,
-                    PharmacistName = tbPharmacistName.Text,
-                    PharmacistPhone = tbPhone.Text,
-                    Address = tbPharmacyAddress.Text
-                };
-
-                dbContext.Pharmacy.Add(newPharmacy);
+                if (pharmacy.PharmacyCode == 0) dbContext.Pharmacy.Add(pharmacy);
                 dbContext.SaveChanges();
             }
             this.Close();
-            MessageBox.Show("Аптека успешно добавлена!");
+            MessageBox.Show("Успешно!");
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

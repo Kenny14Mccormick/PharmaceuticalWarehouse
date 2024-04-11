@@ -134,7 +134,9 @@ namespace Аптечный_склад.FolderPharmacyManager
             ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
 
-            MyFrame.NavigationService.Navigate(new FolderPharmacyManager.Pages.SeeMedicine());
+            var pharmacyMannagercode = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.FirstOrDefault(p => p.UserCode == CurrentUser.UserCode);
+
+            MyFrame.NavigationService.Navigate(new FolderPharmacyManager.Pages.SeeMedicine(pharmacyMannagercode.PharmacyManagerCode));
 
         }
 

@@ -16,21 +16,22 @@ using System.Windows.Shapes;
 namespace Аптечный_склад.FolderPharmacyManager.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для SeeMedicine.xaml
+    /// Логика взаимодействия для OrderMedicines.xaml
     /// </summary>
-    public partial class SeeMedicine : Page
+    public partial class OrderMedicines : Page
     {
         private List<Medicine> _filteredMedicine; // Список отфильтрованных лекарств
+        private int _medicineCountInOrder; // Счетчик лекарств в заявке
+        private List<Medicine> selectedMedicines = new List<Medicine>(); // Создание коллекции выбранных лекарств
+        private int pharmacyManagerCode;
 
-        int pharmacyManagerCode;
-        public SeeMedicine(int pharmacyManagerCode)
+        public OrderMedicines(int pharmacyManagerCode)
         {
             this.pharmacyManagerCode = pharmacyManagerCode;
             InitializeComponent();
             InitializeFilters();
             LoadMedicine();
         }
-
         private void InitializeFilters()
         {
             // Инициализация фильтров
@@ -49,10 +50,25 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             cbForm.ItemsSource = forms;
             cbForm.SelectedIndex = 0;
         }
+
         private void LoadMedicine()
         {
             _filteredMedicine = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
+            foreach (var medicine in _filteredMedicine)
+            {
+                medicine.IsAdded = false; // Устанавливаем IsAdded в false для каждого лекарства
+            }
             ApplyFilters();
+
+
+            _medicineCountInOrder = 0;
+            UpdateMedicineCountInOrder();
+        }
+
+        private void UpdateMedicineCountInOrder()
+        {
+            // Обновление отображения счетчика лекарств в заявке
+            tbMedicineCountInOrder.Text = $"Добавлено в заявку: {_medicineCountInOrder}";
         }
         private void ApplyFilters()
         {
@@ -87,7 +103,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             }
 
             _filteredMedicine = filteredMedicine;
-            dgMedicines.ItemsSource = _filteredMedicine;
+            dgMedicine.ItemsSource = _filteredMedicine;
         }
 
         private void tbFindeMedicicne_tch(object sender, TextChangedEventArgs e)
@@ -110,6 +126,77 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             ApplyFilters();
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            LoadMedicine();
+        }
+
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                // Получение выбранного лекарства
+                Medicine selectedMedicine = (button.DataContext as Medicine);
+
+                // Добавление выбранного лекарства в список
+                selectedMedicines.Add(selectedMedicine);
+
+                // Установка свойства IsAdded в true
+                selectedMedicine.IsAdded = true;
+
+                // Увеличение счетчика лекарств в заявке и вывод сообщения
+                _medicineCountInOrder++;
+                UpdateMedicineCountInOrder();
+
+
+                btnCreateApplication.IsEnabled = true;
+                MessageBox.Show("Успешно добавлено в заявку");
+            }
+        }
+
+
+        private T FindVisualChild<T>(DependencyObject parent, string name) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child != null && child is T && ((FrameworkElement)child).Name == name)
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    T childOfChild = FindVisualChild<T>(child, name);
+                    if (childOfChild != null)
+                    {
+                        return childOfChild;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private void btnCreateApplication_Click(object sender, RoutedEventArgs e)
+        {
+            if (_medicineCountInOrder == 0)
+            {
+                MessageBox.Show("Для оформления заявки необходимо выбрать хотя бы одно лекарство.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                FolderPharmacyManager.Pages.CreateApplication createApplicationPage = new FolderPharmacyManager.Pages.CreateApplication(selectedMedicines, pharmacyManagerCode);
+                NavigationService.Navigate(createApplicationPage);
+            }
+
+        }
+
         private void btnMoreInfo_Click(object sender, RoutedEventArgs e)
         {
             // Получаем выбранное лекарство из ListView
@@ -123,9 +210,10 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             }
         }
 
-        private void btnOrderMedicine_Click(object sender, RoutedEventArgs e)
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new OrderMedicines(pharmacyManagerCode));
+            NavigationService.GoBack();
         }
     }
+
 }

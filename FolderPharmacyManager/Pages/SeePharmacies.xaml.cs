@@ -57,7 +57,8 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
         private void btnAddPharmacy_Click(object sender, RoutedEventArgs e)
         {
-            FolderPharmacyManager.AddPharmacy addPharmacy = new AddPharmacy();
+            var pharmacy = new Pharmacy();
+            FolderPharmacyManager.AddPharmacy addPharmacy = new AddPharmacy(pharmacy);
             addPharmacy.ShowDialog();
             // Обновляем DataGrid
             dgPharmacies.ItemsSource = null;
@@ -99,7 +100,13 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
         private void btnEditPharmacy_Click(object sender, RoutedEventArgs e)
         {
-
+            var editButton = sender as Button;
+            var selectedPharmacy = editButton.DataContext as Pharmacy;
+            FolderPharmacyManager.AddPharmacy addPharmacy = new AddPharmacy(selectedPharmacy);
+            addPharmacy.ShowDialog();
+            // Обновляем DataGrid
+            dgPharmacies.ItemsSource = null;
+            dgPharmacies.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
         }
     }
 }

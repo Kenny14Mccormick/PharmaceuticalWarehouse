@@ -7,26 +7,26 @@
       mc:Ignorable="d" 
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SeePharmacies">
+      Title="SeePharmacies" FontSize="15" Foreground="White">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="6*"/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="*" FontSize="13" x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="*" FontSize="15" x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
+                <DataGridTextColumn Width="0.5*" Header="Код" Binding="{Binding DisplayDocumentCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО фармацевта" Binding="{Binding PharmacistName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Телефон" Binding="{Binding PharmacistPhone}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"></DataGridTextColumn>
 
-                <DataGridTemplateColumn Width="150">
+                <DataGridTemplateColumn Width="170">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Редактировать" Click="btnEditPharmacy_Click" x:Name="btnEditPharmacy" Foreground="White"/>
@@ -43,16 +43,23 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
-            <TextBlock Text="Поиск по названию" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <TextBox VerticalAlignment="Center" FontSize="17" MaxWidth="200" TextChanged="tbFindPharmacy" x:Name="tbPharmacy"  Margin="15 0" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Название аптеки"/>
-            <TextBlock Text="Поиск по адресу" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <TextBox VerticalAlignment="Center" FontSize="17" MaxWidth="200"  TextChanged="tbFindAddress" x:Name="tbAddress"  Margin="15 0" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Адрес аптеки"/>
-            <TextBlock Text="Поиск по фармацевту" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="17"/>
-            <TextBox VerticalAlignment="Center" FontSize="17" MaxWidth="200"  TextChanged="tbFindPharmacist" x:Name="tbPharmacist"  Margin="15 0" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="ФИО фармацевта"/>
-        </StackPanel>
-        
-        <Button Foreground="White" Grid.Column="1" Margin="20 0 0 0" Grid.Row="2" Content="Добавить аптеку" FontSize="17" VerticalContentAlignment="Center" Click="btnAddPharmacy_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" >
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox VerticalAlignment="Center" FontSize="15" MaxWidth="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="tbFindPharmacy" x:Name="tbPharmacy"  Margin="10 0 0 13" Foreground="White" BorderBrush="Gray"  materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Название аптеки"/>
+            </StackPanel>
 
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                    <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox VerticalAlignment="Center" FontSize="15" MaxWidth="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="tbFindAddress" x:Name="tbAddress"  Margin="10 0 0 13" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Адрес аптеки"/>
+                </StackPanel>
+
+
+                <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                        <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox VerticalAlignment="Center" FontSize="15" MaxWidth="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="tbFindPharmacist" x:Name="tbPharmacist"  Margin="10 0 0 13" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="ФИО фармацевта"/>
+                    </StackPanel>
+            <Button Foreground="White" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="300"  Margin="20 0 0 0" Grid.Row="2" Content="Добавить аптеку" FontSize="15" VerticalContentAlignment="Center" Click="btnAddPharmacy_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

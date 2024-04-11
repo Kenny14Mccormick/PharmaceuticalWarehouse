@@ -58,7 +58,6 @@
             // Фильтрация по статусу (невыполненные заявки)
             filteredAndSortedApplications = filteredAndSortedApplications
                     .Where(app => app.StatusCode == 1).ToList();
-                // Перенумеровываем заявки, начиная с 1
 
 
                 // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
@@ -92,7 +91,7 @@
                 if (!string.IsNullOrEmpty(appCodeText))
                 {
 
-                        filteredAndSortedApplications = filteredAndSortedApplications.Where(app => app.DisplayApplicationCode == appCodeText).ToList();
+                        filteredAndSortedApplications = filteredAndSortedApplications.Where(app => app.DisplayApplicationCode.Contains(appCodeText)).ToList();
                 }
 
                 return filteredAndSortedApplications;

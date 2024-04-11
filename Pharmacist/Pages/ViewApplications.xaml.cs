@@ -17,8 +17,8 @@ namespace Аптечный_склад.Pharmacist.Pages
             List<string> statusDescriptions = new List<string>
     {
         "Все статусы",
-        "В ожидании",
-        "Выполнена"
+        "в ожидании",
+        "выполнена"
     };
             comboBoxStatus.ItemsSource = statusDescriptions;
             dpStart.SelectedDateChanged += UpdateApplications;
@@ -50,7 +50,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             if (!string.IsNullOrEmpty(applicationCodeText))
             {
        
-                    filteredAndSortedApplications = filteredAndSortedApplications.Where(application => application.DisplayApplicationCode == applicationCodeText).ToList();
+                    filteredAndSortedApplications = filteredAndSortedApplications.Where(application => application.DisplayApplicationCode.Contains(applicationCodeText)).ToList();
             }
 
 
@@ -74,7 +74,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             }
 
             // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
-            dgApplications.ItemsSource = filteredAndSortedApplications;
+            dgApplications.ItemsSource = filteredAndSortedApplications.OrderByDescending(a=>a.Date);
         }
 
 

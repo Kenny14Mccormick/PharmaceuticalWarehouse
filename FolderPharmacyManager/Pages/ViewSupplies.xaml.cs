@@ -30,6 +30,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             dpStart.SelectedDateChanged += UpdateSupplies;
             dpEnd.SelectedDateChanged += UpdateSupplies;
             tbSupplyCode.TextChanged += UpdateSupplies;
+            tbPharmacy.TextChanged += UpdateSupplies;
         }
 
         private void UpdateSupplies(object sender, RoutedEventArgs e)
@@ -61,8 +62,16 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             if (!string.IsNullOrEmpty(supplyCodeText))
             {
 
-                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode == supplyCodeText).ToList();
+                    filteredSupplies = filteredSupplies.Where(supply => supply.DisplaySupplyCode.Contains(supplyCodeText)).ToList();
 
+            }
+
+            string pharmacyNameFilter = tbPharmacy.Text;
+            // Фильтрация по названию аптеки
+            if (!string.IsNullOrEmpty(pharmacyNameFilter))
+            {
+                filteredSupplies = filteredSupplies.Where(app =>
+                    app.Pharmacy.Title.ToLower().Contains(pharmacyNameFilter)).ToList();
             }
 
             return filteredSupplies;
