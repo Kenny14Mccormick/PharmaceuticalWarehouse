@@ -112,7 +112,7 @@
           <Key>
             <PropertyRef Name="SupplyCode" />
           </Key>
-          <Property Name="SupplyCode" Type="int" Nullable="false" />
+          <Property Name="SupplyCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="SupplierCode" Type="int" Nullable="false" />
           <Property Name="PharmacyManagerCode" Type="int" Nullable="false" />

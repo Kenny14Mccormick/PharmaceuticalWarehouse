@@ -13,12 +13,12 @@ namespace Аптечный_склад.Pharmacist.Pages
         private int _medicineCountInOrder; // Счетчик лекарств в заявке
         private List<Medicine> selectedMedicines = new List<Medicine>(); // Создание коллекции выбранных лекарств
         private int pharmacyCode;
-
-        public ViewMedicine(int pharmacyCode)
+        private User user;
+        public ViewMedicine(int pharmacyCode, User user)
         {
             InitializeComponent();
             this.pharmacyCode = pharmacyCode;
-            
+            this.user = user;
             InitializeFilters();
             LoadMedicine();
         }
@@ -182,7 +182,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             }
             else
             {
-                CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode);
+                CreateApplication createApplicationPage = new CreateApplication(selectedMedicines, pharmacyCode, user);
                 NavigationService.Navigate(createApplicationPage);
             }
 

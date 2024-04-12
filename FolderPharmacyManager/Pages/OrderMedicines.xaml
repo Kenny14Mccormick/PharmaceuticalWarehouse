@@ -44,7 +44,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Foreground="White" Click="btnCreateApplication_Click" Grid.Column="2" x:Name="btnCreateApplication" IsEnabled="False" Grid.Row="1" Content="Перейти к оформлению"/>
-            <Button Foreground="White" Click="btnGoBack_Click" Grid.Column="2" x:Name="btnGoBack" IsEnabled="False" Grid.Row="1" Content="Назад"/>
+            <Button Foreground="White" Click="btnGoBack_Click" Grid.Column="0" x:Name="btnGoBack" Grid.Row="1" Content="Назад"/>
             <TextBlock x:Name="tbMedicineCountInOrder"   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         </Grid>

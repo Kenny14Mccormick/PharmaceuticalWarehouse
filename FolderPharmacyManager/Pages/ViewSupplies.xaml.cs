@@ -66,12 +66,12 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
             }
 
-            string pharmacyNameFilter = tbPharmacy.Text;
+            var pharmacyNameFilter = tbPharmacy.Text.Trim().ToLower();
             // Фильтрация по названию аптеки
             if (!string.IsNullOrEmpty(pharmacyNameFilter))
             {
-                filteredSupplies = filteredSupplies.Where(app =>
-                    app.Pharmacy.Title.ToLower().Contains(pharmacyNameFilter)).ToList();
+                filteredSupplies = filteredSupplies.Where(supply =>
+                    supply.Pharmacy.Title.ToLower().Contains(pharmacyNameFilter)).ToList();
             }
 
             return filteredSupplies;
@@ -100,10 +100,5 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             dpStart.SelectedDate = null;
             dpEnd.SelectedDate = null;
         }
-
-        private void btnCreateDocumnet_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-    }
+   }
 }

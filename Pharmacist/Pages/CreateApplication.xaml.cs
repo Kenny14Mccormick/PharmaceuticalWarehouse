@@ -25,13 +25,13 @@ namespace Аптечный_склад.Pharmacist.Pages
         private List<Medicine> selectedMedicines;
         private int pharmacyCode;
         private double sum;
-
-        public CreateApplication(List<Medicine> selectedMedicines, int pharmacyCode)
+        private User user;
+        public CreateApplication(List<Medicine> selectedMedicines, int pharmacyCode, User user)
         {
             InitializeComponent();
             this.selectedMedicines = selectedMedicines;
             this.pharmacyCode = pharmacyCode;
-
+            this.user = user;
             lvSelectedMedicine.ItemsSource = selectedMedicines;
 
             foreach (var s in selectedMedicines)
@@ -138,7 +138,7 @@ namespace Аптечный_склад.Pharmacist.Pages
             {
                 a.Quantity = 1;
             }
-            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
+            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode, user));
         }
 
         private void btnOrderMedicine_Click(object sender, RoutedEventArgs e)
@@ -201,7 +201,48 @@ namespace Аптечный_склад.Pharmacist.Pages
 
             // Оповещение пользователя о успешном создании заявки
             MessageBox.Show("Заявка успешно создана и отправлена!");
-            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode));
+            var historyOperation = new HistoryOperations
+            {
+                UserCode = user.UserCode,
+                Date = DateTime.Now,
+                Details = "Создание заявки",
+                Type = "Операция"
+            };
+            MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Add(historyOperation);
+            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            var pharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
+            List<Application> allApplications = new List<Application>();
+
+            // Проходимся по каждой аптеке
+            foreach (var pharmacy in pharmacies)
+            {
+                // Получаем заявки для текущей аптеки
+                var pharmacyApplications = MainWindow.Pharmaceutical_Warehouse.Application
+                    .Where(app => app.PharmacyCode == pharmacy.PharmacyCode)
+                    .ToList();
+
+                // Пронумеруем заявки с единицы
+                int applicationNumber = 1;
+                foreach (var application in pharmacyApplications)
+                {
+                    application.DisplayApplicationCode = $"{application.Pharmacy.DisplayDocumentCode}{applicationNumber}";
+                    applicationNumber++;
+                }
+
+                // Получаем поставки для текущей аптеки
+                var pharmacySupplies = MainWindow.Pharmaceutical_Warehouse.PharmacySupply
+                    .Where(supply => supply.PharmacyCode == pharmacy.PharmacyCode)
+                    .ToList();
+
+                // Пронумеруем поставки с единицы
+                int supplyNumber = 1;
+                foreach (var supply in pharmacySupplies)
+                {
+                    supply.DisplaySupplyCode = $"{supply.Pharmacy.DisplayDocumentCode}{supplyNumber}";
+                    supplyNumber++;
+                }
+            }
+            NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode, user));
         }
 
 

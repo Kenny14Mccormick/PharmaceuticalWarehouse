@@ -21,13 +21,14 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
     public partial class DetailedApplication : Page
     {
         private List<Application> _applications;
-
+        private User user;
         private Application selectedApplication;
         int pharmacyManagerCode;
 
-        public DetailedApplication(Application selectedApplication, List<Application> applications, int pharmacyManagerCode)
+        public DetailedApplication(Application selectedApplication, List<Application> applications, int pharmacyManagerCode, User user)
         {
             InitializeComponent();
+            this.user = user;
             _applications = applications;
             double totalCost = 0;
             this.pharmacyManagerCode = pharmacyManagerCode;
@@ -49,7 +50,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             // Возвращаемся на страницу с просмотром всех заявок и передаем список заявок
-            NavigationService.Navigate(new FolderPharmacyManager.Pages.ViewApplications(pharmacyManagerCode, _applications));
+            NavigationService.Navigate(new FolderPharmacyManager.Pages.ViewApplications(pharmacyManagerCode, _applications, user));
         }
 
 
@@ -61,67 +62,91 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
                 using (var dbContext = new Pharmaceutical_WarehouseEntities())
                 {
                     bool isEnoughMedicine = true;
-                    
+
                     // Проверяем, достаточно ли всех лекарств на складе
                     foreach (var content in selectedApplication.ApplicationContent)
                     {
                         var medicine = dbContext.Medicine.FirstOrDefault(o => o.MedicineCode == content.MedicineCode);
-                        if (medicine.MedicineQuantitiy.Quantity < content.MedicineQuantity)
+                        var medicineQuantity = dbContext.MedicineQuantitiy.FirstOrDefault(mq => mq.QuantityCode == medicine.QuantityCode);
+
+                        if (medicineQuantity != null)
+                        {
+                            if (medicineQuantity.Quantity < content.MedicineQuantity)
+                            {
+                                isEnoughMedicine = false;
+                                MessageBox.Show($"Недостаточно {medicine.Title} на складе.");
+                                break;
+                            }
+                        }
+                        else
                         {
                             isEnoughMedicine = false;
-                            MessageBox.Show($"Недостаточно {medicine.Title} на складе.");
+                            MessageBox.Show($"Лекарство {medicine.Title} отсутствует на складе.");
                             break;
                         }
                     }
 
                     if (isEnoughMedicine)
                     {
-                        // Создаем новую поставку
-                        var newSupply = new PharmacySupply
-                        {
-                            Date = DateTime.Now,
-                            PharmacyCode = selectedApplication.PharmacyCode,
-                            PharmacyManagerCode = pharmacyManagerCode
-                        };
-                        dbContext.PharmacySupply.Add(newSupply);
-                        dbContext.SaveChanges();
+                        // Проверяем, была ли уже создана поставка для этой заявки
+                        var existingSupply = dbContext.PharmacySupply.FirstOrDefault(supply => supply.Application.Any(app => app.ApplicationCode == selectedApplication.ApplicationCode));
 
-                        // Добавляем лекарства из заявки в содержимое поставки
-                        foreach (var content in selectedApplication.ApplicationContent)
+                        if (existingSupply == null)
                         {
-                            var newSupplyContent = new PharmacySupplyContent
+                            // Создаем новую поставку
+                            var newSupply = new PharmacySupply
                             {
-                                SupplyCode = newSupply.SupplyCode,
-                                MedicineCode = content.MedicineCode,
-                                MedicineQuantity = content.MedicineQuantity
+                                Date = DateTime.Now,
+                                PharmacyCode = selectedApplication.PharmacyCode,
+                                PharmacyManagerCode = pharmacyManagerCode
                             };
-                            var medicine = dbContext.Medicine.FirstOrDefault(o => o.MedicineCode == content.MedicineCode);
-                            medicine.MedicineQuantitiy.Quantity -= content.MedicineQuantity;
-                            dbContext.PharmacySupplyContent.Add(newSupplyContent);
-                        }
+                            dbContext.PharmacySupply.Add(newSupply);
 
-                        // Получаем заявку из текущего контекста данных
-                        var applicationToUpdate = dbContext.Application.FirstOrDefault(a => a.ApplicationCode == selectedApplication.ApplicationCode);
+                            // Добавляем лекарства из заявки в содержимое поставки
+                            foreach (var content in selectedApplication.ApplicationContent)
+                            {
+                                var newSupplyContent = new PharmacySupplyContent
+                                {
+                                    SupplyCode = newSupply.SupplyCode,
+                                    MedicineCode = content.MedicineCode,
+                                    MedicineQuantity = content.MedicineQuantity
+                                };
+                                dbContext.PharmacySupplyContent.Add(newSupplyContent);
 
-                        if (applicationToUpdate != null)
-                        {
+                                // Обновляем количество лекарств на складе
+                                var medicine = dbContext.Medicine.FirstOrDefault(o => o.MedicineCode == content.MedicineCode);
+                                var medicineQuantity = dbContext.MedicineQuantitiy.FirstOrDefault(mq => mq.QuantityCode == medicine.QuantityCode);
+                                medicineQuantity.Quantity -= content.MedicineQuantity;
+                            }
+
                             // Обновляем статус заявки на "Выполнена"
-                            applicationToUpdate.StatusCode = 2; // предполагая, что 2 означает "Выполнена"
+                            var applicationToUpdate = dbContext.Application.FirstOrDefault(app => app.ApplicationCode == selectedApplication.ApplicationCode);
+                            if (applicationToUpdate != null)
+                            {
+                                applicationToUpdate.StatusCode = 2;
+                            }
+
                             dbContext.SaveChanges();
 
-                            // Обновляем соответствующий элемент в списке _applications
-                            var updatedApplicationIndex = _applications.FindIndex(app => app.ApplicationCode == selectedApplication.ApplicationCode);
-                            if (updatedApplicationIndex != -1)
-                            {
-                                _applications[updatedApplicationIndex] = applicationToUpdate;
-                            }
-                            // Здесь вместо вызова метода LoadApplications() мы передаем список заявок обратно на страницу ViewApplications
-                            NavigationService.Navigate(new FolderPharmacyManager.Pages.ViewApplications(pharmacyManagerCode, _applications));
-                        }
-                        //dgApplications.ItemsSource = dbContext.Application.ToList();
-                        //LoadApplications();
-                        MessageBox.Show("Поставка успешно создана и заявка обновлена на 'Выполнена'!");
+                            MessageBox.Show("Поставка успешно создана и заявка обновлена на 'Выполнена'!");
 
+                            var historyOperation = new HistoryOperations
+                            {
+                                UserCode = user.UserCode,
+                                Date = DateTime.Now,
+                                Details = "Создание поставки",
+                                Type = "Операция"
+                            };
+                            dbContext.HistoryOperations.Add(historyOperation);
+                            dbContext.SaveChanges();
+
+                            // Обновление отображаемых данных и навигация
+                            UpdateDisplayedData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Для этой заявки уже создана поставка.");
+                        }
                     }
                     else
                     {
@@ -134,5 +159,45 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
                 MessageBox.Show("Пожалуйста, выберите заявку для создания поставки.");
             }
         }
+
+        private void UpdateDisplayedData()
+        {
+            var pharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
+            List<Application> allApplications = new List<Application>();
+
+            // Проходимся по каждой аптеке
+            foreach (var pharmacy in pharmacies)
+            {
+                // Получаем заявки для текущей аптеки
+                var pharmacyApplications = MainWindow.Pharmaceutical_Warehouse.Application
+                    .Where(app => app.PharmacyCode == pharmacy.PharmacyCode)
+                    .ToList();
+
+                // Пронумеруем заявки с единицы
+                int applicationNumber = 1;
+                foreach (var application in pharmacyApplications)
+                {
+                    application.DisplayApplicationCode = $"{application.Pharmacy.DisplayDocumentCode}{applicationNumber}";
+                    applicationNumber++;
+                }
+
+                // Получаем поставки для текущей аптеки
+                var pharmacySupplies = MainWindow.Pharmaceutical_Warehouse.PharmacySupply
+                    .Where(supply => supply.PharmacyCode == pharmacy.PharmacyCode)
+                    .ToList();
+
+                // Пронумеруем поставки с единицы
+                int supplyNumber = 1;
+                foreach (var supply in pharmacySupplies)
+                {
+                    supply.DisplaySupplyCode = $"{supply.Pharmacy.DisplayDocumentCode}{supplyNumber}";
+                    supplyNumber++;
+                }
+            }
+
+            NavigationService.Navigate(new FolderPharmacyManager.Pages.ViewApplications(pharmacyManagerCode, _applications, user));
+        }
+
+
     }
 }

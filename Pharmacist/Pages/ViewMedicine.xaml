@@ -65,7 +65,11 @@
         <DataGrid ItemsSource="{Binding Path=MedicineView}" ColumnWidth="*" Grid.Row="1" Grid.Column="1"  Name="dgMedicine" AutoGenerateColumns="False" FontSize="15" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
+                
+                
                 <DataGridTextColumn Header="Цена за упаковку (руб.)" Binding="{Binding MedicinePrice.Price}"></DataGridTextColumn>
+                
+                
                 <DataGridTemplateColumn Header="Наличие" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -20,7 +20,7 @@
                 <DataGridTextColumn Width="0.5*" Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Width="0.5*" Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Pharmacy.Address}"></DataGridTextColumn>
-                <DataGridTextColumn Width="0.5*" Header="Сумма" Binding="{Binding TotalCost, StringFormat={}{0} руб.}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>

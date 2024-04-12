@@ -163,10 +163,10 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             // Создание новой заявки
             MedicineSupply newMedicineSupply = new MedicineSupply
             {
+                PharmacyManagerCode = pharmacyManagerCode,
                 Date = DateTime.Today,
                 SupplierCode = ran.Next(1, 21),
-                TotalCost = totalCost,
-                PharmacyManagerCode = pharmacyManagerCode
+                TotalCost = totalCost
             };
 
             // Добавление заявки в таблицу Application
@@ -180,7 +180,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             int newSupplyCode = newMedicineSupply.SupplyCode;
 
             // Создание объектов ApplicationContent для каждого выбранного лекарства и их количества
-            List<SupplyContent> SupplyContent = new List<SupplyContent>();
+            List<SupplyContent> supplyContentList = new List<SupplyContent>();
             foreach (var medicine in selectedMedicines)
             {
                 SupplyContent content = new SupplyContent
@@ -189,30 +189,29 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
                     MedicineCode = medicine.MedicineCode,
                     MedicineQuantity = medicine.Quantity
                 };
-                SupplyContent.Add(content);
+                supplyContentList.Add(content);
             }
 
-            // Добавление объектов ApplicationContent в таблицу ApplicationContent
+            // Добавление объектов SupplyContent в таблицу SupplyContent
             using (var dbContext = new Pharmaceutical_WarehouseEntities())
             {
-                dbContext.SupplyContent.AddRange(SupplyContent);
+                dbContext.SupplyContent.AddRange(supplyContentList);
                 dbContext.SaveChanges();
             }
 
-            // Пройдемся по списку выбранных лекарств
+            // Обновление количества лекарств на складе в таблице MedicineQuantity
             foreach (var medicine in selectedMedicines)
             {
-                // Найдем соответствующий объект лекарства в вашем хранилище данных
-                var storedMedicine = MainWindow.Pharmaceutical_Warehouse.Medicine.FirstOrDefault(m => m.MedicineCode == medicine.MedicineCode);
-
-                if (storedMedicine != null)
+                // Найдем соответствующий объект MedicineQuantitiy по QuantityCode
+                var medicineQuantity = MainWindow.Pharmaceutical_Warehouse.MedicineQuantitiy.FirstOrDefault(mq => mq.QuantityCode == medicine.QuantityCode);
+                if (medicineQuantity != null)
                 {
-                    // Увеличим количество лекарства на складе на количество из заявки
-                    storedMedicine.Quantity += medicine.Quantity;
+                    // Увеличим количество лекарств на складе на количество из заявки
+                    medicineQuantity.Quantity += medicine.Quantity;
                 }
             }
 
-            // Сохраните изменения в вашем хранилище данных
+            // Сохранение изменений в базе данных
             using (var dbContext = new Pharmaceutical_WarehouseEntities())
             {
                 dbContext.SaveChanges();
@@ -222,6 +221,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             MessageBox.Show("Заявка успешно создана и отправлена!");
             NavigationService.Navigate(new FolderPharmacyManager.Pages.OrderMedicines(pharmacyManagerCode));
         }
+
 
 
 

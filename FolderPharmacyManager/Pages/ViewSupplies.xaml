@@ -38,9 +38,10 @@
 
         <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgSupplies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Width="0.3*" Header="Номер" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.4*" Header="Номер" Binding="{Binding DisplaySupplyCode}"></DataGridTextColumn>
                 <DataGridTextColumn Width="0.5*" Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Width="0.5*" Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Pharmacy.Address}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Провизор" Binding="{Binding PharmacyManager.FullName}"></DataGridTextColumn>
                 <DataGridTextColumn Width="0.5*" Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
 

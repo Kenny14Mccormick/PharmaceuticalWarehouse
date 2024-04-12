@@ -212,7 +212,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new FolderPharmacyManager.Pages.SeeMedicine(pharmacyManagerCode));
         }
     }
 

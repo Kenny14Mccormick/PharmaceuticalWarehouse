@@ -48,10 +48,27 @@ namespace Аптечный_склад.Pharmacist
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            Authorization authorization = new Authorization();
-            authorization.Show();
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Выход из аккаунта
+                this.Close();
+                Authorization authorization = new Authorization();
+                authorization.Show();
+
+                var historyOperation = new HistoryOperations
+                {
+                    UserCode = CurrentUser.UserCode,
+                    Date = DateTime.Now,
+                    Details = "Выход из аккаунта",
+                    Type = "Авторизация"
+                };
+                MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Add(historyOperation);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            }
         }
+
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -99,7 +116,7 @@ namespace Аптечный_склад.Pharmacist
             MagazineMedicinesBtn.ClearValue(Control.BackgroundProperty);
 
             // Передаем номер аптеки при создании объекта страницы ViewMedicine
-            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacy.PharmacyCode));
+            MyFrame.NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacy.PharmacyCode, CurrentUser));
         }
 
 
@@ -143,13 +160,6 @@ namespace Аптечный_склад.Pharmacist
                 .Where(supply => supply.PharmacyCode == pharmacy.PharmacyCode)
                 .ToList();
 
-            // Пронумеруем поставки с единицы
-            int supplyNumber = 1;
-            foreach (var supply in pharmacySupplies)
-            {
-                supply.DisplaySupplyCode = $"{supply.Pharmacy.DisplayDocumentCode}{supplyNumber}";
-                supplyNumber++;
-            }
             // Создаем страницу просмотра поставок для текущей аптеки
             Pharmacist.Pages.ViewSupplies viewSuppliesPage = new Pharmacist.Pages.ViewSupplies(pharmacySupplies);
 

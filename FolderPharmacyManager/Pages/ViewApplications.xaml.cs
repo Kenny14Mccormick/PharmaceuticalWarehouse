@@ -23,11 +23,12 @@
         {
             private List<Application> _applications; // Список всех заявок
             private int pharmacyManagerCode;
+            private User user;
 
-
-            public ViewApplications(int pharmacyManagerCode, List<Application> applications)
+            public ViewApplications(int pharmacyManagerCode, List<Application> applications, User user)
             {
                 InitializeComponent();
+            this.user = user;
                 this.pharmacyManagerCode = pharmacyManagerCode;
                 _applications = applications;
                 // Устанавливаем обработчики событий для изменения фильтров
@@ -106,7 +107,7 @@
                 if (selectedApplication != null)
                 {
                     // Создаем страницу с подробной информацией о заявке и передаем выбранную заявку
-                    DetailedApplication detailedPage = new DetailedApplication(selectedApplication, _applications, pharmacyManagerCode);
+                    DetailedApplication detailedPage = new DetailedApplication(selectedApplication, _applications, pharmacyManagerCode, user);
                     NavigationService.Navigate(detailedPage);
                 }
             }

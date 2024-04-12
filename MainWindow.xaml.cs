@@ -32,7 +32,7 @@ namespace Аптечный_склад
 
         }
 
-        private void LoadApplicationAndSupplyNumbers()
+        public void LoadApplicationAndSupplyNumbers()
         {
             var pharmacies = Pharmaceutical_Warehouse.Pharmacy.ToList();
             List<Application> allApplications = new List<Application>();

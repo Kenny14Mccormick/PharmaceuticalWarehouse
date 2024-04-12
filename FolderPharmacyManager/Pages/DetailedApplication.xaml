@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-     Title="DetailedApplication" FontSize="17">
+     Title="DetailedApplication" FontSize="17" Foreground="White">
 
     <Grid Margin="10">
         

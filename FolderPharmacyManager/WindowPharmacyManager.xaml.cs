@@ -48,9 +48,25 @@ namespace Аптечный_склад.FolderPharmacyManager
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            Authorization authorization = new Authorization();
-            authorization.Show();
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Выход из аккаунта
+                this.Close();
+                Authorization authorization = new Authorization();
+                authorization.Show();
+
+                var historyOperation = new HistoryOperations
+                {
+                    UserCode = CurrentUser.UserCode,
+                    Date = DateTime.Now,
+                    Details = "Выход из аккаунта",
+                    Type = "Авторизация"
+                };
+                MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Add(historyOperation);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            }
         }
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -98,7 +114,7 @@ namespace Аптечный_склад.FolderPharmacyManager
             var applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
       
             // Передаем pharmacyMannagercode.PharmacyManagerCode в конструктор ViewApplications
-            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, applications);
+            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, applications, CurrentUser);
 
             // Открываем страницу просмотра заявок во фрейме
             MyFrame.NavigationService.Navigate(viewApplications);
