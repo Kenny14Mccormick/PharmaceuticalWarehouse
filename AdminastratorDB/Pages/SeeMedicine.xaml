@@ -8,22 +8,28 @@
                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SeeMedicine" FontSize="17" Foreground="White">
+      Title="SeeMedicine" FontSize="15" Foreground="White">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Категория" Binding="{Binding MedicineCategory.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Категория" Binding="{Binding MedicineCategory.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Производитель" Binding="{Binding Manufacturer.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена" Binding="{Binding MedicinePrice.Price}"></DataGridTextColumn>
 
-
                 <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Подробнее" Click="btnMoreInfo_Click" x:Name="btnMoreInfo" Foreground="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="170">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Редактировать" Click="btnEditMedicine_Click" x:Name="btnEditMedicine" Foreground="White"/>
@@ -40,12 +46,19 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20  0 0 0">
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
-                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
-                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" x:Name="tbMedicine" materialDesign:HintAssist.Hint="Название лекарства" TextChanged="tbFindPMeidicne" BorderBrush="Gray"  Foreground="White" Margin="10 0"  Width="180" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:HintAssist.Hint="Название лекарства" Foreground="White" BorderBrush="Gray" x:Name="tbFindMedicine"
+                         TextChanged="tbFindeMedicicne_tch"
+             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+             VerticalAlignment="Center" Margin="5,0,0,0"/>
             </StackPanel>
-            <Button Grid.Row="1"  Content="Добавить" FontSize="17" Foreground="White" VerticalContentAlignment="Center" Click="BtnAddMedicine_Click"/>
+            <ComboBox  Margin="20 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbCategory" SelectionChanged="cbCategoryChanged"  materialDesign:HintAssist.Hint="Категория"  BorderBrush="Gray"/>
+            <ComboBox  Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" materialDesign:HintAssist.Hint="Действующее вещство" materialDesign:HintAssist.Foreground="Gray" BorderBrush="Gray"/>
+            <ComboBox Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbForm" SelectionChanged="cbFormChanged" materialDesign:HintAssist.Hint="Форма выпуска"  BorderBrush="Gray"/>
+
         </StackPanel>
+
     </Grid>
 </Page>

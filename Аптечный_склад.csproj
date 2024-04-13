@@ -78,6 +78,12 @@
     <Compile Include="ActiveSubstance.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\EditUserWindow.xaml.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminastratorDB\MedicineMoreInfo.xaml.cs">
+      <DependentUpon>MedicineMoreInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminastratorDB\Pages\SeeHistory.xaml.cs">
       <DependentUpon>SeeHistory.xaml</DependentUpon>
     </Compile>
@@ -92,9 +98,6 @@
     </Compile>
     <Compile Include="AdminastratorDB\WindowAdministratorDB.xaml.cs">
       <DependentUpon>WindowAdministratorDB.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdminastratorDB\WindowEditUser.xaml.cs">
-      <DependentUpon>WindowEditUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -250,6 +253,14 @@
     <Compile Include="User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Page Include="AdminastratorDB\EditUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminastratorDB\MedicineMoreInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminastratorDB\Pages\SeeHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -267,10 +278,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminastratorDB\WindowAdministratorDB.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdminastratorDB\WindowEditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

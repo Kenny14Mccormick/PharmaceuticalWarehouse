@@ -15,28 +15,25 @@ using System.Windows.Shapes;
 namespace Аптечный_склад.AdminastratorDB
 {
     /// <summary>
-    /// Логика взаимодействия для WindowEditUser.xaml
+    /// Логика взаимодействия для MedicineMoreInfo.xaml
     /// </summary>
-    public partial class WindowEditUser : Window
+    public partial class MedicineMoreInfo : Window
     {
-        public WindowEditUser()
+        public MedicineMoreInfo(Medicine selectedMedicine)
         {
             InitializeComponent();
-        }
 
+            // Устанавливаем DataContext на выбранное лекарство
+            DataContext = selectedMedicine;
+        }
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }
 
-        private void btn_Close(object sender, RoutedEventArgs e)
+        private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void btnEditUser_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -52,6 +52,7 @@
                 <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
                 <TextBox materialDesign:HintAssist.Hint="Название лекарства" Foreground="White" BorderBrush="Gray" x:Name="tbFindMedicine"
                          TextChanged="tbFindeMedicicne_tch"
+    materialDesign:TextFieldAssist.HasClearButton="True"
              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
              VerticalAlignment="Center" Margin="5,0,0,0"/>
             </StackPanel>

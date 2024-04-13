@@ -1,0 +1,62 @@
+﻿<Window x:Class="Аптечный_склад.AdminastratorDB.MedicineMoreInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Аптечный_склад.AdminastratorDB"
+        mc:Ignorable="d"
+          Title="Подробная информация"  WindowStyle="None" ResizeMode="NoResize"
+        Height="630" Width="400" Background="#2d5b73" Foreground="White" FontSize="15" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.10*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
+
+        <StackPanel Grid.Row="1" Margin="15" >
+            <TextBlock Margin="0 5" Text="{Binding Title}" TextAlignment="Center" FontSize="25"/>
+            <Image  Source="{Binding MedicinePhoto.ImageSource}"  Height="200"/>
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock  HorizontalAlignment="Left"  Text="Производитель:" />
+                <TextBlock Foreground="Wheat"  HorizontalAlignment="Left" Margin="10 0" TextWrapping="Wrap" Text="{Binding Manufacturer.Title}" />
+            </StackPanel>
+
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock  HorizontalAlignment="Left"  Text="Регистрационный номер:"  />
+                <TextBlock Foreground="Wheat"  HorizontalAlignment="Left"  Margin="10 0" TextWrapping="Wrap" Text="{Binding Registration_number}" />
+            </StackPanel>
+
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left"  Text="Категория:"  />
+                <TextBlock Foreground="Wheat" HorizontalAlignment="Left"  Margin="10 0" TextWrapping="Wrap" Text="{Binding MedicineCategory.Title}" />
+            </StackPanel>
+
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left"  Text="Действующее вещество:"  />
+                <TextBlock Foreground="Wheat" HorizontalAlignment="Left"  Margin="10 0" TextWrapping="Wrap" Text="{Binding ActiveSubstance.Title}" />
+            </StackPanel>
+
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left"  Text="Форма выпуска:"  />
+                <TextBlock Foreground="Wheat" HorizontalAlignment="Left"  Margin="10 0" TextWrapping="Wrap" Text="{Binding ReleaseForm.Title}" />
+            </StackPanel>
+
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left"  Text="Срок годности:"  />
+                <TextBlock Foreground="Wheat" HorizontalAlignment="Left"  Margin="10 0" TextWrapping="Wrap" Text="{Binding ExpirationDate, StringFormat={}{0:dd/MM/yyyy}}"  />
+            </StackPanel>
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left"  Text="Условия хранения:"  />
+                <TextBlock Foreground="Wheat" HorizontalAlignment="Left" Width="240" Margin="10 0" TextWrapping="Wrap" Text="{Binding StorageConditionals}" />
+            </StackPanel>
+            <StackPanel Margin="0 5" Orientation="Horizontal" >
+                <TextBlock HorizontalAlignment="Left"  Text="Количество:"  />
+                <TextBlock Foreground="Wheat" HorizontalAlignment="Left" Width="240" Margin="10 0" TextWrapping="Wrap" Text="{Binding MedicineQuantitiy.Quantity, StringFormat={}{0} упаковок}" />
+            </StackPanel>
+        </StackPanel>
+        <Button Grid.Row="2" Foreground="White" Content="Закрыть" VerticalAlignment="Top" Margin="7 0" Click="closeButton_Click"/>
+    </Grid>
+</Window>
