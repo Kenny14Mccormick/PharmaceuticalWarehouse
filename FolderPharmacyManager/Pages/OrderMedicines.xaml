@@ -59,8 +59,6 @@
             <ComboBox  Margin="20 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbCategory" SelectionChanged="cbCategoryChanged"  materialDesign:HintAssist.Hint="Категория"  BorderBrush="Gray"/>
             <ComboBox  Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" materialDesign:HintAssist.Hint="Действующее вещство" materialDesign:HintAssist.Foreground="Gray" BorderBrush="Gray"/>
             <ComboBox Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbForm" SelectionChanged="cbFormChanged" materialDesign:HintAssist.Hint="Форма выпуска"  BorderBrush="Gray"/>
-            <CheckBox Content="Только в наличии" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Path=MedicineView}" ColumnWidth="*" Grid.Row="1" Grid.Column="1"  Name="dgMedicine" AutoGenerateColumns="False" FontSize="15" IsReadOnly="True">

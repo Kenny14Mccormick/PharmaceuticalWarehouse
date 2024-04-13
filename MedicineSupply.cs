@@ -24,7 +24,18 @@ namespace Аптечный_склад
         public System.DateTime Date { get; set; }
         public int SupplierCode { get; set; }
         public int PharmacyManagerCode { get; set; }
-        public double TotalCost { get; set; }
+        public double TotalCost
+        {
+            get
+            {
+                double totalcost = 0;
+                foreach (var content in SupplyContent)
+                {
+                    totalcost += content.MedicineTotalCost;
+                }
+                return totalcost;
+            }
+        }
 
         public virtual PharmacyManager PharmacyManager { get; set; }
         public virtual Supplier Supplier { get; set; }

@@ -14,12 +14,16 @@
             <RowDefinition/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
+
         <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
-            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Margin="10 0" VerticalAlignment="Center" Orientation="Horizontal">
                 <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
-                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbSupplyCode" materialDesign:HintAssist.Hint="Имя пользователя" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbUserTitle" materialDesign:HintAssist.Hint="Имя пользователя" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" />
             </StackPanel>
-            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Роль пользователя" x:Name="comboBoxStatus" Width="150" Margin="0 0 7 13" BorderBrush="Gray"/>
+            <StackPanel Margin="10 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbDetailsOfOperation" materialDesign:HintAssist.Hint="Детали операции" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
 
             <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />

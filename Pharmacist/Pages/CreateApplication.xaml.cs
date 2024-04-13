@@ -170,11 +170,10 @@ namespace Аптечный_склад.Pharmacist.Pages
             };
 
             // Добавление заявки в таблицу Application
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                dbContext.Application.Add(newApplication);
-                dbContext.SaveChanges();
-            }
+
+            MainWindow.Pharmaceutical_Warehouse.Application.Add(newApplication);
+            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            
 
             // Получение кода только что созданной заявки
             int newApplicationCode = newApplication.ApplicationCode;
@@ -193,11 +192,10 @@ namespace Аптечный_склад.Pharmacist.Pages
             }
 
             // Добавление объектов ApplicationContent в таблицу ApplicationContent
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                dbContext.ApplicationContent.AddRange(applicationContents);
-                dbContext.SaveChanges();
-            }
+
+            MainWindow.Pharmaceutical_Warehouse.ApplicationContent.AddRange(applicationContents);
+            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            
 
             // Оповещение пользователя о успешном создании заявки
             MessageBox.Show("Заявка успешно создана и отправлена!");

@@ -35,11 +35,10 @@ namespace Аптечный_склад.FolderPharmacyManager
 
         private void btnAddPharmacy_Click(object sender, RoutedEventArgs e)
         {
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                if (pharmacy.PharmacyCode == 0) dbContext.Pharmacy.Add(pharmacy);
-                dbContext.SaveChanges();
-            }
+
+                if (pharmacy.PharmacyCode == 0) MainWindow.Pharmaceutical_Warehouse.Pharmacy.Add(pharmacy);
+            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            
             this.Close();
             MessageBox.Show("Успешно!");
         }

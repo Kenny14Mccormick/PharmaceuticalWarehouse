@@ -111,10 +111,9 @@ namespace Аптечный_склад.FolderPharmacyManager
             ManagePharmaciesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             var pharmacyMannagercode = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.FirstOrDefault(p => p.UserCode == CurrentUser.UserCode);
-            var applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
       
             // Передаем pharmacyMannagercode.PharmacyManagerCode в конструктор ViewApplications
-            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode, applications, CurrentUser);
+            FolderPharmacyManager.Pages.ViewApplications viewApplications = new Pages.ViewApplications(pharmacyMannagercode.PharmacyManagerCode,  CurrentUser);
 
             // Открываем страницу просмотра заявок во фрейме
             MyFrame.NavigationService.Navigate(viewApplications);

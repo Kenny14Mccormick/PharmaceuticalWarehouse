@@ -47,7 +47,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             // Возвращаемся на страницу с просмотром всех заявок и передаем список заявок
-            NavigationService.Navigate(new Pharmacist.Pages.ViewSupplies(_supplies));
+            NavigationService.Navigate(new FolderPharmacyManager.Pages.ViewSupplies());
         }
 
         private void btnInvoice_Click(object sender, RoutedEventArgs e)

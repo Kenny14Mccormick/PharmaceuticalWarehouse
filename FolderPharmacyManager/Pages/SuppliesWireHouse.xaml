@@ -1,0 +1,57 @@
+﻿<Page x:Class="Аптечный_склад.FolderPharmacyManager.Pages.SuppliesWireHouse"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+        Title="ViewSupplies" FontSize="15" Foreground="White">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Foreground="White" FontSize="15" Width="150" Click="btnGoBack_Click"/>
+
+        <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
+            <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
+                <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
+                <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbSupplyCode" materialDesign:HintAssist.Hint="Номер поставки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Margin="10 0 0 0" VerticalAlignment="Center" Orientation="Horizontal"/>
+            <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
+            <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
+
+            <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
+
+            <Button FontSize="15" Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="20 0" Click="ResetDatesBtn_Click" Height="30"  Width="180" VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+
+        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgSupplies" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns >
+                <DataGridTextColumn Width="0.3*" Header="#" Binding="{Binding SupplyCode}"></DataGridTextColumn>
+                <DataGridTextColumn  Header="Дата поставки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Width="2*" Header="Поставщик" Binding="{Binding Supplier.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Width="1.5*" Header="Провизор" Binding="{Binding PharmacyManager.FullName}"></DataGridTextColumn>
+                <DataGridTextColumn  Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
+
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Foreground="White" Content="Подробнее" Click="btnMore_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

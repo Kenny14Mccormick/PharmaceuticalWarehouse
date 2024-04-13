@@ -25,12 +25,13 @@
             private int pharmacyManagerCode;
             private User user;
 
-            public ViewApplications(int pharmacyManagerCode, List<Application> applications, User user)
+            public ViewApplications(int pharmacyManagerCode, User user)
             {
                 InitializeComponent();
             this.user = user;
                 this.pharmacyManagerCode = pharmacyManagerCode;
-                _applications = applications;
+                _applications = MainWindow.Pharmaceutical_Warehouse.Application.ToList();
+
                 // Устанавливаем обработчики событий для изменения фильтров
                 dpStart.SelectedDateChanged += UpdateApplications;
                 dpEnd.SelectedDateChanged += UpdateApplications;
@@ -107,7 +108,7 @@
                 if (selectedApplication != null)
                 {
                     // Создаем страницу с подробной информацией о заявке и передаем выбранную заявку
-                    DetailedApplication detailedPage = new DetailedApplication(selectedApplication, _applications, pharmacyManagerCode, user);
+                    DetailedApplication detailedPage = new DetailedApplication(selectedApplication, pharmacyManagerCode, user);
                     NavigationService.Navigate(detailedPage);
                 }
             }
@@ -115,6 +116,7 @@
             // Метод для обновления списка заявок при изменении фильтров
             private void UpdateApplications(object sender, RoutedEventArgs e)
             {
+
                 LoadApplications();
             }
 

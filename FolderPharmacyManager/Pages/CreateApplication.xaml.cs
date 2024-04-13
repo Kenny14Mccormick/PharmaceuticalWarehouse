@@ -165,16 +165,14 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             {
                 PharmacyManagerCode = pharmacyManagerCode,
                 Date = DateTime.Today,
-                SupplierCode = ran.Next(1, 21),
-                TotalCost = totalCost
+                SupplierCode = ran.Next(1, 21)
             };
 
             // Добавление заявки в таблицу Application
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                dbContext.MedicineSupply.Add(newMedicineSupply);
-                dbContext.SaveChanges();
-            }
+
+                MainWindow.Pharmaceutical_Warehouse.MedicineSupply.Add(newMedicineSupply);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            
 
             // Получение кода только что созданной заявки
             int newSupplyCode = newMedicineSupply.SupplyCode;
@@ -193,11 +191,10 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             }
 
             // Добавление объектов SupplyContent в таблицу SupplyContent
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                dbContext.SupplyContent.AddRange(supplyContentList);
-                dbContext.SaveChanges();
-            }
+
+            MainWindow.Pharmaceutical_Warehouse.SupplyContent.AddRange(supplyContentList);
+            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            
 
             // Обновление количества лекарств на складе в таблице MedicineQuantity
             foreach (var medicine in selectedMedicines)
@@ -211,14 +208,12 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
                 }
             }
 
-            // Сохранение изменений в базе данных
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                dbContext.SaveChanges();
-            }
+
+            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            
 
             // Оповещение пользователя о успешном создании заявки
-            MessageBox.Show("Заявка успешно создана и отправлена!");
+            MessageBox.Show("Лекарства успешно заказаны!");
             NavigationService.Navigate(new FolderPharmacyManager.Pages.OrderMedicines(pharmacyManagerCode));
         }
 

@@ -13,7 +13,10 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
+            <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
+        <Button Content="История заказов" Grid.Row="2" HorizontalAlignment="Left" Foreground="White" FontSize="15" Click="btnSuppliesHistory_Click"/>
+
         <DataGrid Grid.Row="1"  FontSize="15" ColumnWidth="*"  x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>
@@ -40,8 +43,8 @@
             </StackPanel>
             <ComboBox  Margin="20 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbCategory" SelectionChanged="cbCategoryChanged"  materialDesign:HintAssist.Hint="Категория"  BorderBrush="Gray"/>
             <ComboBox  Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" materialDesign:HintAssist.Hint="Действующее вещство" materialDesign:HintAssist.Foreground="Gray" BorderBrush="Gray"/>
-            <ComboBox Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbForm" SelectionChanged="cbFormChanged" materialDesign:HintAssist.Hint="Форма выпуска"  BorderBrush="Gray"/>
-            <Button Content="Заказ лекарств" Foreground="White" FontSize="17" Click="btnOrderMedicine_Click"/>
+            <ComboBox Margin="10 0 20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbForm" SelectionChanged="cbFormChanged" materialDesign:HintAssist.Hint="Форма выпуска"  BorderBrush="Gray"/>
+            <Button Content="Заказ лекарств" Foreground="White" FontSize="15" Click="btnOrderMedicine_Click"/>
         </StackPanel>
     </Grid>
 </Page>

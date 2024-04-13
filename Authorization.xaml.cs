@@ -40,9 +40,8 @@ namespace Аптечный_склад
             string login = tbLogin.Text;
             string password = tbPassword.Password;
 
-            using (var dbContext = new Pharmaceutical_WarehouseEntities())
-            {
-                var user = dbContext.User.FirstOrDefault(u => u.Login == login && u.Password == password);
+
+                var user = MainWindow.Pharmaceutical_Warehouse.User.FirstOrDefault(u => u.Login == login && u.Password == password);
 
                 if (user != null)
                 {
@@ -54,8 +53,8 @@ namespace Аптечный_склад
                         Details = "Вход в систему",
                         Type = "Авторизация"
                     };
-                    dbContext.HistoryOperations.Add(historyOperation);
-                    dbContext.SaveChanges();
+                MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Add(historyOperation);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
 
                     switch (user.RoleCode)
                     {
@@ -81,7 +80,7 @@ namespace Аптечный_склад
                     MessageBox.Show("Неккоректный логин или пароль!");
                 }
             }
-        }
+        
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {

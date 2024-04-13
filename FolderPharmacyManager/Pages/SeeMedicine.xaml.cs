@@ -127,5 +127,11 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
         {
             NavigationService.Navigate(new OrderMedicines(pharmacyManagerCode));
         }
+
+        private void btnSuppliesHistory_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SuppliesWireHouse(pharmacyManagerCode));
+
+        }
     }
 }

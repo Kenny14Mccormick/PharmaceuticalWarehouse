@@ -123,6 +123,9 @@
     <Compile Include="FolderPharmacyManager\Pages\DetailedSupply.xaml.cs">
       <DependentUpon>DetailedSupply.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\DetailedWireHouseSupply.xaml.cs">
+      <DependentUpon>DetailedWireHouseSupply.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FolderPharmacyManager\Pages\OrderMedicines.xaml.cs">
       <DependentUpon>OrderMedicines.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,9 @@
     </Compile>
     <Compile Include="FolderPharmacyManager\Pages\SeePharmacies.xaml.cs">
       <DependentUpon>SeePharmacies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FolderPharmacyManager\Pages\SuppliesWireHouse.xaml.cs">
+      <DependentUpon>SuppliesWireHouse.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderPharmacyManager\Pages\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
@@ -292,6 +298,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FolderPharmacyManager\Pages\DetailedWireHouseSupply.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FolderPharmacyManager\Pages\OrderMedicines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FolderPharmacyManager\Pages\SeePharmacies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FolderPharmacyManager\Pages\SuppliesWireHouse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

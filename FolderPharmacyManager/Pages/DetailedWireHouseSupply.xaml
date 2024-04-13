@@ -1,0 +1,42 @@
+﻿<Page x:Class="Аптечный_склад.FolderPharmacyManager.Pages.DetailedWireHouseSupply"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Аптечный_склад.FolderPharmacyManager.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+       Title="DetailedSupply" FontSize="15" Foreground="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Row="1" x:Name="dgDetailedSupply" FontSize="15" Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Лекарство" Binding="{Binding Medicine.Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество (уп.)" Binding="{Binding MedicineQuantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цена за упаковку (руб.)" Binding="{Binding Medicine.MedicinePrice.Price}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Сумма (руб.)" Binding="{Binding MedicineTotalCost}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="4" VerticalAlignment="Center" Grid.Column="0" >
+            <TextBlock x:Name="tblCodeSupply"/>
+            <TextBlock Margin="20 0 10 0" x:Name="tblDateSupply"  />
+            <TextBlock Margin="10 0" x:Name="tblPharmacy"  />
+            <TextBlock Margin="10 0" x:Name="tblPharmacyManagerSupply"/>
+
+        </StackPanel>
+        <TextBlock x:Name="tblTotalCost" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+
+        <Button Grid.Row="2" Grid.Column="0" Margin="0 0 0 0" HorizontalAlignment="Left" Width="200" Content="Назад" Foreground="White" FontSize="15" Height="40" Click="btnBack_Click"/>
+    </Grid>
+</Page>
