@@ -93,6 +93,9 @@
     <Compile Include="AdminastratorDB\Pages\SeeMedicine.xaml.cs">
       <DependentUpon>SeeMedicine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\Pages\SeePharmacyManagers.xaml.cs">
+      <DependentUpon>SeePharmacyManagers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminastratorDB\Pages\SeeUsers.xaml.cs">
       <DependentUpon>SeeUsers.xaml</DependentUpon>
     </Compile>
@@ -273,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminastratorDB\Pages\SeeMedicine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminastratorDB\Pages\SeePharmacyManagers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

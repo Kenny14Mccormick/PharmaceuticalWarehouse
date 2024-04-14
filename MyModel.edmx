@@ -91,7 +91,7 @@
           <Key>
             <PropertyRef Name="PhotoCode" />
           </Key>
-          <Property Name="PhotoCode" Type="int" Nullable="false" />
+          <Property Name="PhotoCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImageSource" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="MedicinePrice">

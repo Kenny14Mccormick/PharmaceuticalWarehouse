@@ -30,9 +30,7 @@ namespace Аптечный_склад.AdminastratorDB
             cbSubstance.ItemsSource = MainWindow.Pharmaceutical_Warehouse.ActiveSubstance.ToList();
             cbForm.ItemsSource = MainWindow.Pharmaceutical_Warehouse.ReleaseForm.ToList();
             cbManufacturer.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Manufacturer.ToList();
-            cbPhoto.ItemsSource = MainWindow.Pharmaceutical_Warehouse.MedicinePhoto.ToList();
-            
-            }
+        }
 
 
         private void ChosePhoto_Click(object sender, RoutedEventArgs e)
@@ -50,8 +48,7 @@ namespace Аптечный_склад.AdminastratorDB
                 string selectedFilePath = openFileDialog.FileName;
 
                 // Обновляем текстовое поле с путем к выбранному файлу
-
-               // cbPhoto. = selectedFilePath;
+                tbPhoto.Text = selectedFilePath;
 
                 // Отображаем выбранное изображение в Image элементе
                 BitmapImage bitmap = new BitmapImage();
@@ -78,7 +75,6 @@ namespace Аптечный_склад.AdminastratorDB
 
                 MedicinePhoto medicinePhoto = new MedicinePhoto()
                 {
-                    PhotoCode = medicine.MedicineCode,
                     ImageSource = tbPhoto.Text
                 };
                 MainWindow.Pharmaceutical_Warehouse.MedicinePhoto.Add(medicinePhoto);

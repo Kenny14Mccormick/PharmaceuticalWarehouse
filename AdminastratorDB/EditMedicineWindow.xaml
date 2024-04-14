@@ -28,9 +28,7 @@
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding StorageConditionals}" VerticalAlignment="Center" FontSize="15" x:Name="tbStorageConditionals"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Условия хранения"/>
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding MedicinePrice.Price}" VerticalAlignment="Center" FontSize="15" x:Name="tbPrice"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Цена лекарства"/>
             <StackPanel Orientation="Horizontal">
-                <!--<TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding MedicinePhoto.ImageSource}" VerticalAlignment="Center" Width="400" FontSize="15" x:Name="tbPhoto"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Путь к фото"/>-->
-                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding PhotoCode}" DisplayMemberPath="ImageSource" SelectedValuePath="PhotoCode" Width="400" VerticalAlignment="Center"  FontSize="17"  x:Name="cbPhoto"  Margin="20 5"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Путь к фото"/>
-
+                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding MedicinePhoto.ImageSource}" VerticalAlignment="Center" Width="400" FontSize="15" x:Name="tbPhoto"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Путь к фото"/>
                 <Button Content="Выбрать фото" Foreground="White" Click="ChosePhoto_Click" FontSize="15"/>
             </StackPanel>
             <Image Source="{Binding MedicinePhoto.ImageSource}" Width="250" Height="150" x:Name="photo"/>
