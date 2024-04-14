@@ -15,17 +15,18 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgUsers" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1"  ColumnWidth="*"  x:Name="dgPMs" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Имя" Binding="{Binding Title}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Роль" Binding="{Binding Role.RoleDescription}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Логин" Binding="{Binding Login}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя пользователя" Binding="{Binding User.Title}" ></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="170">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Click="btnEditUser_Click" x:Name="btnEditUser" Foreground="White"/>
+                            <Button Content="Редактировать" Click="btnEditPM_Click" x:Name="btnEditPM" Foreground="White"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -33,7 +34,7 @@
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Удалить" Click="btnDeleteUser_Click" x:Name="btnDeleteUser" Foreground="White"/>
+                            <Button Content="Удалить" Click="btnDeletePM_Click" x:Name="btnDeletePM" Foreground="White"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -42,14 +43,13 @@
         <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" >
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
                 <materialDesign:PackIcon Foreground="White" Kind="Magnify" VerticalAlignment="Bottom" Width="25" Height="25"/>
-                <TextBox materialDesign:HintAssist.Hint="Имя пользователя" MaxWidth="280" Foreground="White" BorderBrush="Gray" x:Name="tbFindUser"
+                <TextBox materialDesign:HintAssist.Hint="ФИО фармацевта" MaxWidth="280" Foreground="White" BorderBrush="Gray" x:Name="tbFindPM"
     materialDesign:TextFieldAssist.HasClearButton="True"
-                         TextChanged="tbFindUser_TextChanged" 
+                         TextChanged="tbFindPM_TextChanged" 
              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
              VerticalAlignment="Center" Margin="5,0,0,0"/>
             </StackPanel>
-            <ComboBox  Margin="20 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbRole" SelectionChanged="cbRoleChanged"  materialDesign:HintAssist.Hint="Роль"  BorderBrush="Gray"/>
         </StackPanel>
-        <Button Width="200" Grid.Row="2"  Content="Добавить" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center" Click="BddAddUser_Click"/>
+        <Button Width="200" Grid.Row="2"  Content="Добавить" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center" Click="BddAddPM_Click"/>
     </Grid>
 </Page>

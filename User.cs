@@ -18,6 +18,7 @@ namespace Аптечный_склад
         public User()
         {
             this.HistoryOperations = new HashSet<HistoryOperations>();
+            this.PharmacyManager = new HashSet<PharmacyManager>();
         }
     
         public int UserCode { get; set; }
@@ -31,5 +32,7 @@ namespace Аптечный_склад
         public virtual ICollection<HistoryOperations> HistoryOperations { get; set; }
         public virtual Pharmacy Pharmacy { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PharmacyManager> PharmacyManager { get; set; }
     }
 }

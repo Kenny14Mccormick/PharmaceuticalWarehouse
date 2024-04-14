@@ -91,6 +91,7 @@ namespace Аптечный_склад.AdminastratorDB
             SeeUsersBtn.ClearValue(Control.BackgroundProperty);
             SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
             SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
+            SeePMsBtn.ClearValue(Control.BackgroundProperty);
             // Создаем объект страницы настроек
             AdminastratorDB.Pages.UserSettings userSettings = new AdminastratorDB.Pages.UserSettings(CurrentUser);
 
@@ -106,6 +107,7 @@ namespace Аптечный_склад.AdminastratorDB
             SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
+            SeePMsBtn.ClearValue(Control.BackgroundProperty);
         }
 
         private void SeeMedicinesBtn_Click(object sender, RoutedEventArgs e)
@@ -115,6 +117,7 @@ namespace Аптечный_склад.AdminastratorDB
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
 
+            SeePMsBtn.ClearValue(Control.BackgroundProperty);
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeeMedicine());
 
         }
@@ -125,6 +128,7 @@ namespace Аптечный_склад.AdminastratorDB
             SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
+            SeePMsBtn.ClearValue(Control.BackgroundProperty);
 
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeeUsers());
 
@@ -136,12 +140,25 @@ namespace Аптечный_склад.AdminastratorDB
             SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
             UserSettingsBtn.ClearValue(Control.BackgroundProperty);
             SeeHistoryBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+            SeePMsBtn.ClearValue(Control.BackgroundProperty);
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeeHistory());
         }
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Справка");
+        }
+
+        private void SeePMsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SeeUsersBtn.ClearValue(Control.BackgroundProperty);
+            SeeMedicinesBtn.ClearValue(Control.BackgroundProperty);
+            UserSettingsBtn.ClearValue(Control.BackgroundProperty);
+            SeeHistoryBtn.ClearValue(Control.BackgroundProperty);
+            SeePMsBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+
+            MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeePharmacyManagers());
+
         }
     }
 }

@@ -81,6 +81,7 @@
                 <StackPanel Margin="30 0">
                     <Button FontSize="16" Foreground="White" Click="SeeMedicinesBtn_Click" x:Name="SeeMedicinesBtn" Content="Справочник лекарств" Margin="0 40 0 20"/>
                     <Button FontSize="16" Foreground="White" Click="SeeUsersBtn_Click" x:Name="SeeUsersBtn" Content="Пользователи" Margin="0 20"/>
+                    <Button FontSize="16" Foreground="White" Click="SeePMsBtn_Click" x:Name="SeePMsBtn" Content="Провизоры" Margin="0 20"/>
                     <Button FontSize="16" Foreground="White" Click="SeeHistoryBtn_Click" x:Name="SeeHistoryBtn" Content="История входов" Margin="0 20"/>
                 </StackPanel>
 

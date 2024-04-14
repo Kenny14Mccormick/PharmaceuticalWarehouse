@@ -81,6 +81,9 @@
     <Compile Include="AdminastratorDB\EditMedicineWindow.xaml.cs">
       <DependentUpon>EditMedicineWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\EditPharmacyManagerWindow.xaml.cs">
+      <DependentUpon>EditPharmacyManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminastratorDB\EditUserWindow.xaml.cs">
       <DependentUpon>EditUserWindow.xaml</DependentUpon>
     </Compile>
@@ -260,6 +263,10 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Page Include="AdminastratorDB\EditMedicineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminastratorDB\EditPharmacyManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

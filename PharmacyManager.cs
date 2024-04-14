@@ -26,7 +26,7 @@ namespace Аптечный_склад
         public string LastName { get; set; }
         public string Patronymic { get; set; }
         public string Phone { get; set; }
-        public Nullable<int> UserCode { get; set; }
+        public int UserCode { get; set; }
         public string FullName
         {
             get
@@ -40,5 +40,6 @@ namespace Аптечный_склад
         public virtual ICollection<MedicineSupply> MedicineSupply { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PharmacySupply> PharmacySupply { get; set; }
+        public virtual User User { get; set; }
     }
 }

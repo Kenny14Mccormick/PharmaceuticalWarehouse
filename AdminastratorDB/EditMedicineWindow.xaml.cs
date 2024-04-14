@@ -56,6 +56,13 @@ namespace Аптечный_склад.AdminastratorDB
                 bitmap.UriSource = new Uri(selectedFilePath);
                 bitmap.EndInit();
                 photo.Source = bitmap;
+
+                MedicinePhoto medicinePhoto = new MedicinePhoto()
+                {
+                    ImageSource = tbPhoto.Text
+                };
+                MainWindow.Pharmaceutical_Warehouse.MedicinePhoto.Add(medicinePhoto);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
             }
         }
 
@@ -72,12 +79,6 @@ namespace Аптечный_склад.AdminastratorDB
                     Quantity = 0
                 };
                 MainWindow.Pharmaceutical_Warehouse.MedicineQuantitiy.Add(medicineQuantity);
-
-                MedicinePhoto medicinePhoto = new MedicinePhoto()
-                {
-                    ImageSource = tbPhoto.Text
-                };
-                MainWindow.Pharmaceutical_Warehouse.MedicinePhoto.Add(medicinePhoto);
 
                 // Проверка наличия введенной цены перед созданием записи в таблице MedicinePrice
                 if (!string.IsNullOrEmpty(tbPrice.Text))

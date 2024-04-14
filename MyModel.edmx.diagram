@@ -50,6 +50,7 @@
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_PharmacySupplyContent_PharmacySupply" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_User_Role" ManuallyRouted="false" />
         <AssociationConnector Association="Pharmaceutical_WarehouseModel.ApplicationSupply" ManuallyRouted="false" />
+        <AssociationConnector Association="Pharmaceutical_WarehouseModel.FK_PharmacyManager_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
