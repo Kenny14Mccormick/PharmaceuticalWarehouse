@@ -52,10 +52,6 @@
                 <TextBlock HorizontalAlignment="Left"  Text="Условия хранения:"  />
                 <TextBlock Foreground="Wheat" HorizontalAlignment="Left" Width="240" Margin="10 0" TextWrapping="Wrap" Text="{Binding StorageConditionals}" />
             </StackPanel>
-            <StackPanel Margin="0 5" Orientation="Horizontal" >
-                <TextBlock HorizontalAlignment="Left"  Text="Количество:"  />
-                <TextBlock Foreground="Wheat" HorizontalAlignment="Left" Width="240" Margin="10 0" TextWrapping="Wrap" Text="{Binding MedicineQuantitiy.Quantity, StringFormat={}{0} упаковок}" />
-            </StackPanel>
         </StackPanel>
         <Button Grid.Row="2" Foreground="White" Content="Закрыть" VerticalAlignment="Top" Margin="7 0" Click="closeButton_Click"/>
     </Grid>

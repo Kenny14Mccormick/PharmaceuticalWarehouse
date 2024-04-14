@@ -1,0 +1,47 @@
+﻿<Window x:Class="Аптечный_склад.AdminastratorDB.EditMedicineWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Аптечный_склад.AdminastratorDB"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None" ResizeMode="NoResize"
+           Height="800" Width="600" Background="#2d5b73" Foreground="White" FontSize="15" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.04*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.20*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
+        <StackPanel Grid.Row="1" Grid.RowSpan="2">
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Title}" VerticalAlignment="Center"  FontSize="15"  x:Name="tbTitleCode"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Название"/>
+
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Registration_number}" VerticalAlignment="Center" FontSize="15"  x:Name="tbRegistrNumb"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Регистрационный номер"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding CategoryCode}" DisplayMemberPath="Title" SelectedValuePath="CategoryCode"  VerticalAlignment="Center"  FontSize="15"  x:Name="cbCategory"  Margin="20 5"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Категория"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding SubstanceCode}" DisplayMemberPath="Title" SelectedValuePath="SubstanceCode"  VerticalAlignment="Center"  FontSize="15"  x:Name="cbSubstance"  Margin="20 5"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Действующее вещество"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding FormCode}" DisplayMemberPath="Title" SelectedValuePath="FormCode" VerticalAlignment="Center"  FontSize="17"  x:Name="cbForm"  Margin="20 5"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Форма выпуска"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding ManufacturerCode}" DisplayMemberPath="Title" SelectedValuePath="ManufacturerCode" VerticalAlignment="Center"  FontSize="15"  x:Name="cbManufacturer"  Margin="20 5"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Производитель"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding ExpirationDate}" VerticalAlignment="Center" FontSize="15" x:Name="tbExpirationDate"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Срок годности"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding StorageConditionals}" VerticalAlignment="Center" FontSize="15" x:Name="tbStorageConditionals"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Условия хранения"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding MedicinePrice.Price}" VerticalAlignment="Center" FontSize="15" x:Name="tbPrice"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Цена лекарства"/>
+            <StackPanel Orientation="Horizontal">
+                <!--<TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding MedicinePhoto.ImageSource}" VerticalAlignment="Center" Width="400" FontSize="15" x:Name="tbPhoto"  Margin="20 5" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Путь к фото"/>-->
+                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding PhotoCode}" DisplayMemberPath="ImageSource" SelectedValuePath="PhotoCode" Width="400" VerticalAlignment="Center"  FontSize="17"  x:Name="cbPhoto"  Margin="20 5"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Путь к фото"/>
+
+                <Button Content="Выбрать фото" Foreground="White" Click="ChosePhoto_Click" FontSize="15"/>
+            </StackPanel>
+            <Image Source="{Binding MedicinePhoto.ImageSource}" Width="250" Height="150" x:Name="photo"/>
+        </StackPanel>
+        <Grid Grid.Row="2" VerticalAlignment="Bottom" Margin="0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Margin="10 0" Content="Сохранить" Foreground="White" FontSize="17" Click="btnSaveChanges_Click"/>
+            <Button Grid.Column="1" Margin="10 0" Content="Закрыть" Foreground="White" FontSize="17" Click="btn_Close"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -50,6 +50,6 @@
             </StackPanel>
             <ComboBox  Margin="20 0"  Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbRole" SelectionChanged="cbRoleChanged"  materialDesign:HintAssist.Hint="Роль"  BorderBrush="Gray"/>
         </StackPanel>
-        <Button Width="150" Grid.Row="2"  Content="Добавить" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center" Click="BddAddUser_Click"/>
+        <Button Width="200" Grid.Row="2"  Content="Добавить" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center" Click="BddAddUser_Click"/>
     </Grid>
 </Page>

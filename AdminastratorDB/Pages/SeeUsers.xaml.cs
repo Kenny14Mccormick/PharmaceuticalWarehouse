@@ -94,7 +94,6 @@ namespace Аптечный_склад.AdminastratorDB.Pages
 
         private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            // Получаем выбранную аптеку из DataGrid
             User selectedUser = dgUsers.SelectedItem as User;
 
             if (selectedUser != null)

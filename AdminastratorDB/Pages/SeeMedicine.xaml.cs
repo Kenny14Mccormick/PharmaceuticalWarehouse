@@ -114,7 +114,12 @@ namespace Аптечный_склад.AdminastratorDB.Pages
 
         private void BtnAddMedicine_Click(object sender, RoutedEventArgs e)
         {
-
+            var medicine = new Medicine();
+            AdminastratorDB.EditMedicineWindow EditUser = new EditMedicineWindow(medicine);
+            EditUser.ShowDialog();
+            // Обновляем DataGrid
+            dgMedicines.ItemsSource = null;
+            dgMedicines.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
         }
 
         private void tbFindPMeidicne(object sender, TextChangedEventArgs e)
@@ -125,12 +130,44 @@ namespace Аптечный_склад.AdminastratorDB.Pages
 
         private void btnEditMedicine_Click(object sender, RoutedEventArgs e)
         {
-
+            var editButton = sender as Button;
+            var selectedMedicine = editButton.DataContext as Medicine;
+            AdminastratorDB.EditMedicineWindow EditUser = new EditMedicineWindow(selectedMedicine);
+            EditUser.ShowDialog();
+            // Обновляем DataGrid
+            dgMedicines.ItemsSource = null;
+            dgMedicines.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
         }
 
         private void btnDeleteMedicine_Click(object sender, RoutedEventArgs e)
         {
+            Medicine selectedMedicine = dgMedicines.SelectedItem as Medicine;
 
+            if (selectedMedicine != null)
+            {
+
+                if (selectedMedicine != null)
+                {
+                    MessageBoxResult result = MessageBox.Show(
+                        "Вы точно хотите удалить лекарственное средство?",
+                        "Подтверждение об удалении",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        MainWindow.Pharmaceutical_Warehouse.Medicine.Remove(selectedMedicine);
+                        MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+                        MessageBox.Show("Запись удалена!");
+                        dgMedicines.ItemsSource = null;
+                        dgMedicines.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите пользователя для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnMoreInfo_Click(object sender, RoutedEventArgs e)

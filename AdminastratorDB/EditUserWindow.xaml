@@ -17,11 +17,11 @@
         </Grid.RowDefinitions>
         <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
         <StackPanel Grid.Row="1">
-            <TextBox Text="{Binding Title}" VerticalAlignment="Center"  FontSize="17"  x:Name="tbTitleCode"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Имя пользователя"/>
-            <ComboBox SelectedValue="{Binding Role.RoleDescription}" SelectionChanged="cbRole_changed" VerticalAlignment="Center"  FontSize="17"  x:Name="cbRole"  Margin="20"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Роль"/>
-            <TextBox Text="{Binding Login}" VerticalAlignment="Center" FontSize="17"  x:Name="tbLogin"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Логин"/>
-            <TextBox Text="{Binding Password}" VerticalAlignment="Center" FontSize="17" x:Name="tbPassword"  Margin="20" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Пароль"/>
-            <ComboBox Visibility="Collapsed"  VerticalAlignment="Center" FontSize="17" x:Name="cbPharmacy"  Margin="20" BorderBrush="Gray"  materialDesign:HintAssist.Hint="Аптека"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Title}" VerticalAlignment="Center"  FontSize="17"  x:Name="tbTitleCode"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Имя пользователя"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectedValue="{Binding Role.RoleDescription}" SelectionChanged="cbRole_changed" VerticalAlignment="Center"  FontSize="17"  x:Name="cbRole"  Margin="20 10"  BorderBrush="Gray"  materialDesign:HintAssist.Hint="Роль"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Login}" VerticalAlignment="Center" FontSize="17"  x:Name="tbLogin"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Логин"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Password}" VerticalAlignment="Center" FontSize="17" x:Name="tbPassword"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Пароль"/>
+            <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}" Visibility="Collapsed"  VerticalAlignment="Center" FontSize="17" x:Name="cbPharmacy"  Margin="20 10" BorderBrush="Gray"  materialDesign:HintAssist.Hint="Аптека"/>
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

@@ -78,6 +78,9 @@
     <Compile Include="ActiveSubstance.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdminastratorDB\EditMedicineWindow.xaml.cs">
+      <DependentUpon>EditMedicineWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminastratorDB\EditUserWindow.xaml.cs">
       <DependentUpon>EditUserWindow.xaml</DependentUpon>
     </Compile>
@@ -253,6 +256,10 @@
     <Compile Include="User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Page Include="AdminastratorDB\EditMedicineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminastratorDB\EditUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -454,6 +461,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Log.png" />
+    <Resource Include="MedicinesPhoto\Нозефрин.jpg" />
     <Content Include="MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>
