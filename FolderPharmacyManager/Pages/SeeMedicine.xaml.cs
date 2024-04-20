@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Аптечный_склад.FolderPharmacyManager.Pages
 {
@@ -133,5 +134,57 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             NavigationService.Navigate(new SuppliesWireHouse(pharmacyManagerCode));
 
         }
-    }
+
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workbook = excelApp.Workbooks.Add();
+
+            Excel.Worksheet worksheet = workbook.Worksheets[1];
+
+            Excel.Range headerRange = worksheet.Range["A2:B2"];
+            Excel.Range DateRange = worksheet.Range["A1:B1"];
+            headerRange.Merge();
+            DateRange.Merge();
+            headerRange.Cells[1, 1].Value = "Остатки лекарств на складе";
+            headerRange.Cells[0, 1].Value = $"Дата отчета: {DateTime.Today.ToShortDateString()}";
+
+
+            headerRange.Font.Italic = true;
+            DateRange.Font.Italic = true;
+
+            var allMedicines = MainWindow.Pharmaceutical_Warehouse.Medicine.ToList();
+            int count = allMedicines.Count();
+            Excel.Range range = worksheet.Range[$"A1:B{count+3}"];
+
+            worksheet.Cells[3, 1] = "Название лекарства";
+            worksheet.Cells[3, 1].Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle; ;
+            worksheet.Cells[3, 2] = "Количество (уп.)";
+            worksheet.Cells[3, 2].Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle;
+
+
+            for (int i = 0; i < count; i++)
+            {
+                worksheet.Cells[i + 4, 1] = allMedicines[i].Title;
+                worksheet.Cells[i + 4, 2] = allMedicines[i].MedicineQuantitiy.Quantity;
+            }
+            range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+            DateRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+            range.Font.Name = "Comic Sans MS";
+            range.Font.Size = 14;
+            range.Font.Color = (int)(68 + 114 * 256 + 196 * 256 * 256);
+            headerRange.Font.Color = Excel.XlRgbColor.rgbBlack;
+            DateRange.Font.Color = Excel.XlRgbColor.rgbBlack;
+            range.EntireRow.AutoFit();
+            range.EntireColumn.AutoFit();
+            range.Interior.Color = (int)(237 + 237 * 256 + 237 * 256 * 256);
+            headerRange.Interior.Color = (int)(221 + 235 * 256 + 247 * 256 * 256);
+            DateRange.Interior.Color = (int)(226 + 239 * 256 + 218 * 256 * 256);
+
+            range.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;   
+            excelApp.Visible = true;
+            excelApp.UserControl = true;
+        }
+}
 }

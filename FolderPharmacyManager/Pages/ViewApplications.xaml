@@ -12,14 +12,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="2"  ColumnWidth="*" FontSize="15" x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Width="0.3*" Header="Номер" Binding="{Binding DisplayApplicationCode}" />
                 <DataGridTextColumn Width="0.5*" Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
                 <DataGridTextColumn Width="0.5*" Header="Аптека" Binding="{Binding Pharmacy.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Адрес" Binding="{Binding Pharmacy.Address}"></DataGridTextColumn>
+                <DataGridTextColumn Width="0.5*" Header="Статус заявки" Binding="{Binding ApplicationStatus.StatusDescription}"></DataGridTextColumn>
                 <DataGridTextColumn Width="0.5*" Header="Сумма (руб.)" Binding="{Binding TotalCost}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Width="150">
@@ -31,7 +34,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
+        <StackPanel Orientation="Horizontal" Grid.Row="1"  VerticalAlignment="Center" >
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
                 <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
                 <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbApplicationCode" materialDesign:HintAssist.Hint="Номер заявки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="130" HorizontalAlignment="Right" VerticalAlignment="Center" />
@@ -40,6 +43,7 @@
                 <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>
                 <TextBox materialDesign:TextFieldAssist.HasClearButton="True" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  x:Name="tbPharmacy" materialDesign:HintAssist.Hint="Название аптеки" BorderBrush="Gray"  Foreground="White" Margin="10 0 0 13"  Width="140" HorizontalAlignment="Right" VerticalAlignment="Center" />
             </StackPanel>
+
             <TextBlock  Text="С" Margin="10 0" VerticalAlignment="Center" />
             <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="150" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
             <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
@@ -49,5 +53,8 @@
             <Button FontSize="15" Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="20 0" Click="ResetDatesBtn_Click" Height="30"  Width="180" VerticalAlignment="Center"/>
 
         </StackPanel>
+        <ComboBox  HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Статус заявки" x:Name="comboBoxStatus" Width="130" Margin="20 5 7 13" BorderBrush="Gray"/>
+        <Button Content="Отчет о выполненных заявках" Grid.Row="3" HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
+
     </Grid>
 </Page>

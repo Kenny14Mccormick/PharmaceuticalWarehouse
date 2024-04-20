@@ -15,8 +15,10 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
-        <Button Content="История заказов" Grid.Row="2" HorizontalAlignment="Left" Foreground="White" FontSize="15" Click="btnSuppliesHistory_Click"/>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <Button Content="История заказов"  HorizontalAlignment="Left" Foreground="White" Margin="0 0 10 0" FontSize="15" Click="btnSuppliesHistory_Click"/>
+            <Button Content="Отчет о количестве лекарственных средств"  HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
+        </StackPanel>
         <DataGrid Grid.Row="1"  FontSize="15" ColumnWidth="*"  x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>

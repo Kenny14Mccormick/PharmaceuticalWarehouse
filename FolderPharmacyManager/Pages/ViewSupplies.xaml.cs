@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Аптечный_склад.FolderPharmacyManager.Pages
 {
@@ -100,5 +101,75 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             dpStart.SelectedDate = null;
             dpEnd.SelectedDate = null;
         }
-   }
+
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            var allSupplies = MainWindow.Pharmaceutical_Warehouse.PharmacySupply.ToList();
+
+            var startDate = dpStart.SelectedDate ?? DateTime.MinValue;
+            var endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
+
+            allSupplies = allSupplies.Where(app =>
+        app.Date >= startDate && app.Date <= endDate).ToList();
+
+
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workbook = excelApp.Workbooks.Add();
+
+            Excel.Worksheet worksheet = workbook.Worksheets[1];
+
+            Excel.Range headerRange = worksheet.Range["A2:F2"];
+            Excel.Range DateRange = worksheet.Range["A1:F1"];
+            headerRange.Merge();
+            DateRange.Merge();
+            headerRange.Cells[1, 1].Value = "Поставки лекарственных средств в аптеки";
+            headerRange.Cells[0, 1].Value = $"Дата отчета: {DateTime.Today.ToShortDateString()}";
+
+
+            headerRange.Font.Italic = true;
+            DateRange.Font.Italic = true;
+
+
+            int count = allSupplies.Count();
+            Excel.Range range = worksheet.Range[$"A1:F{count + 3}"];
+
+            Excel.Range headersTableRange = worksheet.Range["A3:F3"];
+            worksheet.Cells[3, 1] = "Номер заявки";
+            worksheet.Cells[3, 2] = "Дата заявки";
+            worksheet.Cells[3, 3] = "Аптека";
+            worksheet.Cells[3, 4] = "Адрес";
+            worksheet.Cells[3, 5] = "Провизор";
+            worksheet.Cells[3, 6] = "Сумма (руб.)";
+            headersTableRange.Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle;
+
+
+            for (int i = 0; i < count; i++)
+            {
+                worksheet.Cells[i + 4, 1] = allSupplies[i].DisplaySupplyCode;
+                worksheet.Cells[i + 4, 2] = allSupplies[i].Date.ToShortDateString();
+                worksheet.Cells[i + 4, 3] = allSupplies[i].Pharmacy.Title;
+                worksheet.Cells[i + 4, 4] = allSupplies[i].Pharmacy.Address;
+                worksheet.Cells[i + 4, 5] = allSupplies[i].PharmacyManager.FullName;
+                worksheet.Cells[i + 4, 6] = allSupplies[i].TotalCost;
+            }
+            range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+            DateRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+            range.Font.Name = "Comic Sans MS";
+            range.Font.Size = 14;
+            range.Font.Color = (int)(68 + 114 * 256 + 196 * 256 * 256);
+            headerRange.Font.Color = Excel.XlRgbColor.rgbBlack;
+            DateRange.Font.Color = Excel.XlRgbColor.rgbBlack;
+            range.EntireRow.AutoFit();
+            range.EntireColumn.AutoFit();
+            range.Interior.Color = (int)(237 + 237 * 256 + 237 * 256 * 256);
+            headerRange.Interior.Color = (int)(221 + 235 * 256 + 247 * 256 * 256);
+            DateRange.Interior.Color = (int)(226 + 239 * 256 + 218 * 256 * 256);
+
+            range.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+            excelApp.Visible = true;
+            excelApp.UserControl = true;
+        
+    }
+    }
 }
