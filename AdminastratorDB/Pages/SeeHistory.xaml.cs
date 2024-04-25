@@ -88,5 +88,30 @@ namespace Аптечный_склад.AdminastratorDB.Pages
             dpEnd.SelectedDate = null;
         }
 
+        private void btnClearHistory_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show(
+            "Вы точно хотите очистить записи",
+            "Внимание!",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Error);
+
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                foreach (var item in MainWindow.Pharmaceutical_Warehouse.HistoryOperations)
+                {
+                    MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Remove(item);
+                }
+
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+
+                MainWindow.Pharmaceutical_Warehouse.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('HistoryOperations', RESEED, 0);");
+
+                MessageBox.Show("История была успешно очищина");
+
+                dgHistory.ItemsSource = MainWindow.Pharmaceutical_Warehouse.HistoryOperations.ToList();
+
+            }
+        }
     }
 }

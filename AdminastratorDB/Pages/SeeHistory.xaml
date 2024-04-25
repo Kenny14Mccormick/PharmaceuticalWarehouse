@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
@@ -39,7 +40,7 @@
                 <DataGridTextColumn Header="Номер" Width="0.5*" Binding="{Binding OperationCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя пользователя" Binding="{Binding User.Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Роль пользователя" Binding="{Binding User.Role.RoleDescription}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Тип операции" Binding="{Binding Type}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Детали операции" Binding="{Binding Details}"></DataGridTextColumn>
 
@@ -64,5 +65,6 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Grid>
+        <Button Content="Очистка всех записей" Grid.Row="2" Foreground="White" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnClearHistory_Click"/>
     </Grid>
 </Page>

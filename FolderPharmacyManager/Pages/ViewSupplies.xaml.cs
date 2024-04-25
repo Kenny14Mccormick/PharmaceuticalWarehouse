@@ -109,6 +109,18 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             var startDate = dpStart.SelectedDate ?? DateTime.MinValue;
             var endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
 
+            // Определяем текст периода
+            string periodText = "";
+            if (dpStart.SelectedDate == null && dpEnd.SelectedDate == null)
+            {
+                periodText = "Поставки за весь период";
+            }
+            else
+            {
+                periodText = $"Поставки с {startDate.ToShortDateString()} по {endDate.ToShortDateString()}";
+            }
+
+
             allSupplies = allSupplies.Where(app =>
         app.Date >= startDate && app.Date <= endDate).ToList();
 
@@ -120,10 +132,13 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
             Excel.Range headerRange = worksheet.Range["A2:F2"];
             Excel.Range DateRange = worksheet.Range["A1:F1"];
+            Excel.Range PeriodRange= worksheet.Range["A3:F3"];
             headerRange.Merge();
             DateRange.Merge();
+            PeriodRange.Merge();
             headerRange.Cells[1, 1].Value = "Поставки лекарственных средств в аптеки";
             headerRange.Cells[0, 1].Value = $"Дата отчета: {DateTime.Today.ToShortDateString()}";
+            headerRange.Cells[2, 1].Value = periodText;
 
 
             headerRange.Font.Italic = true;
@@ -131,27 +146,44 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
 
             int count = allSupplies.Count();
-            Excel.Range range = worksheet.Range[$"A1:F{count + 3}"];
+            Excel.Range range = worksheet.Range[$"A1:F{count + 4}"];
 
-            Excel.Range headersTableRange = worksheet.Range["A3:F3"];
-            worksheet.Cells[3, 1] = "Номер заявки";
-            worksheet.Cells[3, 2] = "Дата заявки";
-            worksheet.Cells[3, 3] = "Аптека";
-            worksheet.Cells[3, 4] = "Адрес";
-            worksheet.Cells[3, 5] = "Провизор";
-            worksheet.Cells[3, 6] = "Сумма (руб.)";
+            Excel.Range headersTableRange = worksheet.Range["A4:F4"];
+            worksheet.Cells[4, 1] = "Номер заявки";
+            worksheet.Cells[4, 2] = "Дата заявки";
+            worksheet.Cells[4, 3] = "Аптека";
+            worksheet.Cells[4, 4] = "Адрес";
+            worksheet.Cells[4, 5] = "Провизор";
+            worksheet.Cells[4, 6] = "Сумма (руб.)";
             headersTableRange.Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle;
 
+            double sum = 0;
 
             for (int i = 0; i < count; i++)
             {
-                worksheet.Cells[i + 4, 1] = allSupplies[i].DisplaySupplyCode;
-                worksheet.Cells[i + 4, 2] = allSupplies[i].Date.ToShortDateString();
-                worksheet.Cells[i + 4, 3] = allSupplies[i].Pharmacy.Title;
-                worksheet.Cells[i + 4, 4] = allSupplies[i].Pharmacy.Address;
-                worksheet.Cells[i + 4, 5] = allSupplies[i].PharmacyManager.FullName;
-                worksheet.Cells[i + 4, 6] = allSupplies[i].TotalCost;
+                worksheet.Cells[i + 5, 1] = allSupplies[i].DisplaySupplyCode;
+                worksheet.Cells[i + 5, 2] = allSupplies[i].Date.ToShortDateString();
+                worksheet.Cells[i + 5, 3] = allSupplies[i].Pharmacy.Title;
+                worksheet.Cells[i + 5, 4] = allSupplies[i].Pharmacy.Address;
+                worksheet.Cells[i + 5, 5] = allSupplies[i].PharmacyManager.FullName;
+                worksheet.Cells[i + 5, 6] = allSupplies[i].TotalCost;
+                sum += allSupplies[i].TotalCost;
             }
+
+            worksheet.Cells[count + 5, 5] = "Общая сумма:";
+            worksheet.Cells[count + 5, 5].Font.Color = (int)(68 + 114 * 256 + 196 * 256 * 256);
+            worksheet.Cells[count + 5, 5].Font.Size = 14;
+            worksheet.Cells[count + 5, 5].Font.Name = "Comic Sans MS"; ;
+            worksheet.Cells[count + 5, 5].Interior.Color = Excel.XlRgbColor.rgbAqua;
+
+            worksheet.Cells[count + 5, 6] = sum;
+            worksheet.Cells[count + 5, 6].Font.Color = (int)(68 + 114 * 256 + 196 * 256 * 256);
+            worksheet.Cells[count + 5, 6].Font.Size = 14;
+            worksheet.Cells[count + 5, 6].Font.Name = "Comic Sans MS"; ;
+            worksheet.Cells[count + 5, 6].Interior.Color = Excel.XlRgbColor.rgbAqua;
+
+
+
             range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
             DateRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;

@@ -30,13 +30,8 @@ namespace Аптечный_склад.AdminastratorDB
             cbRole.SelectedIndex = user.RoleCode;
 
             // Добавление ролей в комбобокс
-            List<string> RoleDescription = new List<string>
-        {
-            "Фармацевт",
-            "Провизор",
-            "Администратор"
-        };
-            cbRole.ItemsSource = RoleDescription;
+
+            cbRole.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Role.ToList();
 
             // Если выбранная роль - фармацевт, то показываем комбобокс с аптеками
             if (user.RoleCode == 0)

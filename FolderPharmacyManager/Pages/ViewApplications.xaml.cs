@@ -26,8 +26,10 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             private int pharmacyManagerCode;
             private User user;
 
+
             public ViewApplications(int pharmacyManagerCode, User user)
             {
+
                 InitializeComponent();
             this.user = user;
                 this.pharmacyManagerCode = pharmacyManagerCode;
@@ -139,10 +141,21 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
         private void btnExcel_Click(object sender, RoutedEventArgs e)
         {
             var allApplications = MainWindow.Pharmaceutical_Warehouse.Application.Where(ap => ap.StatusCode == 2).ToList();
-
-            // Применяем фильтры
             var startDate = dpStart.SelectedDate ?? DateTime.MinValue;
             var endDate = dpEnd.SelectedDate ?? DateTime.MaxValue;
+
+            // Определяем текст периода
+            string periodText = "";
+            if (dpStart.SelectedDate == null && dpEnd.SelectedDate == null)
+            {
+                periodText = "Заявки за весь период";
+            }
+            else
+            {
+                periodText = $"Заявки с {startDate.ToShortDateString()} по {endDate.ToShortDateString()}";
+            }
+
+
 
             allApplications = allApplications.Where(app =>
         app.Date >= startDate && app.Date <= endDate).ToList();
@@ -163,38 +176,54 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
             Excel.Worksheet worksheet = workbook.Worksheets[1];
 
-            Excel.Range headerRange = worksheet.Range["A2:E2"];
             Excel.Range DateRange = worksheet.Range["A1:E1"];
+            Excel.Range headerRange = worksheet.Range["A2:E2"];
+            Excel.Range PeriodRange = worksheet.Range["A3:E3"];
             headerRange.Merge();
             DateRange.Merge();
+            PeriodRange.Merge();
             headerRange.Cells[1, 1].Value = "Выполненные заявки";
             headerRange.Cells[0, 1].Value = $"Дата отчета: {DateTime.Today.ToShortDateString()}";
-
+            headerRange.Cells[2, 1].Value = periodText;
+            
 
             headerRange.Font.Italic = true;
             DateRange.Font.Italic = true;
 
           
             int count = allApplications.Count();
-            Excel.Range range = worksheet.Range[$"A1:E{count + 3}"];
+            Excel.Range range = worksheet.Range[$"A1:E{count + 4}"];
 
-            Excel.Range headersTableRange = worksheet.Range["A3:E3"];
-            worksheet.Cells[3, 1] = "Номер заявки";
-            worksheet.Cells[3, 2] = "Дата заявки";
-            worksheet.Cells[3, 3] = "Аптека";
-            worksheet.Cells[3, 4] = "Адрес";
-            worksheet.Cells[3, 5] = "Сумма (руб.)";
+            Excel.Range headersTableRange = worksheet.Range["A4:E4"];
+            worksheet.Cells[4, 1] = "Номер заявки";
+            worksheet.Cells[4, 2] = "Дата заявки";
+            worksheet.Cells[4, 3] = "Аптека";
+            worksheet.Cells[4, 4] = "Адрес";
+            worksheet.Cells[4, 5] = "Сумма (руб.)";
             headersTableRange.Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle;
 
+            double sum = 0;
 
             for (int i = 0; i < count; i++)
             {
-                worksheet.Cells[i + 4, 1] = allApplications[i].DisplayApplicationCode;
-                worksheet.Cells[i + 4, 2] = allApplications[i].Date.ToShortDateString();
-                worksheet.Cells[i + 4, 3] = allApplications[i].Pharmacy.Title;
-                worksheet.Cells[i + 4, 4] = allApplications[i].Pharmacy.Address;
-                worksheet.Cells[i + 4, 5] = allApplications[i].TotalCost;
+                worksheet.Cells[i + 5, 1] = allApplications[i].DisplayApplicationCode;
+                worksheet.Cells[i + 5, 2] = allApplications[i].Date.ToShortDateString();
+                worksheet.Cells[i + 5, 3] = allApplications[i].Pharmacy.Title;
+                worksheet.Cells[i + 5, 4] = allApplications[i].Pharmacy.Address;
+                worksheet.Cells[i + 5, 5] = allApplications[i].TotalCost;
+                sum += allApplications[i].TotalCost;
             }
+            worksheet.Cells[count + 5, 4] = "Общая сумма:";
+            worksheet.Cells[count + 5, 4].Font.Color = (int)(68 + 114 * 256 + 196 * 256 * 256);
+            worksheet.Cells[count + 5, 4].Font.Size = 14;
+            worksheet.Cells[count + 5, 4].Font.Name = "Comic Sans MS"; ;
+            worksheet.Cells[count + 5, 4].Interior.Color = Excel.XlRgbColor.rgbAqua;
+
+            worksheet.Cells[count + 5, 5] = sum;
+            worksheet.Cells[count + 5, 5].Font.Color = (int)(68 + 114 * 256 + 196 * 256 * 256);
+            worksheet.Cells[count + 5, 5].Font.Size = 14;
+            worksheet.Cells[count + 5, 5].Font.Name = "Comic Sans MS"; ;
+            worksheet.Cells[count + 5, 5].Interior.Color = Excel.XlRgbColor.rgbAqua;
             range.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
             DateRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
@@ -205,7 +234,7 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             DateRange.Font.Color = Excel.XlRgbColor.rgbBlack;
             range.EntireRow.AutoFit();
             range.EntireColumn.AutoFit();
-            range.Interior.Color = (int)(237 + 237 * 256 + 237 * 256 * 256);
+            range.Interior.Color = (int)(237 +   237 * 256 + 237 * 256 * 256);
             headerRange.Interior.Color = (int)(221 + 235 * 256 + 247 * 256 * 256);
             DateRange.Interior.Color = (int)(226 + 239 * 256 + 218 * 256 * 256);
 

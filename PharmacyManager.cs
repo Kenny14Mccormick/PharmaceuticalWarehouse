@@ -34,6 +34,13 @@ namespace Аптечный_склад
                 return $"{LastName} {FirstName} {Patronymic}";
             }
         }
+        public string FullNameDoc
+        {
+            get
+            {
+                return $"{LastName} {FirstName[0]}. {Patronymic[0]}.";
+            }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

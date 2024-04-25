@@ -28,7 +28,17 @@ namespace Аптечный_склад
         public string PharmacistPhone { get; set; }
         public string Address { get; set; }
         public string DisplayDocumentCode { get; set; }
-    
+        public string PharmacistNameDoc
+        {
+            get
+            {
+                string[] words = PharmacistName.Split(' ');
+                string lastname = words[0];
+                string firstname = words[1];
+                string patronymic = words[2];
+                return $"{lastname} {firstname[0]}. {patronymic[0]}.";
+            }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
