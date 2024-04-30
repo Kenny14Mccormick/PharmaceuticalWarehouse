@@ -55,7 +55,11 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
         <Button Content="Отчет о поставках" Grid.Row="3" HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
     </Grid>
 </Page>

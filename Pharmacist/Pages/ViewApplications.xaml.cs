@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Аптечный_склад.Pharmacist.Pages
 {
     public partial class ViewApplications : Page
     {
         private List<Application> _applications; // Список всех заявок
-
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 10;
         public ViewApplications(List<Application> applications)
         {
             InitializeComponent();
@@ -72,14 +74,67 @@ namespace Аптечный_склад.Pharmacist.Pages
                 }
                 application.TotalCost = totalCost;
             }
+            ShowCurrentPage();
+        }
 
-            // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
-            dgApplications.ItemsSource = filteredAndSortedApplications.OrderByDescending(a=>a.Date);
+        private void ShowCurrentPage()
+        {
+            var filteredAndSortedApplications = FilterAndSortApplications(_applications.OrderByDescending(a => a.Date).ToList());
+            dgApplications.ItemsSource = filteredAndSortedApplications.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
+
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (filteredAndSortedApplications.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
         }
 
 
 
-       
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            var filteredAndSortedApplications = FilterAndSortApplications(_applications);
+            if (currentPageIndex < (filteredAndSortedApplications.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
+        }
+
+
 
 
         private void btnMore_Click(object sender, RoutedEventArgs e)

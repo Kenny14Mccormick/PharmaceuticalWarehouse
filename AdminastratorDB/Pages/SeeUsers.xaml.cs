@@ -20,6 +20,8 @@ namespace Аптечный_склад.AdminastratorDB.Pages
     /// </summary>
     public partial class SeeUsers : Page
     {
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 10;
         public SeeUsers()
         {
             InitializeComponent();
@@ -59,8 +61,7 @@ namespace Аптечный_склад.AdminastratorDB.Pages
         }
         private void LoadUsers()
         {
-            var filteredUsers = GetFilteredUsers();
-            dgUsers.ItemsSource = filteredUsers;
+            ShowCurrentPage();
         }
 
         private List<User> GetFilteredUsers()
@@ -81,6 +82,64 @@ namespace Аптечный_склад.AdminastratorDB.Pages
             return filteredUsers;
         }
 
+        private void ShowCurrentPage()
+        {
+            var filteredUsers = GetFilteredUsers();
+
+            dgUsers.ItemsSource = filteredUsers.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
+
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (filteredUsers.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
+        }
+
+
+
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            var filteredUsers = GetFilteredUsers();
+
+            if (currentPageIndex < (filteredUsers.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
+        }
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
             var editButton = sender as Button;

@@ -21,7 +21,8 @@ namespace Аптечный_склад.Pharmacist.Pages
     public partial class ViewSupplies : Page
     {
         private List<PharmacySupply> _supplies; // Список всех поставок
-
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 10;
         public ViewSupplies(List<PharmacySupply> supplies)
         {
             InitializeComponent();
@@ -36,12 +37,7 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void LoadSupplies()
         {
-            // Применяем фильтрацию и сортировку к списку поставок
-            var filteredSupplies = FilterSupplies(_supplies);
-            var sortedSupplies = SortSupplies(filteredSupplies);
-
-            // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
-            dgSupplies.ItemsSource = sortedSupplies;
+            ShowCurrentPage();
         }
         private List<PharmacySupply> FilterSupplies(List<PharmacySupply> supplies)
         {
@@ -66,16 +62,65 @@ namespace Аптечный_склад.Pharmacist.Pages
             return filteredSupplies;
         }
 
-
-
-
-        private List<PharmacySupply> SortSupplies(List<PharmacySupply> supplies)
+        private void ShowCurrentPage()
         {
-            var sortedSupplies = supplies;
+            var filteredSupplies = FilterSupplies(_supplies);
+            dgSupplies.ItemsSource = filteredSupplies.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
 
-
-            return sortedSupplies;
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (filteredSupplies.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
         }
+
+
+
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            var filteredSupplies = FilterSupplies(_supplies);
+            if (currentPageIndex < (filteredSupplies.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
+        }
+
+
+  
 
         // Обработчик события нажатия кнопки "Подробнее"
         private void btnMore_Click(object sender, RoutedEventArgs e)

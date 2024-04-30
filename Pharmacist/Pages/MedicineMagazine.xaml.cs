@@ -21,7 +21,8 @@ namespace Аптечный_склад.Pharmacist.Pages
     public partial class MedicineMagazine : Page
     {
         private List<Medicine> _filteredMedicine; // Список отфильтрованных лекарств
-
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 9;
         public MedicineMagazine()
         {
             InitializeComponent();
@@ -88,8 +89,72 @@ namespace Аптечный_склад.Pharmacist.Pages
             }
 
             _filteredMedicine = filteredMedicine;
-            lvMedicine.ItemsSource = _filteredMedicine;
+
+            // После применения фильтров проверяем, что текущая страница находится в пределах доступных страниц
+            if (currentPageIndex >= (_filteredMedicine.Count - 1) / itemsPerPage)
+            {
+                // Если текущая страница больше не существует, перекидываем пользователя на первую страницу
+                currentPageIndex = 0;
+            }
+
+            ShowCurrentPage();
         }
+
+        private void ShowCurrentPage()
+        {
+            lvMedicine.ItemsSource = _filteredMedicine.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
+
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (_filteredMedicine.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
+        }
+
+
+
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex < (_filteredMedicine.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
+        }
+
 
         private void tbFindeMedicicne_tch(object sender, TextChangedEventArgs e)
         {

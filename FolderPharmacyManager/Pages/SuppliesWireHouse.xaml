@@ -17,7 +17,11 @@
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
         <Button Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Foreground="White" FontSize="15" Width="150" Click="btnGoBack_Click"/>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
         <StackPanel Orientation="Horizontal"   VerticalAlignment="Center" >
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
                 <materialDesign:PackIcon  Kind="Magnify" VerticalAlignment="Center" Width="20" Margin="0 6 0 0" Height="20"/>

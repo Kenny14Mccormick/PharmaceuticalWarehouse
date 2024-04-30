@@ -13,9 +13,10 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
         <Button Content="История заказов"  HorizontalAlignment="Left" Foreground="White" Margin="0 0 10 0" FontSize="15" Click="btnSuppliesHistory_Click"/>
             <Button Content="Отчет о количестве лекарственных средств"  HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
         </StackPanel>
@@ -47,6 +48,11 @@
             <ComboBox  Margin="20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbSubstance" SelectionChanged="cbSubstanceChanged" materialDesign:HintAssist.Hint="Действующее вещство" materialDesign:HintAssist.Foreground="Gray" BorderBrush="Gray"/>
             <ComboBox Margin="10 0 20 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}" x:Name="cbForm" SelectionChanged="cbFormChanged" materialDesign:HintAssist.Hint="Форма выпуска"  BorderBrush="Gray"/>
             <Button Content="Заказ лекарств" Foreground="White" FontSize="15" Click="btnOrderMedicine_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
         </StackPanel>
     </Grid>
 </Page>

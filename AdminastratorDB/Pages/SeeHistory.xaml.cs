@@ -22,6 +22,8 @@ namespace Аптечный_склад.AdminastratorDB.Pages
     public partial class SeeHistory : Page
     {
         private List<HistoryOperations> historyOperations;
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 15;
         public SeeHistory()
         {
             InitializeComponent();
@@ -34,14 +36,9 @@ namespace Аптечный_склад.AdminastratorDB.Pages
         }
         private void LoadOperations()
         {
-            // Применяем фильтрацию и сортировку к списку поставок
-            var filteredOperations = FilterSupplies(historyOperations);
-            var sortedOperations = SortSupplies(filteredOperations);
-
-            // Устанавливаем отфильтрованный и отсортированный список как источник данных для DataGrid
-            dgHistory.ItemsSource = sortedOperations;
+            ShowCurrentPage();
         }
-        private List<HistoryOperations> FilterSupplies(List<HistoryOperations> operations)
+        private List<HistoryOperations> FilterOperations(List<HistoryOperations> operations)
         {
             // Применяем фильтры
             var filteredOperations = operations;
@@ -70,13 +67,65 @@ namespace Аптечный_склад.AdminastratorDB.Pages
             return filteredOperations;
         }
 
-        private List<HistoryOperations> SortSupplies(List<HistoryOperations> operations)
+        private void ShowCurrentPage()
         {
-            var sortedOperations = operations;
+            var filteredOperations = FilterOperations(historyOperations);
 
+            dgHistory.ItemsSource = filteredOperations.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
 
-            return sortedOperations;
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (filteredOperations.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
         }
+
+
+
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            var filteredOperations = FilterOperations(historyOperations);
+
+            if (currentPageIndex < (filteredOperations.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
+        }
+
         private void UpdateOperations(object sender, RoutedEventArgs e)
         {
             LoadOperations();

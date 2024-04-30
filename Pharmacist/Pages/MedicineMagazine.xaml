@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
   
@@ -31,7 +32,7 @@
 
         </StackPanel>
 
-        <ListView  Grid.Row="2" FontSize="15" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView  Grid.Row="1" FontSize="15" Name="lvMedicine" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate >
                     <WrapPanel Background="White" HorizontalAlignment="Center"></WrapPanel>
@@ -59,5 +60,10 @@
             </ListView.ItemTemplate>
         </ListView>
         
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
     </Grid>
 </Page>

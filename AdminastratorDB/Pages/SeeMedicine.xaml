@@ -16,7 +16,12 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
-        <Button Content="Добавить" FontSize="15" Click="BtnAddMedicine_Click" Grid.Row="2" Foreground="White" Width="200"/>
+        <Button Content="Добавить" FontSize="15" Click="BtnAddMedicine_Click" Grid.Row="2" Foreground="White" Width="200" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
         <DataGrid Grid.Row="1"  ColumnWidth="*" FontSize="15" x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"></DataGridTextColumn>

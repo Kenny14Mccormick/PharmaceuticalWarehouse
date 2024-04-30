@@ -54,7 +54,11 @@
 
         </StackPanel>
         <ComboBox  HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="Статус заявки" x:Name="comboBoxStatus" Width="130" Margin="20 5 7 13" BorderBrush="Gray"/>
-        <Button Content="Отчет о выполненных заявках" Grid.Row="3" HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
-
+        <Button Content="Отчет о выполненных заявках" Grid.Row="4" HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
     </Grid>
 </Page>

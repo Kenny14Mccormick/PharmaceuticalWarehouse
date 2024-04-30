@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"   VerticalAlignment="Center">
             <StackPanel Margin="20 0" VerticalAlignment="Center" Orientation="Horizontal">
@@ -29,7 +30,7 @@
             <Button FontSize="15" Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="20 0" Click="ResetDatesBtn_Click" Height="30"  Width="180" VerticalAlignment="Center"/>
 
         </StackPanel>
-        <DataGrid Grid.Row="2" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" FontSize="15" ColumnWidth="*"  x:Name="dgApplications" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Номер заявки" Binding="{Binding DisplayApplicationCode}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата заявки" Binding="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"></DataGridTextColumn>
@@ -46,16 +47,11 @@
             </DataGrid.Columns>
         </DataGrid>
 
-            <!--<StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="Статус заявки" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
-            <ComboBox x:Name="comboBoxStatus" Width="150" Margin="15 0" BorderBrush="Gray"/>
-                <TextBlock  Text="С"  Margin="10 0" VerticalAlignment="Center" />
-                <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpStart"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Начало периода" Language="ru-RU" />
-                <TextBlock Text="По"  Margin="10 0" VerticalAlignment="Center"/>
-                <DatePicker Foreground="White" materialDesign:ThemeAssist.Theme="Dark" x:Name="dpEnd"  Width="200" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Конец периода" Language="ru-RU" />
-                <Button Foreground="White" Grid.Column="2" Content="Сброс даты" Margin="25 0" Click="ResetDatesBtn_Click" Height="30"  Width="200" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
 
-            </StackPanel>-->
-            
     </Grid>
 </Page>

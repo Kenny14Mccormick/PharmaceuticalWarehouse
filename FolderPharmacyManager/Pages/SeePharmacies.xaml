@@ -12,12 +12,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+
         <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="*" FontSize="15" x:Name="dgPharmacies" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >
                 <DataGridTextColumn Width="0.5*" Header="Код" Binding="{Binding DisplayDocumentCode}"></DataGridTextColumn>
@@ -60,6 +58,12 @@
                 <TextBox VerticalAlignment="Center" FontSize="15" MaxWidth="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="tbFindPharmacist" x:Name="tbPharmacist"  Margin="10 0 0 13" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="ФИО фармацевта"/>
                     </StackPanel>
             <Button Foreground="White" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="300"  Margin="20 0 0 0" Grid.Row="2" Content="Добавить аптеку" FontSize="15" VerticalContentAlignment="Center" Click="btnAddPharmacy_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
         </StackPanel>
     </Grid>
 </Page>

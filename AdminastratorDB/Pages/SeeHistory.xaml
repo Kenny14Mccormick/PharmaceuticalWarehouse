@@ -65,6 +65,11 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Grid>
-        <Button Content="Очистка всех записей" Grid.Row="2" Foreground="White" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnClearHistory_Click"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
+        <Button Content="Очистка всех записей" Grid.Row="3" Foreground="White" HorizontalAlignment="Left" Margin="10 0 0 0" Click="btnClearHistory_Click"/>
     </Grid>
 </Page>

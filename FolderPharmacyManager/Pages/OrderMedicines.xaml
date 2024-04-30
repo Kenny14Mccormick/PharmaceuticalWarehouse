@@ -13,25 +13,10 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="5*"/>
-            <!--<RowDefinition/>-->
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
-            <Button Click="btnFirstPage_Click">
-                <materialDesign:PackIcon Kind="PageFirst" />
-            </Button>
-            <Button Click="btnPreviousPage_Click">
-                <materialDesign:PackIcon Kind="ChevronLeft" />
-            </Button>
-            <TextBox x:Name="tbPage"/>
-            <Button Click="btnNextPage_Click">
-                <materialDesign:PackIcon Kind="ChevronRight" />
-            </Button>
-            <Button Click="btnLastPage_Click">
-                <materialDesign:PackIcon Kind="PageLast" />
-            </Button>
-            <TextBlock x:Name="tblCurrentPage" VerticalAlignment="Center"/>
-        </StackPanel>-->
+  
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -92,5 +77,11 @@
 
             </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -50,6 +50,11 @@
              VerticalAlignment="Center" Margin="5,0,0,0"/>
             </StackPanel>
         </StackPanel>
-        <Button Width="200" Grid.Row="2"  Content="Добавить" FontSize="15" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center" Click="BddAddPM_Click"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 70 0" >
+            <Button  Foreground="White" Click="PreviousPage_Click" Content="&lt;" Background="Transparent"/>
+            <WrapPanel x:Name="wpPageNumbers" VerticalAlignment="Center"/>
+            <Button Foreground="White" Click="NextPage_Click" Content=">" Background="Transparent"/>
+        </StackPanel>
+        <Button Width="200" Grid.Row="2"  Content="Добавить" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalContentAlignment="Center" Click="BddAddPM_Click"/>
     </Grid>
 </Page>

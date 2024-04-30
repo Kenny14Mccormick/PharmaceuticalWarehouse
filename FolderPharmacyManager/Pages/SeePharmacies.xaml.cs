@@ -20,27 +20,36 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
     /// </summary>
     public partial class SeePharmacies : Page
     {
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 10;
+        private List<Pharmacy> pharmacies; // Список отфильтрованных лекарств
+
         public SeePharmacies()
         {
             InitializeComponent();
-            dgPharmacies.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
-            
+            pharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
+            ShowCurrentPage();
         }
 
         private void tbFindPharmacy(object sender, TextChangedEventArgs e)
         {
             string PharmacyTitle = tbPharmacy.Text;
-            dgPharmacies.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Pharmacy.Where(app => app.Title.ToLower().Contains(PharmacyTitle)).ToList();
+            var filteredpharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy.Where(app => app.Title.ToLower().Contains(PharmacyTitle)).ToList();
+            pharmacies = filteredpharmacies;
+            ShowCurrentPage();
         }
         private void tbFindAddress(object sender, TextChangedEventArgs e)
         {
             string address = tbAddress.Text.ToLower();
             string pharmacistName = tbPharmacist.Text.ToLower();
 
-            dgPharmacies.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Pharmacy
+
+            var filteredpharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy
                 .Where(pharmacy => pharmacy.Address.ToLower().Contains(address) &&
                                    pharmacy.PharmacistName.ToLower().Contains(pharmacistName))
                 .ToList();
+            pharmacies = filteredpharmacies;
+            ShowCurrentPage();
         }
 
         private void tbFindPharmacist(object sender, TextChangedEventArgs e)
@@ -48,10 +57,12 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             string address = tbAddress.Text.ToLower();
             string pharmacistName = tbPharmacist.Text.ToLower();
 
-            dgPharmacies.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Pharmacy
+            var filteredpharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy
                 .Where(pharmacy => pharmacy.Address.ToLower().Contains(address) &&
                                    pharmacy.PharmacistName.ToLower().Contains(pharmacistName))
                 .ToList();
+            pharmacies = filteredpharmacies;
+            ShowCurrentPage();
         }
 
 
@@ -107,6 +118,62 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             // Обновляем DataGrid
             dgPharmacies.ItemsSource = null;
             dgPharmacies.ItemsSource = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
+        }
+
+        private void ShowCurrentPage()
+        {
+
+            dgPharmacies.ItemsSource = pharmacies.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
+
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (pharmacies.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
+        }
+
+
+
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex < (pharmacies.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
         }
     }
 }

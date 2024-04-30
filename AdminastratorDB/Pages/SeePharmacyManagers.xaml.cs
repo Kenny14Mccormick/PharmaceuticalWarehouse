@@ -20,10 +20,14 @@ namespace Аптечный_склад.AdminastratorDB.Pages
     /// </summary>
     public partial class SeePharmacyManagers : Page
     {
+        private List<PharmacyManager> pharmacyManagers;
+        private int currentPageIndex = 0;
+        private int itemsPerPage = 10;
         public SeePharmacyManagers()
         {
             InitializeComponent();
-            dgPMs.ItemsSource = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.ToList();
+            pharmacyManagers = MainWindow.Pharmaceutical_Warehouse.PharmacyManager.ToList();
+            ShowCurrentPage();
         }
 
         private void btnEditPM_Click(object sender, RoutedEventArgs e)
@@ -94,9 +98,62 @@ namespace Аптечный_склад.AdminastratorDB.Pages
                 ).ToList();
             }
 
-            dgPMs.ItemsSource = filteredManagers;
+            pharmacyManagers = filteredManagers;
+        }
+        private void ShowCurrentPage()
+        {
+            dgPMs.ItemsSource = pharmacyManagers.Skip(currentPageIndex * itemsPerPage).Take(itemsPerPage).ToList();
+
+            wpPageNumbers.Children.Clear();
+            for (int i = 0; i < (pharmacyManagers.Count - 1) / itemsPerPage + 1; i++)
+            {
+                Button pageButton = new Button
+                {
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(10, 0, 10, 0),
+                    Foreground = new SolidColorBrush(Colors.White)
+                };
+                if (i == currentPageIndex)
+                {
+                    pageButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA500"));
+                }
+                else
+                {
+                    pageButton.ClearValue(Button.BackgroundProperty);
+                }
+                pageButton.Click += PageButton_Click;
+                wpPageNumbers.Children.Add(pageButton);
+            }
         }
 
+
+
+        private void PageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            currentPageIndex = int.Parse(button.Content.ToString()) - 1;
+            ShowCurrentPage();
+        }
+
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex < (pharmacyManagers.Count - 1) / itemsPerPage)
+            {
+                currentPageIndex++;
+                ShowCurrentPage();
+            }
+        }
+
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex > 0)
+            {
+                currentPageIndex--;
+                ShowCurrentPage();
+            }
+        }
 
 
     }
