@@ -200,21 +200,29 @@ namespace Аптечный_склад.Pharmacist.Pages
                 // Получение выбранного лекарства
                 Medicine selectedMedicine = (button.DataContext as Medicine);
 
-                // Добавление выбранного лекарства в список
-                selectedMedicines.Add(selectedMedicine);
+                // Проверка наличия лекарства
+                if (selectedMedicine.MedicineQuantitiy.ActualText == "В наличии")
+                {
+                    // Добавление выбранного лекарства в список
+                    selectedMedicines.Add(selectedMedicine);
 
-                // Установка свойства IsAdded в true
-                selectedMedicine.IsAdded = true;
+                    // Установка свойства IsAdded в true
+                    selectedMedicine.IsAdded = true;
 
-                // Увеличение счетчика лекарств в заявке и вывод сообщения
-                _medicineCountInOrder++;
-                UpdateMedicineCountInOrder();
+                    // Увеличение счетчика лекарств в заявке и вывод сообщения
+                    _medicineCountInOrder++;
+                    UpdateMedicineCountInOrder();
 
- 
-                btnCreateApplication.IsEnabled = true;
-                MessageBox.Show("Успешно добавлено в заявку");
+                    btnCreateApplication.IsEnabled = true;
+                    MessageBox.Show("Успешно добавлено в заявку");
+                }
+                else
+                {
+                    MessageBox.Show("Выбранное лекарство не в наличии");
+                }
             }
         }
+
 
 
         private T FindVisualChild<T>(DependencyObject parent, string name) where T : DependencyObject

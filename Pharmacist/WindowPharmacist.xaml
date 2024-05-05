@@ -8,7 +8,17 @@
         mc:Ignorable="d"
         Title="Фармацевт" Height="700" Width="1300" Background="#243944"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontSize="18" Foreground="White">
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <RoutedUICommand x:Key="f1" Text="Another Text"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{StaticResource f1}"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource f1}" Executed="F1Shortcut1"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
@@ -39,24 +49,26 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Click="MinimizeButton_Click" Grid.Column="19" Style="{StaticResource panel}">
+            <Button ToolTip="Свернуть приложение" Click="MinimizeButton_Click" Grid.Column="19" Style="{StaticResource panel}">
                 <materialDesign:PackIcon Kind="WindowMinimize" Height="30" Width="50"/>
             </Button>
-            <Button Click="HelpButton_Click" Grid.Column="18" Style="{StaticResource panel}">
+            <Button ToolTip="Руководство пользователя (f1)" Click="HelpButton_Click" Grid.Column="18" Style="{StaticResource panel}">
                 <materialDesign:PackIcon Kind="Help" Height="30" Width="50"/>
             </Button>
-            <Button Click="HomeButton_Click" Grid.Column="1" Style="{StaticResource panel}">
-                <materialDesign:PackIcon Kind="Home" Height="30" Width="50"/>
+            <Button ToolTip="Скрыть все страницы" Click="HomeButton_Click" Grid.Column="1" Style="{StaticResource panel}">
+                <materialDesign:PackIcon  Kind="Home" Height="30" Width="50"/>
             </Button>
-            <Button  Click="MaximizeButton_Click" Grid.Column="20" Style="{StaticResource panel}">
+            <Image Source="/Images/Log.png" VerticalAlignment="Top"  Grid.Column="2" />
+
+            <Button ToolTip="Полноэкранный режим" Click="MaximizeButton_Click" Grid.Column="20" Style="{StaticResource panel}">
                 <materialDesign:PackIcon Kind="WindowMaximize" Height="30" Width="50"/>
 
             </Button>
-            <Button  Click="CloseButton_Click" Grid.Column="21" Style="{StaticResource panel}">
+            <Button ToolTip="Закрыть приложение" Click="CloseButton_Click" Grid.Column="21" Style="{StaticResource panel}">
                 <materialDesign:PackIcon Kind="WindowClose" Height="30" Width="50"/>
             </Button>
-            <Button  Click="QuitButton_Click" Grid.Column="0" Style="{StaticResource panel}">
-                <materialDesign:PackIcon Kind="ExitToApp" Height="30" Width="50" RenderTransformOrigin="0.5,0.5" >
+            <Button ToolTip="Выход из учетной записи" Click="QuitButton_Click" Grid.Column="0" Style="{StaticResource panel}">
+                <materialDesign:PackIcon  Kind="ExitToApp" Height="30" Width="50" RenderTransformOrigin="0.5,0.5" >
                     <materialDesign:PackIcon.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleX="-1"/>
@@ -67,10 +79,8 @@
                     </materialDesign:PackIcon.RenderTransform>
                 </materialDesign:PackIcon>
             </Button>
-            <Button Foreground="White" x:Name="UserSettingsBtn"  FontSize="15" Content="{Binding CurrentUser.Title}" Grid.Column="15" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
+            <Button ToolTip="Управление учетной записью" Foreground="White" x:Name="UserSettingsBtn"  FontSize="15" Content="{Binding CurrentUser.Title}" Grid.Column="15" Grid.ColumnSpan="3" Click="UserSettingsBtn_Click"/>
             <TextBlock Text="{Binding CurrentUser.Pharmacy.Title,StringFormat={}Аптека: {0}}" Grid.Column="11" Grid.ColumnSpan="4" VerticalAlignment="Center" />
-
-
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

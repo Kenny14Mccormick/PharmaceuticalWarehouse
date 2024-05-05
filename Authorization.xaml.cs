@@ -116,7 +116,12 @@ namespace Аптечный_склад
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Введите логин или пароль для дальнейшей работы");
+            System.Diagnostics.Process.Start("Общее_руководство_пользователя.chm");
+        }
+
+        private void F1Shortcut1(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("Общее_руководство_пользователя.chm");
         }
     }
 }

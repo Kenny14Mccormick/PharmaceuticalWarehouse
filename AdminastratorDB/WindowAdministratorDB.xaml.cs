@@ -146,7 +146,7 @@ namespace Аптечный_склад.AdminastratorDB
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Справка");
+            System.Diagnostics.Process.Start("Общее_руководство_пользователя.chm");
         }
 
         private void SeePMsBtn_Click(object sender, RoutedEventArgs e)
@@ -159,6 +159,11 @@ namespace Аптечный_склад.AdminastratorDB
 
             MyFrame.NavigationService.Navigate(new AdminastratorDB.Pages.SeePharmacyManagers());
 
+        }
+
+        private void F1Shortcut1(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("Общее_руководство_пользователя.chm");
         }
     }
 }

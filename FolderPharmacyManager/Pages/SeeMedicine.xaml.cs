@@ -244,7 +244,28 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
             headerRange.Interior.Color = (int)(221 + 235 * 256 + 247 * 256 * 256);
             DateRange.Interior.Color = (int)(226 + 239 * 256 + 218 * 256 * 256);
 
-            range.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;   
+            range.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+
+            // Добавление диаграммы
+            Excel.ChartObjects charts = (Excel.ChartObjects)worksheet.ChartObjects();
+            Excel.ChartObject chartObject = charts.Add(300, 20, 400, 400); // Измененный отступ слева и размеры диаграммы
+            Excel.Chart chart = chartObject.Chart;
+
+            // Установка данных для диаграммы
+            Excel.Range chartRange = worksheet.Range["A4", $"B{_filteredMedicine.Count + 3}"];
+            chart.SetSourceData(chartRange);
+
+            // Установка типа диаграммы (круговая)
+            chart.ChartType = Excel.XlChartType.xlPie;
+            chart.ApplyDataLabels(Excel.XlDataLabelsType.xlDataLabelsShowPercent);
+            // Установка названия диаграммы
+            chart.HasTitle = true;
+            chart.ChartTitle.Text = "Количественные остатки лекарств";
+
+            // Отображение диаграммы
+            chartObject.Activate();
+
+
             excelApp.Visible = true;
             excelApp.UserControl = true;
         }

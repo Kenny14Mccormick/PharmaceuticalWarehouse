@@ -17,11 +17,11 @@
         </Grid.RowDefinitions>
         <Grid  Background="#5E8CA6" MouseLeftButtonDown="Grid_MouseLeftButtonDown"/>
         <StackPanel Grid.Row="1">
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding DisplayDocumentCode}" VerticalAlignment="Center"  FontSize="17"  x:Name="tbDocumentCode"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Код"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Title}" VerticalAlignment="Center"  FontSize="17"  x:Name="tbPharmacy"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Название аптеки"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding PharmacistName}" VerticalAlignment="Center" FontSize="17"  x:Name="tbPharmacistName"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="ФИО фармацевта"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding PharmacistPhone}" VerticalAlignment="Center" FontSize="17" x:Name="tbPhone"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Телефон"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Address}" VerticalAlignment="Center" FontSize="17" x:Name="tbPharmacyAddress"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Адрес"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"  FontSize="17"  x:Name="tbDocumentCode"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Код"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  FontSize="17"  x:Name="tbPharmacy"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Название аптеки"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" FontSize="17"  x:Name="tbPharmacistName"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="ФИО фармацевта"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" FontSize="17" x:Name="tbPhone"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Телефон"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" FontSize="17" x:Name="tbPharmacyAddress"  Margin="20 10" Foreground="White" BorderBrush="Gray" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Адрес"/>
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

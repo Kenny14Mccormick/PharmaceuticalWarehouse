@@ -80,11 +80,16 @@ namespace Аптечный_склад.AdminastratorDB
             }
 
             // Сохраняем изменения в базе данных
-            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
-
-            // Закрываем окно и выводим сообщение об успешном сохранении
-            this.Close();
-            MessageBox.Show("Успешно!");
+            try
+            {
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+                this.Close();
+                MessageBox.Show("Успешно!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

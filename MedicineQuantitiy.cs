@@ -24,7 +24,7 @@ namespace Аптечный_склад
 
         public string ActualText
         {
-            get { return Quantity > 0 ? "Есть в наличии" : "Нет в наличии"; }
+            get { return Quantity > 0 ? "В наличии" : "Нет в наличии"; }
         }
 
         public string ActualTextColor

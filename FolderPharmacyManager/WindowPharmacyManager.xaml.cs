@@ -168,7 +168,12 @@ namespace Аптечный_склад.FolderPharmacyManager
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Справка");
+            System.Diagnostics.Process.Start("Провизор_руководство_пользователя.chm");
+        }
+
+        private void F1Shortcut1(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("Провизор_руководство_пользователя.chm");
         }
     }
 }

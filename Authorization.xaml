@@ -8,7 +8,17 @@
         mc:Ignorable="d"
   Title="Авторизация" Height="700" Width="600" Background="#243944"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="White" FontSize="20">
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <RoutedUICommand x:Key="f1" Text="Another Text"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{StaticResource f1}"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource f1}" Executed="F1Shortcut1"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*"/>
@@ -29,14 +39,13 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Click="HelpButton_Click" Grid.Column="10" Style="{StaticResource panel}">
+            <Button ToolTip="Руководство пользователя" Click="HelpButton_Click" Grid.Column="10" Style="{StaticResource panel}">
                 <materialDesign:PackIcon Kind="Help" Height="30" Width="50"/>
-
             </Button>
 
-     
-            <Button  Click="CloseButton_Click" Grid.Column="15" Style="{StaticResource panel}">
-                <materialDesign:PackIcon Kind="WindowClose" Height="30" Width="50"/>
+
+            <Button ToolTip="Закрыть приложение" Click="CloseButton_Click" Grid.Column="15" Style="{StaticResource panel}">
+                <materialDesign:PackIcon  Kind="WindowClose" Height="30" Width="50"/>
             </Button>
         </Grid>
 

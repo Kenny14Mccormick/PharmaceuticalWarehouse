@@ -192,7 +192,12 @@ namespace Аптечный_склад.Pharmacist
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Разработчик: Степан Хортов Васильевич (НЕ ЗАБУДЬ СДЕЛАТЬ СПРАВКУ)");
+            System.Diagnostics.Process.Start("Фармацевт_руководство_пользователя.chm");
+        }
+
+        private void F1Shortcut1(object sender, ExecutedRoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("Фармацевт_руководство_пользователя.chm");
         }
     }
 }

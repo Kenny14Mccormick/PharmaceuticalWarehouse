@@ -14,11 +14,10 @@
             <RowDefinition/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="3" Orientation="Horizontal">
         <Button Content="История заказов"  HorizontalAlignment="Left" Foreground="White" Margin="0 0 10 0" FontSize="15" Click="btnSuppliesHistory_Click"/>
-            <Button Content="Отчет о количестве лекарственных средств"  HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
+            <Button Content="Отчет о количественных остатках"  HorizontalAlignment="Left" Foreground="White" Margin="10 0" FontSize="15" Click="btnExcel_Click"/>
         </StackPanel>
         <DataGrid Grid.Row="1"  FontSize="15" ColumnWidth="*"  x:Name="dgMedicines" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns >

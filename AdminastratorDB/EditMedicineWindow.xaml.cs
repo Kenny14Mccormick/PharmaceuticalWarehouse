@@ -56,13 +56,6 @@ namespace Аптечный_склад.AdminastratorDB
                 bitmap.UriSource = new Uri(selectedFilePath);
                 bitmap.EndInit();
                 photo.Source = bitmap;
-
-                MedicinePhoto medicinePhoto = new MedicinePhoto()
-                {
-                    ImageSource = tbPhoto.Text
-                };
-                MainWindow.Pharmaceutical_Warehouse.MedicinePhoto.Add(medicinePhoto);
-                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
             }
         }
 
@@ -75,17 +68,21 @@ namespace Аптечный_склад.AdminastratorDB
                 // Создание новой записи в таблице MedicineQuantity
                 MedicineQuantitiy medicineQuantity = new MedicineQuantitiy()
                 {
-                    QuantityCode = medicine.MedicineCode,
                     Quantity = 0
                 };
                 MainWindow.Pharmaceutical_Warehouse.MedicineQuantitiy.Add(medicineQuantity);
+                MedicinePhoto medicinePhoto = new MedicinePhoto()
+                {
+                    ImageSource = tbPhoto.Text
+                };
+                medicine.PhotoCode = medicinePhoto.PhotoCode;
+                MainWindow.Pharmaceutical_Warehouse.MedicinePhoto.Add(medicinePhoto);
 
                 // Проверка наличия введенной цены перед созданием записи в таблице MedicinePrice
                 if (!string.IsNullOrEmpty(tbPrice.Text))
                 {
                     MedicinePrice medicinePrice = new MedicinePrice()
                     {
-                        PriceCode = medicine.MedicineCode,
                         Price = double.Parse(tbPrice.Text)
                     };
                     MainWindow.Pharmaceutical_Warehouse.MedicinePrice.Add(medicinePrice);
@@ -93,14 +90,19 @@ namespace Аптечный_склад.AdminastratorDB
             }
 
             // Сохранение изменений в базе данных
-            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+            try
+            {
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+                this.Close();
+                MessageBox.Show("Успешно!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
-            this.Close();
-            MessageBox.Show("Успешно!");
+
         }
-
-
-
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

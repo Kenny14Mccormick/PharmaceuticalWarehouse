@@ -240,6 +240,12 @@ namespace Аптечный_склад.FolderPharmacyManager.Pages
 
                 // Обновление суммы заказа
                 UpdateTotalSum();
+                // Проверка наличия лекарств после удаления
+                if (selectedMedicines.Count == 0)
+                {
+                    // Переход на предыдущую страницу
+                    NavigationService.Navigate(new FolderPharmacyManager.Pages.OrderMedicines(pharmacyManagerCode));
+                }
             }
         }
 

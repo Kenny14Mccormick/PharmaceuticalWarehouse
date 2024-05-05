@@ -134,7 +134,7 @@ namespace Аптечный_склад.Pharmacist.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var a in selectedMedicines)
+            foreach (var a in selectedMedicines)
             {
                 a.Quantity = 1;
             }
@@ -160,88 +160,72 @@ namespace Аптечный_склад.Pharmacist.Pages
                 return; // Прерываем создание заявки
             }
 
-            // Создание новой заявки
-            Application newApplication = new Application
+            try
             {
-                PharmacyCode = pharmacyCode,
-                Date = DateTime.Today,
-                StatusCode = 1,
-                TotalCost = totalCost // Присвоение общей стоимости новой заявке
-            };
-
-            // Добавление заявки в таблицу Application
-
-            MainWindow.Pharmaceutical_Warehouse.Application.Add(newApplication);
-            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
-            
-
-            // Получение кода только что созданной заявки
-            int newApplicationCode = newApplication.ApplicationCode;
-
-            // Создание объектов ApplicationContent для каждого выбранного лекарства и их количества
-            List<ApplicationContent> applicationContents = new List<ApplicationContent>();
-            foreach (var medicine in selectedMedicines)
-            {
-                ApplicationContent content = new ApplicationContent
+                // Проверка наличия запрашиваемого количества лекарств на складе
+                foreach (var medicine in selectedMedicines)
                 {
-                    ApplicationCode = newApplicationCode,
-                    MedicineCode = medicine.MedicineCode,
-                    MedicineQuantity = medicine.Quantity
+                    if (medicine.Quantity > medicine.MedicineQuantitiy.Quantity)
+                    {
+                        MessageBox.Show($"Недостаточное количество лекарства \"{medicine.Title}\" на складе.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return; // Прерываем создание заявки
+                    }
+                }
+
+                // Создание новой заявки
+                Application newApplication = new Application
+                {
+                    PharmacyCode = pharmacyCode,
+                    Date = DateTime.Today,
+                    StatusCode = 1,
+                    TotalCost = totalCost // Присвоение общей стоимости новой заявке
                 };
-                applicationContents.Add(content);
-            }
 
-            // Добавление объектов ApplicationContent в таблицу ApplicationContent
+                // Добавление заявки в таблицу Application
+                MainWindow.Pharmaceutical_Warehouse.Application.Add(newApplication);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
 
-            MainWindow.Pharmaceutical_Warehouse.ApplicationContent.AddRange(applicationContents);
-            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
-            
+                // Получение кода только что созданной заявки
+                int newApplicationCode = newApplication.ApplicationCode;
 
-            // Оповещение пользователя о успешном создании заявки
-            MessageBox.Show("Заявка успешно создана и отправлена!");
-            var historyOperation = new HistoryOperations
-            {
-                UserCode = user.UserCode,
-                Date = DateTime.Now,
-                Details = "Создание заявки",
-                Type = "Операция"
-            };
-            MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Add(historyOperation);
-            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
-            var pharmacies = MainWindow.Pharmaceutical_Warehouse.Pharmacy.ToList();
-            List<Application> allApplications = new List<Application>();
-
-            // Проходимся по каждой аптеке
-            foreach (var pharmacy in pharmacies)
-            {
-                // Получаем заявки для текущей аптеки
-                var pharmacyApplications = MainWindow.Pharmaceutical_Warehouse.Application
-                    .Where(app => app.PharmacyCode == pharmacy.PharmacyCode)
-                    .ToList();
-
-                // Пронумеруем заявки с единицы
-                int applicationNumber = 1;
-                foreach (var application in pharmacyApplications)
+                // Создание объектов ApplicationContent для каждого выбранного лекарства и их количества
+                List<ApplicationContent> applicationContents = new List<ApplicationContent>();
+                foreach (var medicine in selectedMedicines)
                 {
-                    application.DisplayApplicationCode = $"{application.Pharmacy.DisplayDocumentCode}{applicationNumber}";
-                    applicationNumber++;
+                    ApplicationContent content = new ApplicationContent
+                    {
+                        ApplicationCode = newApplicationCode,
+                        MedicineCode = medicine.MedicineCode,
+                        MedicineQuantity = medicine.Quantity
+                    };
+                    applicationContents.Add(content);
                 }
 
-                // Получаем поставки для текущей аптеки
-                var pharmacySupplies = MainWindow.Pharmaceutical_Warehouse.PharmacySupply
-                    .Where(supply => supply.PharmacyCode == pharmacy.PharmacyCode)
-                    .ToList();
+                // Добавление объектов ApplicationContent в таблицу ApplicationContent
+                MainWindow.Pharmaceutical_Warehouse.ApplicationContent.AddRange(applicationContents);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
 
-                // Пронумеруем поставки с единицы
-                int supplyNumber = 1;
-                foreach (var supply in pharmacySupplies)
+                // Оповещение пользователя о успешном создании заявки
+                MessageBox.Show("Заявка успешно создана и отправлена!");
+                var historyOperation = new HistoryOperations
                 {
-                    supply.DisplaySupplyCode = $"{supply.Pharmacy.DisplayDocumentCode}{supplyNumber}";
-                    supplyNumber++;
-                }
+                    UserCode = user.UserCode,
+                    Date = DateTime.Now,
+                    Details = "Создание заявки",
+                    Type = "Операция"
+                };
+                MainWindow.Pharmaceutical_Warehouse.HistoryOperations.Add(historyOperation);
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка при создании заявки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode, user));
         }
+
+
 
 
 
@@ -254,7 +238,6 @@ namespace Аптечный_склад.Pharmacist.Pages
             MessageBoxResult result = MessageBox.Show($"Вы уверены, что хотите убрать {medicine.Title} из списка?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-
                 medicine.Quantity = 1;
                 // Удаление выбранного лекарства из списка
                 selectedMedicines.Remove(medicine);
@@ -265,8 +248,16 @@ namespace Аптечный_склад.Pharmacist.Pages
 
                 // Обновление суммы заказа
                 UpdateTotalSum();
+
+                // Проверка наличия лекарств после удаления
+                if (selectedMedicines.Count == 0)
+                {
+                    // Переход на предыдущую страницу
+                    NavigationService.Navigate(new Pharmacist.Pages.ViewMedicine(pharmacyCode, user));
+                }
             }
         }
+
 
 
     }

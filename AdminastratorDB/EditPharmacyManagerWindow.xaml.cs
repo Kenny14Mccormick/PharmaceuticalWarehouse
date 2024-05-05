@@ -40,10 +40,16 @@ namespace Аптечный_склад.AdminastratorDB
         private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
             if (pharmacyManager.PharmacyManagerCode == 0) MainWindow.Pharmaceutical_Warehouse.PharmacyManager.Add(pharmacyManager);
-            MainWindow.Pharmaceutical_Warehouse.SaveChanges();
-
-            this.Close();
-            MessageBox.Show("Успешно!");
+            try
+            {
+                MainWindow.Pharmaceutical_Warehouse.SaveChanges();
+                this.Close();
+                MessageBox.Show("Успешно!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
